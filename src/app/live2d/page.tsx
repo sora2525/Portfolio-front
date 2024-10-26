@@ -1,11 +1,17 @@
+'use client'
 import Live2dView from '@/components/live2d/live2dView';
+import { useLipSyncHandler } from '@/lib/hooks/useLipSyncHandler';
 
 export default function Live2D() {
+  const { startLipSync } = useLipSyncHandler();
+  const handlePlayAudio = () => {
+    const audioFilePath = '/audio/sample.wav';
+    startLipSync(audioFilePath); 
+  };
   return (
     <>
-        <div className="absolute top-0 left-0 w-full h-full">
-          <Live2dView />
-        </div>
+      <button onClick={handlePlayAudio}>音声とリップシンク開始</button>
+        <Live2dView />
     </>
   );
 }
