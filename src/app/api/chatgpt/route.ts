@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { newMessageType,RoleType } from '@/components/gpt/types'
+import { newMessageType,RoleType } from '@/components/chat/types'
 import OpenAI from 'openai'
 import GPT3Tokenizer from 'gpt3-tokenizer'
 
