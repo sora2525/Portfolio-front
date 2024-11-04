@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Script from "next/script";
 import { RecoilRoot } from 'recoil';
+import PageHeader from "@/components/header";
+import { useEffect } from "react";
+import { useAuth } from "@/lib/hooks/useAuth";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -16,6 +19,15 @@ const geistMono = localFont({
 });
 
 
+function AuthLoader({ children }: { children: React.ReactNode }) {
+  const { checkAuthStatus } = useAuth();
+
+  useEffect(() => {
+    checkAuthStatus(); // 認証状態を確認
+  },[]);
+
+  return <>{children}</>;
+}
 
 export default function RootLayout({
   children,
@@ -33,8 +45,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-       <RecoilRoot>
-          {children}
+        <RecoilRoot>
+        <AuthLoader>
+            <PageHeader />
+            {children}
+          </AuthLoader>
         </RecoilRoot>
       </body>
     </html>
