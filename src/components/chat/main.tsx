@@ -6,7 +6,7 @@ import { ArrowPathIcon } from '@heroicons/react/24/solid';
 import { useVoiceVoxAudio } from '@/lib/hooks/useVoiceVoxAudio';
 import { useOpenAIChat } from '@/lib/hooks/useOpenAIChat';
 
-const Main = () => {
+export default function Main() {
   const character:string = '58';
   const [messages, setMessages] = useState<MessageType[]>([]);
   const questionRef = useRef<HTMLInputElement>(null);
@@ -85,4 +85,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+
