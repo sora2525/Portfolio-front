@@ -6,6 +6,7 @@ import { RecoilRoot } from 'recoil';
 import PageHeader from "@/components/header";
 import { useEffect } from "react";
 import { useAuth } from "@/lib/hooks/useAuth";
+import Live2dView from "@/components/live2d/live2dView";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,15 +19,18 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-
 function AuthLoader({ children }: { children: React.ReactNode }) {
   const { checkAuthStatus } = useAuth();
 
   useEffect(() => {
     checkAuthStatus(); // 認証状態を確認
-  },[]);
+  }, []);
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+    </>
+  )
 }
 
 export default function RootLayout({
@@ -46,9 +50,16 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <RecoilRoot>
-        <AuthLoader>
-            <PageHeader />
-            {children}
+          <AuthLoader>
+            <div className="h-screen w-screen bg-[url('/images/sample.jpg')] bg-cover bg-no-repeat bg-center relative overflow-hidden">
+              <PageHeader />
+              <div className="absolute z-10">
+                {children}
+              </div>
+              <div className="absolute inset-0 z-0 inline h-auto">
+                <Live2dView />
+              </div>
+            </div>
           </AuthLoader>
         </RecoilRoot>
       </body>
