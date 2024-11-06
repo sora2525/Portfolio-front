@@ -45,7 +45,7 @@ export default function Main() {
     <div>
       <form onSubmit={onSubmit}>
         <input
-          className="w-full border-b py-2 px-3 mb-5 rounded-lg focus:outline-none bg-transparent bg-white"
+          className="w-[400px]  border-b py-2 px-3 mb-5 rounded-lg focus:outline-none bg-transparent bg-white"
           placeholder="お話しよう！"
           ref={questionRef}
           disabled={chatLoading}

@@ -1,4 +1,3 @@
-// app/tasks/[id]/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -40,13 +39,15 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
     if (!task) return <p>読み込み中...</p>;
 
     return (
-        <div>
-            <button onClick={() => router.back()}>戻る</button>
-            <h1>{task.title}</h1>
-            <p>{task.description}</p>
-            <p>期日: {task.due_date}</p>
-            <p>優先度: {task.priority}</p>
-            <p>リマインダー: {task.reminder_time}</p>
+        <div className="pointer-events-auto flex flex-col items-center mt-[5%] w-screen h-screen">
+            <div className="bg-[rgba(243,244,246,0.85)] w-[95%] h-[85%] p-4 rounded-lg shadow-lg overflow-y-auto">
+                <button onClick={() => router.back()}>戻る</button>
+                <h1 className="font-bold text-5xl text-center">{task.title}</h1>
+                <p className="text-3xl mt-5 h-[50%]">{task.description}</p>
+                <p className="text-red-500 text-3xl mt-5">期日: {task.due_date}</p>
+                <p className="text-blue-500 text-3xl mt-5">優先度: {task.priority}</p>
+                <p className="text-3xl mt-5">リマインダー: {task.reminder_time}</p>
+            </div>
         </div>
     );
 }

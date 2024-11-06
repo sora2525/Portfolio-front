@@ -1,6 +1,7 @@
 import { useAuth } from "@/lib/hooks/useAuth";
 import { useRecoilState } from "recoil";
 import { authState } from "@/lib/atom/authAtom";
+import Link from "next/link";
 
 export default function PageHeader() {
     const { logout } = useAuth();
@@ -11,22 +12,20 @@ export default function PageHeader() {
         setAuth({ isAuthenticated: false, user: null });
     };
 
-    if (!auth.isAuthenticated || !auth.user) {
-        return <p>ログインしていません</p>;
-    }
-
     return (
-        <>
-            <div>
-                <button onClick={handleLogout} className="bg-gray-50">ログアウト</button>
-            </div>
-
-            <div className="user-info">
-                <h2>ユーザー情報</h2>
-                <p><strong>ID:</strong> {auth.user.id}</p>
-                <p><strong>名前:</strong> {auth.user.name}</p>
-                <p><strong>メール:</strong> {auth.user.email}</p>
-            </div>
-        </>
+        <div className="bg-pink-400 flex h-[70px] items-center pointer-events-auto">
+            {auth.isAuthenticated && auth.user ? (
+                <>
+                    <div className="user-info">
+                        <p className="text-white font-bold">{auth.user.name}</p>
+                    </div>
+                    <div>
+                        <button onClick={handleLogout} className="text-white font-bold">ログアウト</button>
+                    </div>
+                </>
+            ) : (
+                <Link href="/sign_in" className="text-white font-bold ml-6">ログイン</Link>
+            )}
+        </div>
     );
 }

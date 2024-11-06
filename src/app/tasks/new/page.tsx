@@ -13,7 +13,6 @@ export default function TaskCreate() {
     const { createTask, error } = useTasks();
     const [auth,] = useRecoilState(authState);
 
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -28,7 +27,7 @@ export default function TaskCreate() {
     };
 
     return (
-        <div>
+        <div className="pointer-events-auto">
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"

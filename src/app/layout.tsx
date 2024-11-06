@@ -26,11 +26,7 @@ function AuthLoader({ children }: { children: React.ReactNode }) {
     checkAuthStatus(); // 認証状態を確認
   }, []);
 
-  return (
-    <>
-      {children}
-    </>
-  )
+  return <>{children}</>;
 }
 
 export default function RootLayout({
@@ -52,11 +48,13 @@ export default function RootLayout({
         <RecoilRoot>
           <AuthLoader>
             <div className="h-screen w-screen bg-[url('/images/sample.jpg')] bg-cover bg-no-repeat bg-center relative overflow-hidden">
-              <PageHeader />
-              <div className="absolute z-10">
+              <div className="relative top-0 left-0 w-full z-20">
+                <PageHeader />
+              </div>
+              <div className="absolute z-10 pointer-events-none">
                 {children}
               </div>
-              <div className="absolute inset-0 z-0 inline h-auto">
+              <div className="absolute inset-0 z-0">
                 <Live2dView />
               </div>
             </div>
