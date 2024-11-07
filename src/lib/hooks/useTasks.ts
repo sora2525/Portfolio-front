@@ -10,18 +10,19 @@ type Task = {
     priority: number;
     reminder_time: string;
     user_id: number;
-  };
-  
+};
+
 
 export const useTasks = () => {
-    const [tasks,setTasks] = useState<Task[]>([])
+    const [tasks, setTasks] = useState<Task[]>([])
     const [error, setError] = useState<string | null>(null);
 
-    const getTasks = async ()=>{
-        try{
+    const getTasks = async () => {
+        setError(null);
+        try {
             const response = await axiosInstance.get("/tasks");
             setTasks(response.data);
-        }catch(e:unknown){
+        } catch (e: unknown) {
             setError("タスクの取得に失敗しました");
         }
     }
@@ -30,7 +31,7 @@ export const useTasks = () => {
         setError(null);
         try {
             const response = await axiosInstance.get(`/tasks/${id}`);
-            return response.data; 
+            return response.data;
         } catch (e: unknown) {
             setError("タスクの取得に失敗しました");
             return null; // 取得失敗時はnullを返す
@@ -44,13 +45,13 @@ export const useTasks = () => {
         priority: number,
         reminderTime: string
     ) => {
-        setError(null); 
+        setError(null);
         try {
             const response = await axiosInstance.post("/tasks", {
                 task: { title, description, due_date: dueDate, priority, reminder_time: reminderTime }
             });
             setTasks((prevTasks) => [...prevTasks, response.data]);
-        } catch (e) {
+        } catch (e: unknown) {
             if (axios.isAxiosError(e) && e.response?.data.errors) {
                 setError(e.response.data.errors.join(", "));
             } else {
@@ -59,5 +60,46 @@ export const useTasks = () => {
         }
     };
 
-    return { tasks, getTasks,getTask, createTask, error};
+    const updateTask = async (
+        id: number,
+        title: string,
+        description: string,
+        dueDate: string,
+        priority: number,
+        reminderTime: string
+    ) => {
+        setError(null);
+        try {
+            const response = await axiosInstance.put(`/tasks/${id}`, {
+                task: { title, description, due_date: dueDate, priority, reminder_time: reminderTime }
+            });
+            setTasks((prevTasks) =>
+                prevTasks.map((task) =>
+                    task.id === id ? response.data : task
+                )
+            );
+        } catch (e: unknown) {
+            if (axios.isAxiosError(e) && e.response?.data.errors) {
+                setError(e.response.data.errors.join(", "));
+            } else {
+                setError("タスクの更新に失敗しました");
+            }
+        }
+    };
+
+    const destroyTask = async (id: number) => {
+        setError(null);
+        try {
+            await axiosInstance.delete(`/tasks/${id}`);
+            setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+        } catch (e: unknown) {
+            if (axios.isAxiosError(e) && e.response?.data.errors) {
+                setError(e.response.data.errors.join(", "));
+            } else {
+                setError("タスクの削除に失敗しました");
+            }
+        }
+    };
+
+    return { tasks, getTasks, getTask, createTask, updateTask, destroyTask, error };
 };
