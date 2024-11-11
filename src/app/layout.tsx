@@ -51,7 +51,7 @@ export default function RootLayout({
               <div className="relative top-0 left-0 w-full z-20">
                 <PageHeader />
               </div>
-              <div className="absolute z-10 pointer-events-none">
+              <div className="absolute  z-10 pointer-events-none">
                 {children}
               </div>
               <div className="absolute inset-0 z-0">

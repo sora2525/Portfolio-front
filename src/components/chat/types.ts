@@ -5,8 +5,7 @@ export type CharacterType = {
     label: string
     word: string
   }
-
-
+  
 // キャラクター選択の型定義
 export type CharacterSelectProps = {
   setCharacter: Dispatch<SetStateAction<CharacterType>>

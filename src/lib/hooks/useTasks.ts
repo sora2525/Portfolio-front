@@ -10,6 +10,7 @@ type Task = {
     priority: number;
     reminder_time: string;
     user_id: number;
+    tags: Array<{ id: number; name: string; color: string }>;
 };
 
 
@@ -34,7 +35,7 @@ export const useTasks = () => {
             return response.data;
         } catch (e: unknown) {
             setError("タスクの取得に失敗しました");
-            return null; // 取得失敗時はnullを返す
+            return null; 
         }
     };
 
@@ -43,12 +44,13 @@ export const useTasks = () => {
         description: string,
         dueDate: string,
         priority: number,
-        reminderTime: string
+        reminderTime: string,
+        tags:number[]
     ) => {
         setError(null);
         try {
             const response = await axiosInstance.post("/tasks", {
-                task: { title, description, due_date: dueDate, priority, reminder_time: reminderTime }
+                task: { title, description, due_date: dueDate, priority, reminder_time: reminderTime,tags }
             });
             setTasks((prevTasks) => [...prevTasks, response.data]);
         } catch (e: unknown) {
@@ -66,12 +68,13 @@ export const useTasks = () => {
         description: string,
         dueDate: string,
         priority: number,
-        reminderTime: string
+        reminderTime: string,
+        tags:number[]
     ) => {
         setError(null);
         try {
             const response = await axiosInstance.put(`/tasks/${id}`, {
-                task: { title, description, due_date: dueDate, priority, reminder_time: reminderTime }
+                task: { title, description, due_date: dueDate, priority, reminder_time: reminderTime,tags }
             });
             setTasks((prevTasks) =>
                 prevTasks.map((task) =>

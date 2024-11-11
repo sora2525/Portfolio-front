@@ -11,7 +11,6 @@ export default function SignUpPage() {
     const [validationError, setValidationError] = useState<string | null>(null); 
     const { signUp, loading, error,success } = useAuth();
    
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!name || !email || !password || !passwordConfirmation) {

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import TagItem from "../tag/TagItem";
 
 type TaskItemProps = {
     id: number;
@@ -8,6 +9,13 @@ type TaskItemProps = {
     due_date: string;
     priority: number;
     reminder_time: string;
+    tags: Tag[];
+};
+
+type Tag = {
+    id: number;
+    name: string;
+    color: string;
 };
 
 export default function TaskItem({
@@ -16,6 +24,7 @@ export default function TaskItem({
     description,
     due_date,
     priority,
+    tags,
 }: TaskItemProps) {
 
     return (
@@ -28,6 +37,11 @@ export default function TaskItem({
                         <p className="w-1/2 p-2">優先度: {priority}</p>
                         <p className="w-1/2 p-2">{description}</p>
                         <p className="w-1/2 p-2 text-red-500">期日: {due_date}</p>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                            {tags.map((tag) => (
+                                <TagItem key={tag.id} id={tag.id} name={tag.name} color={tag.color} />
+                            ))}
+                        </div>
                     </Link>
                 </li>
             </div>

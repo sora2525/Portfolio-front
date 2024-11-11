@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useCallback, useState } from 'react';
 import { MessageType } from '@/components/chat/types';
 
-export function useOpenAIChat() {
+export const useOpenAIChat = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
