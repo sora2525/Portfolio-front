@@ -9,20 +9,23 @@ export default function Task() {
     const { getTasks, createTask, tasks, error } = useTasks();
     const { getTags, tags } = useTags();
     const [isCreating, setIsCreating] = useState(false);
+    const [sortBy, setSortBy] = useState("due_date");
+    const [order, setOrder] = useState("desc");
+    const [selectedTag, setSelectedTag] = useState("");
 
     useEffect(() => {
-        getTasks();
+        getTasks(sortBy, order, selectedTag);
         getTags();
-    }, []);
+    }, [sortBy, order, selectedTag]);  // selectedTagを依存配列に追加
 
     const handleCreateToggle = () => {
         setIsCreating(!isCreating);
     };
 
-    const handleFormSubmit = (title: string, description: string, dueDate: string, priority: number, reminderTime: string, selectedTags: number[]) => {
-        if (title) { 
+    const handleFormSubmit = (title, description, dueDate, priority, reminderTime, selectedTags) => {
+        if (title) {
             createTask(title, description, dueDate, priority, reminderTime, selectedTags);
-            getTasks();
+            getTasks(sortBy, order, selectedTag);  // タスクの再取得
         }
         setIsCreating(false);
     };
@@ -31,6 +34,26 @@ export default function Task() {
         <div className="pointer-events-auto flex flex-col items-center mt-[5%] w-screen h-screen">
             <div className="bg-[rgba(243,244,246,0.85)] w-[95%] h-[85%] p-4 rounded-lg shadow-lg">
                 <h1 className="text-2xl font-semibold mb-4 text-center">タスク一覧</h1>
+                
+                <label>並び替え:</label>
+                <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
+                    <option value="created_at">作成日順</option>
+                    <option value="due_date">期限順</option>
+                    <option value="priority">優先度順</option>
+                </select>
+
+                <select onChange={(e) => setOrder(e.target.value)} value={order}>
+                    <option value="asc">昇順</option>
+                    <option value="desc">降順</option>
+                </select>
+
+                <select onChange={(e) => setSelectedTag(e.target.value)} value={selectedTag}>
+                    <option value="">すべてのタグ</option> {/* デフォルトオプション */}
+                    {tags.map((tag) => (
+                        <option key={tag.id} value={tag.id}>{tag.name}</option>
+                    ))}
+                </select>
+
                 <div className="overflow-y-auto max-h-[85%] mt-4">
                     {error && <p style={{ color: "red" }}>{error}</p>}
                     <ul className="space-y-4">
@@ -52,6 +75,7 @@ export default function Task() {
                         )}
                     </ul>
                 </div>
+
                 <div className="flex justify-center mt-5">
                     <button
                         onClick={handleCreateToggle}
@@ -61,7 +85,7 @@ export default function Task() {
                     </button>
                 </div>
             </div>
-            <TaskForm onSubmit={handleFormSubmit} tags={tags} isVisible={isCreating}  />
+            <TaskForm onSubmit={handleFormSubmit} tags={tags} isVisible={isCreating} />
         </div>
     );
 }

@@ -13,21 +13,20 @@ type Task = {
     tags: Array<{ id: number; name: string; color: string }>;
 };
 
-
 export const useTasks = () => {
     const [tasks, setTasks] = useState<Task[]>([])
     const [error, setError] = useState<string | null>(null);
 
-    const getTasks = async () => {
+    const getTasks = async (sortBy, order, tagId) => {
         setError(null);
         try {
-            const response = await axiosInstance.get("/tasks");
+            const url = `/tasks?sort_by=${sortBy}&order=${order}${tagId ? `&tag_id=${tagId}` : ''}`;
+            const response = await axiosInstance.get(url);
             setTasks(response.data);
-        } catch (e: unknown) {
+        } catch (e) {
             setError("タスクの取得に失敗しました");
         }
-    }
-
+    };
     const getTask = async (id: number) => {
         setError(null);
         try {
@@ -103,6 +102,7 @@ export const useTasks = () => {
             }
         }
     };
+
 
     return { tasks, getTasks, getTask, createTask, updateTask, destroyTask, error };
 };
