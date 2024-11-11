@@ -4,19 +4,20 @@ import { useTasks } from "@/lib/hooks/useTasks";
 import TaskItem from "@/components/task/TaskItem";
 import { useTags } from "@/lib/hooks/useTags";
 import TaskForm from "@/components/task/TaskForm";
+import Link from "next/link";
 
 export default function Task() {
     const { getTasks, createTask, tasks, error } = useTasks();
     const { getTags, tags } = useTags();
     const [isCreating, setIsCreating] = useState(false);
-    const [sortBy, setSortBy] = useState("due_date");
+    const [sortBy, setSortBy] = useState("created_at");
     const [order, setOrder] = useState("desc");
     const [selectedTag, setSelectedTag] = useState("");
 
     useEffect(() => {
         getTasks(sortBy, order, selectedTag);
         getTags();
-    }, [sortBy, order, selectedTag]);  // selectedTagを依存配列に追加
+    }, [sortBy, order, selectedTag]);
 
     const handleCreateToggle = () => {
         setIsCreating(!isCreating);
@@ -25,7 +26,7 @@ export default function Task() {
     const handleFormSubmit = (title, description, dueDate, priority, reminderTime, selectedTags) => {
         if (title) {
             createTask(title, description, dueDate, priority, reminderTime, selectedTags);
-            getTasks(sortBy, order, selectedTag);  // タスクの再取得
+            getTasks(sortBy, order, selectedTag);
         }
         setIsCreating(false);
     };
@@ -33,8 +34,9 @@ export default function Task() {
     return (
         <div className="pointer-events-auto flex flex-col items-center mt-[5%] w-screen h-screen">
             <div className="bg-[rgba(243,244,246,0.85)] w-[95%] h-[85%] p-4 rounded-lg shadow-lg">
+                <Link href="/">トップページに戻る</Link>
                 <h1 className="text-2xl font-semibold mb-4 text-center">タスク一覧</h1>
-                
+
                 <label>並び替え:</label>
                 <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
                     <option value="created_at">作成日順</option>

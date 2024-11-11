@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useTags } from '@/lib/hooks/useTags';
 import TagForm from '@/components/tag/TagForm';
 import TagItem from '@/components/tag/TagItem';
+import Link from 'next/link';
 
 export default function NewTagForm() {
   const { getTags, deleteTag, tags } = useTags();
@@ -16,7 +17,10 @@ export default function NewTagForm() {
   };
 
   return (
+    <>
+    
     <div className="flex flex-col items-center justify-center w-screen h-screen pointer-events-auto">
+    <Link href="/tasks">タスク一覧へ</Link>
       <div className="flex flex-wrap justify-center mt-6 gap-2 bg-white p-2 rounded-lg">
         {tags.length > 0 ? (
           tags.map((tag) => (
@@ -32,5 +36,6 @@ export default function NewTagForm() {
         <TagForm />
       </div>
     </div>
+    </>
   );
 }

@@ -1,6 +1,5 @@
-
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import TagItem from "@/components/tag/TagItem";
 import Link from "next/link";
 
@@ -109,10 +108,11 @@ export default function TaskForm({ onSubmit, tags, isVisible }: TaskFormProps) {
                         </div>
                     ))}
                 </div>
-                <div className="mt-5 mb-5">
 
+                <div className="mt-5 mb-5">
                     <Link href="/tags" className="bg-blue-500 text-white p-2 font-bold ">タグの新規作成</Link>
                 </div>
+
                 <div className="mt-4">
                     <h4>選択したタグ:</h4>
                     <div className="flex flex-wrap gap-2">
