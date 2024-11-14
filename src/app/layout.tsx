@@ -24,6 +24,7 @@ function AuthLoader({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     checkAuthStatus(); // 認証状態を確認
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <>{children}</>;

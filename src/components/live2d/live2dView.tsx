@@ -8,34 +8,34 @@ export default function Live2dView() {
   const ref = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    if (ref.current) {
+      initialize();
+      window.addEventListener('resize', resizeView);
+    }
+
     return () => {
-      LAppDelegate.releaseInstance();
-      globalThis.window.removeEventListener('resize', resizeView);
+      LAppDelegate.releaseInstance(); 
+      window.removeEventListener('resize', resizeView);
     };
   }, []);
 
-  useEffect(() => {
-    if (ref.current) {
-      initialize();
-      globalThis.window.addEventListener('resize', resizeView);
-    }
-  }, [ref.current]);
-
   const initialize = async () => {
-    if (ref.current) LAppGlManager.setCanvas(ref.current);
-    LAppDelegate.getInstance().initialize();
-    LAppDelegate.getInstance().run();
+    if (ref.current) {
+      LAppGlManager.setCanvas(ref.current);
+      const appDelegateInstance = LAppDelegate.getInstance();
+      appDelegateInstance.initialize();
+      appDelegateInstance.run();
+    }
   };
 
   const resizeView = () => {
-    LAppDelegate.getInstance().onResize();
+    const appDelegateInstance = LAppDelegate.getInstance();
+    appDelegateInstance.onResize();
   };
 
   return (
-    <>
-      <div id='live2d-container'>
-        <canvas className="w-screen h-[1200px]" ref={ref} />
-      </div>
-    </>
-  )
+    <div id="live2d-container">
+      <canvas className="w-screen h-[1200px]" ref={ref} />
+    </div>
+  );
 }

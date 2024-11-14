@@ -10,6 +10,7 @@ export default function NewTagForm() {
 
   useEffect(() => {
     getTags();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDeleteTag = (id: number) => {

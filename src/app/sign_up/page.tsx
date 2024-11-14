@@ -29,7 +29,7 @@ export default function SignUpPage() {
       };
 
     return (
-        <div className="bg-red-50 flex flex-col">
+        <div className="bg-red-50 flex flex-col pointer-events-auto">
             <form onSubmit={handleSubmit}>
                 <input 
                     type="text" 

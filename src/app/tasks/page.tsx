@@ -17,6 +17,7 @@ export default function Task() {
     useEffect(() => {
         getTasks(sortBy, order, selectedTag);
         getTags();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortBy, order, selectedTag]);
 
     const handleCreateToggle = () => {

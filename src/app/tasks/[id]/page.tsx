@@ -54,6 +54,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
         };
         fetchTask();
         getTags();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [taskId]);
 
     const handleEditToggle = () => {
