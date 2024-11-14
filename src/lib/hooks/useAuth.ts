@@ -3,14 +3,12 @@ import { useRecoilState } from "recoil";
 import { authState } from "../atom/authAtom";
 import { axiosInstance } from "../axiosInstance";
 import Cookies from "js-cookie";
-import { useSearchParams } from "next/navigation";
 
 export const useAuth = () => {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [, setAuth] = useRecoilState(authState);
-    const searchParams = useSearchParams();
 
     // 新規登録
     const signUp = async (name: string, email: string, password: string, passwordConfirmation: string) => {
@@ -129,7 +127,14 @@ export const useAuth = () => {
     };
 
     // パスワードリセット確認
-    const resetPasswordConfirm = async (password: string, password_confirmation: string, reset_password_token: string) => {
+    const resetPasswordConfirm = async (
+        password: string,
+        password_confirmation: string,
+        reset_password_token: string,
+        accessToken: string,
+        client: string,
+        uid: string
+    ) => {
         setLoading(true);
         setError(null);
         setSuccess(null);
@@ -141,9 +146,9 @@ export const useAuth = () => {
                 reset_password_token
             }, {
                 headers: {
-                    "access-token": searchParams.get("access-token") || "",
-                    client: searchParams.get("client") || "",
-                    uid: searchParams.get("uid") || "",
+                    "access-token": accessToken,
+                    client: client,
+                    uid: uid,
                 },
             });
 
