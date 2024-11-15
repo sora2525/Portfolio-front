@@ -5,7 +5,7 @@ import { useAuth } from "@/lib/hooks/useAuth";
 
 interface PasswordResetProps {
     searchParams: {
-        reset_password_token?: string;
+        token?: string;
         ["access-token"]?: string;
         client?: string;
         uid?: string;
@@ -19,6 +19,9 @@ const PasswordReset = ({ searchParams }: PasswordResetProps) => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [localError, setLocalError] = useState<string | null>(null);
 
+    console.log("searchParams:", searchParams);
+    console.log("searchParams.token:", searchParams.token);
+
     const handlePasswordReset = async (e: React.FormEvent) => {
         e.preventDefault();
         setLocalError(null);
@@ -31,7 +34,7 @@ const PasswordReset = ({ searchParams }: PasswordResetProps) => {
         await resetPasswordConfirm(
             newPassword,
             confirmPassword,
-            searchParams.reset_password_token || "",
+            searchParams.token || "", 
             searchParams["access-token"] || "",
             searchParams.client || "",
             searchParams.uid || ""
@@ -41,8 +44,11 @@ const PasswordReset = ({ searchParams }: PasswordResetProps) => {
     return (
         <div className="pointer-events-auto">
             <h1>パスワードリセット</h1>
+            {/* エラー・成功メッセージ */}
             {(localError || error) && <p style={{ color: "red" }}>{localError || error}</p>}
             {success && <p style={{ color: "green" }}>{success}</p>}
+
+            {/* パスワードリセットフォーム */}
             <form onSubmit={handlePasswordReset}>
                 <div>
                     <label>新しいパスワード</label>
