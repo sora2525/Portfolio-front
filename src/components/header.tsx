@@ -16,15 +16,20 @@ export default function PageHeader() {
         <div className="bg-pink-400 flex h-[70px] items-center pointer-events-auto">
             {auth.isAuthenticated && auth.user ? (
                 <>
-                    <div className="user-info">
-                        <p className="text-white font-bold">{auth.user.name}</p>
+                    <div className="flex justify-between items-center w-full px-4">
+                        <div className="user-info">
+                            <Link href="/" className="text-white font-bold ml-6">{auth.user.name}</Link>
+                        </div>
+                        <div className="">
+                            <button onClick={handleLogout} className="text-white font-bold">ログアウト</button>
+                            <Link href="/profile" className="text-white font-bold ml-6">プロフィール</Link>
+                        </div>
                     </div>
-                    <div>
-                        <button onClick={handleLogout} className="text-white font-bold">ログアウト</button>
-                    </div>
+
                 </>
             ) : (
                 <Link href="/sign_in" className="text-white font-bold ml-6">ログイン</Link>
+
             )}
         </div>
     );
