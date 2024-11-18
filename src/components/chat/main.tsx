@@ -3,7 +3,6 @@
 import { useRef, useState } from 'react';
 import { MessageType } from './types';
 import { ArrowPathIcon } from '@heroicons/react/24/solid';
-import { useVoiceVoxAudio } from '@/lib/hooks/useVoiceVoxAudio';
 import { useOpenAIChat } from '@/lib/hooks/useOpenAIChat';
 import { useVoiceVoxLipSync } from '@/lib/hooks/useVoiceVoxLipSync';
 
@@ -11,7 +10,6 @@ export default function Main() {
   const character: string = '58';
   const [messages, setMessages] = useState<MessageType[]>([]);
   const questionRef = useRef<HTMLInputElement>(null);
-  const { generateAndPlayAudio } = useVoiceVoxAudio();
   const { generateResponse, loading: chatLoading, error: chatError } = useOpenAIChat();
   const { playVoiceAndLipSync } = useVoiceVoxLipSync();
   const messageHandler = (message: MessageType) => {

@@ -8,6 +8,7 @@ type Task = {
     description: string;
     due_date: string;
     priority: number;
+    completion_date: string | null; 
     reminder_time: string;
     user_id: number;
     tags: Array<{ id: number; name: string; color: string }>;
@@ -103,6 +104,35 @@ export const useTasks = () => {
         }
     };
 
+   const completeTask = async (id: number, currentCompletionDate?: string) => {
+    setError(null);
+    try {
+        // 未完了にする場合は completion_date を null に設定
+        const completion_date = currentCompletionDate
+            ? null // すでに完了状態の場合、未完了に設定
+            : new Date().toISOString().split("T")[0]; // 未完了なら現在の日付を設定
 
-    return { tasks, getTasks, getTask, createTask, updateTask, destroyTask, error };
+        const response = await axiosInstance.put(`/tasks/${id}`, {
+            task: { completion_date }
+        });
+
+        // タスク一覧を更新
+        setTasks((prevTasks) =>
+            prevTasks.map((task) =>
+                task.id === id ? response.data : task
+            )
+        );
+    } catch (e: unknown) {
+        if (axios.isAxiosError(e) && e.response?.data.errors) {
+            setError(e.response.data.errors.join(", "));
+        } else {
+            setError("タスクの完了/未完了操作に失敗しました");
+        }
+    }
+};
+
+
+
+
+    return { tasks, getTasks, getTask, createTask, updateTask, destroyTask, error,completeTask };
 };
