@@ -13,8 +13,8 @@ const MAX_TOKEN_COUNT = 3000;
 
 export async function POST(req: NextRequest) {
   try {
-    // 質問とメッセージリスト取得
-    const { question, messages } = await req.json();
+    // リクエストボディを取得
+    const { question, messages, mode, affinity } = await req.json();
 
     // メッセージリストの作成
     const newMessages: newMessageType[] = [
@@ -37,15 +37,12 @@ export async function POST(req: NextRequest) {
         // カウント計算
         const newCount = count + encoded.bpe.length;
 
-        // カウントがMAX_TOKEN_COUNTを超えたら履歴の追加をやめる
         if (newCount > MAX_TOKEN_COUNT) {
           break;
         }
 
-        // カウントを更新
         count = newCount;
 
-        // 履歴に追加
         newMessages.push({ role, content: data.text });
       }
     }
@@ -53,10 +50,15 @@ export async function POST(req: NextRequest) {
     // メッセージを古い順に並び替え
     newMessages.reverse();
 
-    // システムメッセージを配列の先頭に追加
+    // システムメッセージを設定（モードと好感度に応じて変更）
+    const systemMessage =
+      mode === 'chat'
+        ? `あなたはフレンドリーな美少女アシスタントです。好感度は ${affinity} です。`
+        : `あなたはタスク完了を褒める美少女です。好感度は ${affinity} です。`;
+
     newMessages.unshift({
       role: 'system',
-      content: 'あなたは幼馴染的存在の美少女です。あなたの名前は「ひより」で17歳。前向きな性格で面倒見のいい大人しい女性です。好奇心旺盛で効いた話しを深掘りしたりしてお話相手になってください。口調はため口でフレンドリーに話します。',
+      content: systemMessage,
     });
 
     // ChatGPTによる応答
@@ -67,7 +69,6 @@ export async function POST(req: NextRequest) {
       temperature: 1.3,
     });
 
-    // 応答メッセージを取得
     const message = completion.choices[0].message?.content;
 
     return NextResponse.json({ response: message });
