@@ -33,7 +33,7 @@ export const useAuth = () => {
                 setError("トークン情報が取得できませんでした");
             }
 
-        } catch (e) {
+        } catch (err) {
             setError("登録に失敗しました");
         } finally {
             setLoading(false);
