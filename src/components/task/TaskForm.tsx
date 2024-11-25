@@ -52,9 +52,8 @@ export default function TaskForm({ onSubmit, tags, isVisible }: TaskFormProps) {
 
     return (
         <div
-            className={`fixed flex flex-col h-[90vh] sm:h-[80vh] bottom-0 left-0 right-0 bg-white p-5 shadow-lg rounded-t-lg transition-transform duration-300 z-50 ${
-                isVisible ? "translate-y-0" : "translate-y-full"
-            }`}
+            className={`fixed flex flex-col h-[90vh] sm:h-[80vh] bottom-0 left-0 right-0 bg-white p-5 shadow-lg rounded-t-lg transition-transform duration-300 z-50 ${isVisible ? "translate-y-0" : "translate-y-full"
+                }`}
         >
             <div className="text-center">
                 <h2 className="text-2xl font-bold ">新しいタスクを作成</h2>
@@ -124,9 +123,25 @@ export default function TaskForm({ onSubmit, tags, isVisible }: TaskFormProps) {
                 </div>
             </div>
 
-            <div className="flex flex-col mt-auto mb-10 items-center justify-center space-y-5">
-                <button onClick={handleFormSubmit} className="p-2 bg-green-500 text-white rounded text-3xl w-64">作成</button>
-                <button onClick={() => onSubmit("", "", "", 1, "", [])} className="p-2 bg-gray-500 text-white rounded text-3xl w-64">キャンセル</button>
+            <div className="flex xxs:flex-col xxs:text-3xl mt-auto mb-10 items-center justify-center xxs:space-y-5">
+                <button onClick={handleFormSubmit} className="p-2 text-[#008080] group">
+                    <div className="flex items-center">
+                        <span className="material-icons" style={{ fontSize: '52px' }}>
+                        fiber_new
+                        </span>
+                        <p>作成</p>
+                    </div>
+                    <div className="w-[100%] h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
+                </button>
+                <button onClick={() => onSubmit("", "", "", 1, "", [])} className="p-2 text-gray-500 group">
+                    <div className="flex items-center">
+                        <span className="material-icons" style={{ fontSize: '46px' }}>
+                            close
+                        </span>
+                        <p>キャンセル</p>
+                    </div>
+                    <div className="w-[100%] h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
+                </button>
             </div>
         </div>
     );

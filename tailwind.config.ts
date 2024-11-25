@@ -12,8 +12,15 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        custom: ['"Custom Font"', "sans-serif"], // カスタムフォントの追加
+      },
+      screens: {
+        xxs: "376px", // 376px以下のカスタムブレークポイント
+      },
     },
   },
   plugins: [],
 };
+
 export default config;

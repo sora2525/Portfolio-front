@@ -50,7 +50,7 @@ export default function RootLayout({
         <RecoilRoot>
           <AuthLoader>
             <div className="h-screen w-screen bg-[url('/images/sample.jpg')] bg-cover bg-no-repeat bg-center relative overflow-hidden">
-              <div className="relative top-0 left-0 w-full z-20">
+              <div className="absolute  top-0 left-0 w-full z-20">
                 <PageHeader />
               </div>
               <div className="absolute  z-10 pointer-events-none">

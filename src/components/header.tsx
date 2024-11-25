@@ -13,7 +13,7 @@ export default function PageHeader() {
     };
 
     return (
-        <div className="bg-pink-400 flex h-[70px] items-center pointer-events-auto">
+        <div className="bg-pink-400 flex h-[50px] items-center pointer-events-auto">
             {auth.isAuthenticated && auth.user ? (
                 <>
                     <div className="flex justify-between items-center w-full px-4">
@@ -21,8 +21,12 @@ export default function PageHeader() {
                             <Link href="/" className="text-white font-bold ml-6">{auth.user.name}</Link>
                         </div>
                         <div className="">
-                            <button onClick={handleLogout} className="text-white font-bold">ログアウト</button>
-                            <Link href="/profile" className="text-white font-bold ml-6">プロフィール</Link>
+                            <button onClick={handleLogout} className="text-white font-bold flex">
+                                <span className="material-icons">
+                                    logout
+                                </span>
+                                <p>ログアウト</p>
+                            </button>
                         </div>
                     </div>
 

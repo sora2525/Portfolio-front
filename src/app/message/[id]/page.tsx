@@ -1,8 +1,9 @@
 'use client';
 import Message from "@/components/task/Message";
 import { useTasks } from "@/lib/hooks/useTasks";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useVoiceVoxLipSync } from "@/lib/hooks/useVoiceVoxLipSync"; // useVoiceVoxLipSyncフックを使う
+import Link from "next/link";
 
 type Task = {
     id: number;
@@ -21,7 +22,6 @@ export default function TaskPage({ params }: { params: { id: string } }) {
     const { getTask } = useTasks(); // タスクを取得するための関数
     const { playVoiceAndLipSync } = useVoiceVoxLipSync(); // useVoiceVoxLipSyncフックを使う
     const [task, setTask] = useState<Task | null>(null); // タスクデータを保持するstate
-    const [isPlaying, setIsPlaying] = useState(false); // 音声再生状態を管理するstate
 
     const taskId = Number(params.id); // URLパラメータのidを取得
 
@@ -40,29 +40,38 @@ export default function TaskPage({ params }: { params: { id: string } }) {
     const handlePlayMessage = () => {
         if (task?.completion_message) {
             playVoiceAndLipSync(task.completion_message, '58'); // VoiceVoxのspeaker IDを指定（例: '58'）
-            setIsPlaying(true); // 音声再生フラグを設定
         }
     };
 
     if (!task) return <div>Loading...</div>; // タスクがまだ取得できていない場合はロード中メッセージを表示
 
     return (
-        <div className="pointer-events-auto w-screen h-screen flex justify-center items-center flex-col">
-            <Message completion_message={task.completion_message} />
-            
-            {/* タスクデータを表示 */}
-            <div>
+        <>
+        <div className="pointer-events-auto w-screen h-screen flex justify-end items-center flex-col relative">
+            {/* 左上に戻るボタンを配置 */}
+            <Link href="/tasks" className="absolute top-[80px] left-4 text-3xl hover:text-[#008080]">
+                <span className="material-icons" style={{ fontSize: '48px' }}>
+                    backspace
+                </span>
+            </Link>
+
+            <div className="space text-center">
                 <h2>{task.title}</h2>
                 <p>{task.description}</p>
             </div>
             
-            {/* ボタンをクリックしたときに音声を再生 */}
-            <button 
-                onClick={handlePlayMessage} 
-                className="mt-4 p-2 bg-blue-500 text-white rounded-lg"
+            <Message completion_message={task.completion_message} />
+
+            <button
+                onClick={handlePlayMessage}
+                className="mt-4 p-2 bg-blue-500 text-white flex space-x-3 mb-5"
             >
-                {isPlaying ? "再生中..." : "音声を再生"}
+                <span className="material-icons">
+                    volume_up
+                </span>
+                <p>音声を生成</p>
             </button>
         </div>
+        </>
     );
 }

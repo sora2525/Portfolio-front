@@ -17,7 +17,7 @@ export default function Task() {
     useEffect(() => {
         getTasks(sortBy, order, selectedTag);
         getTags();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortBy, order, selectedTag]);
 
     const handleCreateToggle = () => {
@@ -34,26 +34,29 @@ export default function Task() {
     };
 
     return (
-        <div className="pointer-events-auto flex flex-col items-center mt-[4%] w-screen h-screen">
-            <div className="bg-[rgba(243,244,246,0.85)] w-[95%] h-[85%] p-4 rounded-lg shadow-lg">
-                <Link href="/">トップページに戻る</Link>
-                <h1 className="text-2xl font-semibold mb-4 text-center">タスク一覧</h1>
+        <div className="pointer-events-auto flex flex-col items-center justify-end w-screen h-screen">
+            <div className="bg-[rgba(243,244,246,0.85)] w-[95%] h-[90%] xxs:h-[90%] p-3 rounded-lg shadow-lg mb-2">
+                <div className="flex w-full justify-between items-center">
+                    <Link href="/"><span className="material-icons hover:text-[#008080]" style={{ fontSize: '42px' }}>
+                        backspace
+                    </span></Link>
+                    <h1 className="sm:text-2xl text-xl font-semibold sm:mb-4 mb-2 text-center mx-auto">タスク一覧</h1>
+                </div>
 
                 {/* ソートセレクトボックス */}
                 <div className="flex gap-2">
-                    <label>並び替え:</label>
-                    <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
+                    <select onChange={(e) => setSortBy(e.target.value)} value={sortBy} className="h-[5%]">
                         <option value="created_at">作成日順</option>
                         <option value="due_date">期限順</option>
                         <option value="priority">優先度順</option>
                         <option value="completion_date">完了状態順</option>
                     </select>
 
-                    <select onChange={(e) => setOrder(e.target.value)} value={order}>
+                    <select onChange={(e) => setOrder(e.target.value)} value={order} className="h-[5%]">
                         <option value="asc">昇順</option>
                         <option value="desc">降順</option>
                     </select>
-                    <select onChange={(e) => setSelectedTag(e.target.value)} value={selectedTag}>
+                    <select onChange={(e) => setSelectedTag(e.target.value)} value={selectedTag} className="h-[5%]">
                         <option value="">すべてのタグ</option>
                         {tags.map((tag) => (
                             <option key={tag.id} value={tag.id}>{tag.name}</option>
@@ -86,12 +89,18 @@ export default function Task() {
                     </ul>
                 </div>
 
-                <div className="flex justify-center mt-5">
+                <div className="flex justify-center xxs:mt-5 mt-2 sm:text-2xl">
                     <button
                         onClick={handleCreateToggle}
-                        className="bg-gray-500 text-white rounded text-3xl w-64"
+                        className="text-[#008080] justify-center items-center rounded text-2xl flex flex-col group"
                     >
-                        新規作成
+                        <div className="flex items-center">
+                            <span className="material-icons" style={{ fontSize: '38px' }}>
+                                note_add
+                            </span>
+                            <p>新規作成</p>
+                        </div>
+                        <div className="w-[100%] h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
                     </button>
                 </div>
             </div>

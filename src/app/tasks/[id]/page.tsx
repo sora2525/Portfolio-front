@@ -78,7 +78,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                 formData.due_date,
                 Number(formData.priority),
                 formData.reminder_time,
-                selectedTags 
+                selectedTags
             );
             setTask({
                 ...task,
@@ -87,12 +87,12 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                 due_date: formData.due_date,
                 priority: formData.priority,
                 reminder_time: formData.reminder_time,
-                tags: tags.filter((tag) => selectedTags.includes(tag.id)), 
+                tags: tags.filter((tag) => selectedTags.includes(tag.id)),
             });
             setIsEditing(false);
         }
     };
-    
+
     const handleDelete = async () => {
         if (task) {
             const confirmed = confirm("本当にこのタスクを削除しますか？");
@@ -111,8 +111,8 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
 
     return (
         <>
-            <div className="pointer-events-auto flex flex-col items-center mt-[5%] w-screen h-screen relative">
-                <div className="bg-[rgba(243,244,246,0.85)] w-[95%] h-[85%] p-4 rounded-lg shadow-lg flex flex-col justify-between">
+            <div className="pointer-events-auto flex flex-col items-center  w-screen h-screen relative justify-end">
+                <div className="bg-[rgba(243,244,246,0.85)] w-[95%] h-[85%] p-4 rounded-lg shadow-lg flex flex-col justify-between mb-5">
                     {error ? (
                         <p style={{ color: "red" }}>{error}</p>
                     ) : !task ? (
@@ -139,8 +139,26 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                             </div>
 
                             <div className="flex flex-col items-center space-y-5 mt-auto mb-10">
-                                <button onClick={handleEditToggle} className="p-2 bg-blue-500 text-white rounded text-3xl w-64">編集</button>
-                                <button onClick={handleDelete} className="p-2 bg-red-500 text-white rounded text-3xl w-64">削除</button>
+                                <button onClick={handleEditToggle} className="p-2 text-[#008080]  rounded text-3xl group">
+                                    <div className="flex items-center">
+                                        <span className="material-icons" style={{ fontSize: '42px' }}>
+                                            edit
+                                        </span>
+                                        <p>編集</p>
+                                    </div>
+                                    <div className="w-[100%] h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
+
+                                </button>
+                                <button onClick={handleDelete} className="p-2  text-red-500 rounded text-3xl group">
+                                    <div className="flex items-center">
+                                        <span className="material-icons" style={{ fontSize: '42px' }}>
+                                            delete
+                                        </span>
+                                        <p>削除</p>
+                                    </div>
+                                    <div className="w-[100%] h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
+
+                                </button>
                             </div>
                         </div>
                     )}
@@ -211,8 +229,26 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                         </div>
                     </div>
                     <div className="flex flex-col mt-auto mb-10 items-center justify-center space-y-5">
-                        <button onClick={handleEditToggle} className="p-2 bg-gray-500 text-white rounded text-3xl w-64">キャンセル</button>
-                        <button onClick={handleFormSubmit} className="p-2 bg-green-500 text-white rounded text-3xl w-64">更新</button>
+                        <button onClick={handleFormSubmit} className="p-2 text-green-500 rounded text-3xl group">
+                            <div className="flex items-center">
+                                <span className="material-icons" style={{ fontSize: '46px' }}>
+                                    edit
+                                </span>
+                                <p>更新</p>
+                            </div>
+                            <div className="w-full h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
+
+                        </button>
+                        <button onClick={handleEditToggle} className="p-2 text-gray-500 rounded text-3xl group">
+                            <div className="flex items-center">
+                                <span className="material-icons" style={{ fontSize: '46px' }}>
+                                    close
+                                </span>
+                                <p>キャンセル</p>
+                            </div>
+                            <div className="w-full h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
+
+                        </button>
                     </div>
                 </div>
             </div>

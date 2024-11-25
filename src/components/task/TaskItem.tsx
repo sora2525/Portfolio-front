@@ -71,7 +71,7 @@ export default function TaskItem({
     };
 
     return (
-        <div className="bg-white opacity-100 p-4 rounded-xl flex items-center">
+        <div className="bg-white opacity-100 p-2 rounded-xl flex items-center">
             {/* 完了状態のアイコン */}
             {isLoading ? (
                 <div className="w-10 h-10 flex items-center justify-center">
@@ -80,25 +80,24 @@ export default function TaskItem({
             ) : (
                 <div
                     onClick={handleCompleteToggle}
-                    className={`w-10 h-10 flex items-center justify-center cursor-pointer rounded-full ${isCompleted ? "bg-green-500" : "bg-blue-500"
-                        }`}
+                    className={`w-8 h-8 sm:min-w-12 sm:min-h-12  min-w-8 min-h-8 flex items-center justify-center cursor-pointer rounded-full ${isCompleted ? "bg-green-500" : "bg-blue-500"}`}
                 >
                     {isCompleted ? (
-                        <span className="text-white text-xl font-bold text-center">✓</span>
+                        <span className="text-white text-lg xxs:text-2xl font-bold">✓</span>
                     ) : (
-                        <span className="text-white text-xl font-bold">＋</span>
+                        <span className="text-white text-2xl font-bold">＋</span>
                     )}
                 </div>
             )}
 
             {/* タスク詳細 */}
-            <li className="ml-4 w-full">
+            <li className="ml-2 sm:ml-4 w-full">
                 <Link href={`tasks/${id}`} className="flex flex-wrap">
-                    <h2 className="text-xl font-bold w-1/2 p-2">{title}</h2>
-                    <p className="w-1/2 p-2">優先度: {priority}</p>
-                    <p className="w-1/2 p-2">{description}</p>
-                    <p className="w-1/2 p-2 text-red-500">期日: {due_date}</p>
-                    
+                    <h2 className="text-lg font-bold w-1/2 p-2 overflow-hidden text-ellipsis whitespace-nowrap">{title}</h2>
+                    <p className="w-1/2 p-2">{`優先度: ${priority}`}</p>
+                    <p className="w-1/2 p-2 overflow-hidden text-ellipsis whitespace-nowrap">{description}</p>
+                    <p className="w-1/2 p-2 text-red-500 text-sm">{due_date}</p>
+
                     <div className="flex flex-wrap gap-2 mt-2">
                         {tags.map((tag) => (
                             <TagItem
@@ -110,13 +109,14 @@ export default function TaskItem({
                         ))}
                     </div>
                 </Link>
+
             </li>
 
             {/* 完了メッセージ表示 */}
             {completion_date && (
                 <div className="mt-2 text-green-700">
                     <Link href={`message/${id}`}> {/* リンク先のページURLを指定 */}
-                        <span className="material-icons" style={{ fontSize: '42px' }}>
+                        <span className="material-icons" style={{ fontSize: '38px' }}>
                             textsms
                         </span>
                     </Link>
