@@ -42,6 +42,7 @@ export default function RootLayout({
           src="/live2d/live2dcubismcore.min.js"
           strategy="beforeInteractive"
         />
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

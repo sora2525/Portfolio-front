@@ -75,6 +75,7 @@ export default function Task() {
                                     priority={task.priority}
                                     reminder_time={task.reminder_time}
                                     completion_date={task.completion_date}
+                                    completion_message={task.completion_message}
                                     tags={task.tags || []}
                                     onCompletionToggle={() => getTasks(sortBy, order, selectedTag)}
                                 />

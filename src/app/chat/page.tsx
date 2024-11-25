@@ -35,7 +35,7 @@ export default function Chat() {
 
     return (
         <div className="w-screen h-screen flex flex-col justify-end items-center">
-            <div className="pointer-events-auto sticky bottom-0 chat-container flex flex-col w-full max-w-lg p-4 rounded-lg shadow- ">
+            <div className="pointer-events-auto sticky bottom-0 chat-container flex flex-col w-full max-w-lg p-4 rounded-lg ">
                 <ChatLog chats={chats} />
                 <ChatForm onSendMessage={handleSendMessage} />
             </div>

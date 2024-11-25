@@ -78,7 +78,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                 formData.due_date,
                 Number(formData.priority),
                 formData.reminder_time,
-                selectedTags
+                selectedTags 
             );
             setTask({
                 ...task,
@@ -87,12 +87,12 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                 due_date: formData.due_date,
                 priority: formData.priority,
                 reminder_time: formData.reminder_time,
-                tags: tags.filter((tag) => selectedTags.includes(tag.id)),
+                tags: tags.filter((tag) => selectedTags.includes(tag.id)), 
             });
             setIsEditing(false);
         }
     };
-
+    
     const handleDelete = async () => {
         if (task) {
             const confirmed = confirm("本当にこのタスクを削除しますか？");
