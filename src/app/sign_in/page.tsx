@@ -25,7 +25,7 @@ export default function SignInPage() {
     return (
         <>
             <div className="flex justify-center items-center w-screen h-screen p-6">
-            <Link href="/" className="absolute top-[80px] left-4 text-3xl hover:text-[#008080] pointer-events-auto">
+            <Link href="/" className="absolute top-[80px] left-4 text-3xl text-[#008080] pointer-events-auto">
                 <span className="material-icons" style={{ fontSize: '48px' }}>
                 reply
                 </span>

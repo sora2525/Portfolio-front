@@ -2,7 +2,7 @@
 import Message from "@/components/task/Message";
 import { useTasks } from "@/lib/hooks/useTasks";
 import { useEffect, useState } from "react";
-import { useVoiceVoxLipSync } from "@/lib/hooks/useVoiceVoxLipSync"; // useVoiceVoxLipSyncフックを使う
+import { useTextToLipSync } from "@/lib/hooks/useTextToLipSync";
 import Link from "next/link";
 
 type Task = {
@@ -19,36 +19,35 @@ type Task = {
 };
 
 export default function TaskPage({ params }: { params: { id: string } }) {
-    const { getTask } = useTasks(); // タスクを取得するための関数
-    const { playVoiceAndLipSync } = useVoiceVoxLipSync(); // useVoiceVoxLipSyncフックを使う
-    const [task, setTask] = useState<Task | null>(null); // タスクデータを保持するstate
+    const { getTask } = useTasks(); 
+    const [task, setTask] = useState<Task | null>(null); 
+    const { generateAndSyncLipSync } = useTextToLipSync();
 
-    const taskId = Number(params.id); // URLパラメータのidを取得
+    const taskId = Number(params.id); 
 
-    // タスクを取得してstateに保存する
+    
     useEffect(() => {
         const fetchTask = async () => {
-            if (taskId && !task) { // 既にtaskが取得されていない場合にのみ実行
-                const taskData = await getTask(taskId); // タスクIDに基づいてタスクを取得
-                setTask(taskData); // 取得したタスクデータをstateに保存
+            if (taskId && !task) { 
+                const taskData = await getTask(taskId); 
+                setTask(taskData); 
             }
         };
 
         fetchTask();
-    }, [taskId, task, getTask]); // タスクがnullの場合にのみAPIを呼び出す
+    }, [taskId, task, getTask]); 
 
     const handlePlayMessage = () => {
         if (task?.completion_message) {
-            playVoiceAndLipSync(task.completion_message, '58'); // VoiceVoxのspeaker IDを指定（例: '58'）
+            generateAndSyncLipSync(task.completion_message);
         }
     };
 
-    if (!task) return <div>Loading...</div>; // タスクがまだ取得できていない場合はロード中メッセージを表示
+    if (!task) return <div>Loading...</div>; 
 
     return (
         <>
         <div className="pointer-events-auto w-screen h-screen flex justify-end items-center flex-col relative">
-            {/* 左上に戻るボタンを配置 */}
             <Link href="/tasks" className="absolute top-[80px] left-4 text-3xl text-[#008080]">
                 <span className="material-icons" style={{ fontSize: '48px' }}>
                 reply
