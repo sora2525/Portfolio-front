@@ -6,6 +6,7 @@ import ChatLog from '@/components/chat/ChatLog';
 import { useChatLog } from '@/lib/hooks/useChatLog';
 import { useAIResponse } from '@/lib/hooks/useAIResponse';
 import { useVoiceVoxLipSync } from '@/lib/hooks/useVoiceVoxLipSync';
+import Link from 'next/link';
 
 export default function Chat() {
     const { chats, createChat, getChats } = useChatLog();
@@ -35,6 +36,11 @@ export default function Chat() {
 
     return (
         <div className="w-screen h-screen flex flex-col justify-end items-center">
+             <Link href="/" className="absolute top-[80px] left-4 text-3xl text-[#008080] pointer-events-auto">
+                <span className="material-icons" style={{ fontSize: '48px' }}>
+                reply
+                </span>
+            </Link>
             <div className="pointer-events-auto sticky bottom-0 chat-container flex flex-col w-full max-w-lg p-4 rounded-lg ">
                 <ChatLog chats={chats} />
                 <ChatForm onSendMessage={handleSendMessage} />

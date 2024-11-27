@@ -20,9 +20,7 @@ export default function ChatLog({ chats }: ChatLogProps) {
             {/* チャット履歴表示部分 */}
             <div className=" flex flex-col gap-4 p-4 bg-[rgba(243,244,246,0.85)] rounded-lg  overflow-y-auto">
             <div className='flex items-center space-x-8'>
-                <Link href="/"><span className="material-icons hover:text-[#008080]">
-                    backspace
-                </span></Link>
+                
                 <button
                     onClick={() => setShowAll(!showAll)} // 状態をトグル
                     className="toggle-button px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition"

@@ -120,7 +120,11 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                     ) : (
                         <div className="flex flex-col h-full">
                             <div>
-                                <button onClick={() => router.back()}>戻る</button>
+                                <button onClick={() => router.back()}>
+                                    <span className="material-icons text-[#008080]" style={{ fontSize: '42px' }}>
+                                        reply
+                                    </span>
+                                </button>
                                 <h1 className="font-bold text-5xl text-center">{formData.title || task.title}</h1>
                                 <p className="text-3xl mt-5">{formData.description || task.description}</p>
                                 <p className="text-red-500 text-3xl mt-5">期日: {formData.due_date || task.due_date}</p>

@@ -3,12 +3,14 @@ import { useRecoilState } from "recoil";
 import { authState } from "../atom/authAtom";
 import { axiosInstance } from "../axiosInstance";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export const useAuth = () => {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [, setAuth] = useRecoilState(authState);
+    const router = useRouter();
 
     // 新規登録
     const signUp = async (name: string, email: string, password: string, passwordConfirmation: string) => {
@@ -53,6 +55,7 @@ export const useAuth = () => {
                 setAuth({ isAuthenticated: true, user: response.data.data });
                 setSuccess("ログインに成功しました！");
                 setError(null);
+                router.push("/");
             } else {
                 setError("トークン情報が取得できませんでした");
             }

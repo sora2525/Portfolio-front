@@ -49,9 +49,9 @@ export default function TaskPage({ params }: { params: { id: string } }) {
         <>
         <div className="pointer-events-auto w-screen h-screen flex justify-end items-center flex-col relative">
             {/* 左上に戻るボタンを配置 */}
-            <Link href="/tasks" className="absolute top-[80px] left-4 text-3xl hover:text-[#008080]">
+            <Link href="/tasks" className="absolute top-[80px] left-4 text-3xl text-[#008080]">
                 <span className="material-icons" style={{ fontSize: '48px' }}>
-                    backspace
+                reply
                 </span>
             </Link>
 
