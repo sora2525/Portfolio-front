@@ -21,7 +21,8 @@ export function useLipSyncHandler() {
     };
   }, []);
 
-  const startLipSync = async (wavFilePath: string) => {
+  // 音声ファイルのURLを受け取ってリップシンクを開始
+  const startLipSync = async (wavFilePath: string): Promise<void> => {
     console.log("startLipSync called");
 
     if (!wavFileHandlerRef.current) {

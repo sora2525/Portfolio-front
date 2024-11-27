@@ -6,12 +6,15 @@ import ChatLog from '@/components/chat/ChatLog';
 import { useChatLog } from '@/lib/hooks/useChatLog';
 import { useAIResponse } from '@/lib/hooks/useAIResponse';
 import { useVoiceVoxLipSync } from '@/lib/hooks/useVoiceVoxLipSync';
+import { useTextToLipSync } from '@/lib/hooks/useTextToLipSync';
 import Link from 'next/link';
 
 export default function Chat() {
     const { chats, createChat, getChats } = useChatLog();
     const { generateResponse } = useAIResponse();
     const { playVoiceAndLipSync } = useVoiceVoxLipSync();
+  const { loading, error, lipSyncError, generateAndSyncLipSync } = useTextToLipSync();
+
 
     const handleSendMessage = async (userMessage: string) => {
         await createChat(userMessage, 'user');
@@ -28,7 +31,7 @@ export default function Chat() {
 
         if (aiResponse) {
             await createChat(aiResponse, 'character');
-            playVoiceAndLipSync(aiResponse, '58');
+            generateAndSyncLipSync(aiResponse)
         }
 
         await getChats();
