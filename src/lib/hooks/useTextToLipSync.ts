@@ -8,7 +8,7 @@ export const useTextToLipSync = () => {
   const [lipSyncError, setLipSyncError] = useState<string | null>(null);
 
   // テキストを受け取って音声合成とリップシンクを実行する関数
-  const generateAndSyncLipSync = async (text: string, speakerId: number = 0) => {
+  const generateAndSyncLipSync = async (text: string, speakerId: number = 58) => {
     if (!text) {
       setLipSyncError('テキストが空です');
       return;

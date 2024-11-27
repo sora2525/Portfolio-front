@@ -5,15 +5,13 @@ import ChatForm from '@/components/chat/ChatForm';
 import ChatLog from '@/components/chat/ChatLog';
 import { useChatLog } from '@/lib/hooks/useChatLog';
 import { useAIResponse } from '@/lib/hooks/useAIResponse';
-import { useVoiceVoxLipSync } from '@/lib/hooks/useVoiceVoxLipSync';
 import { useTextToLipSync } from '@/lib/hooks/useTextToLipSync';
 import Link from 'next/link';
 
 export default function Chat() {
     const { chats, createChat, getChats } = useChatLog();
     const { generateResponse } = useAIResponse();
-    const { playVoiceAndLipSync } = useVoiceVoxLipSync();
-  const { loading, error, lipSyncError, generateAndSyncLipSync } = useTextToLipSync();
+  const { generateAndSyncLipSync } = useTextToLipSync();
 
 
     const handleSendMessage = async (userMessage: string) => {
