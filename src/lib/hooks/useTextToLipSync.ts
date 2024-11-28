@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useVoicevox } from './useVoicevox'; // 音声合成
 import { useLipSyncHandler } from './useLipSyncHandler'; // リップシンク
 
@@ -6,7 +6,6 @@ export const useTextToLipSync = () => {
   const { loading, error, audioUrl, fetchAudio } = useVoicevox();
   const { startLipSync } = useLipSyncHandler();
   const [lipSyncError, setLipSyncError] = useState<string | null>(null);
-  const isAudioPlayingRef = useRef<boolean>(false); // 音声再生状態を追跡
 
   // テキストを受け取って音声合成とリップシンクを実行する関数
   const generateAndSyncLipSync = async (text: string, speakerId: number = 58) => {
@@ -23,8 +22,8 @@ export const useTextToLipSync = () => {
 
   // audioUrlが更新されたタイミングでリップシンクを開始
   useEffect(() => {
-    if (audioUrl && !isAudioPlayingRef.current) {
-      isAudioPlayingRef.current = true; // 音声再生中
+    if (audioUrl) {
+      // 音声URLが設定されたらリップシンクを開始
       startLipSync(audioUrl).catch((err) => {
         setLipSyncError('リップシンクの開始に失敗しました');
       });
