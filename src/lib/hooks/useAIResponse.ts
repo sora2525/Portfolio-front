@@ -17,7 +17,6 @@ export const useAIResponse = () => {
       setError(null);
 
       try {
-        // APIリクエストのペイロードに mode と affinity を追加
         const response = await axios.post('/api/chatgpt', {
           question,
           messages,

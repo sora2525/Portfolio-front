@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
     // システムメッセージを設定（モードと好感度に応じて変更）
     const systemMessage =
       mode === 'chat'
-        ? `あなたはフレンドリーな美少女アシスタントです。好感度は ${affinity} です。`
+        ? `あなたはフレンドリーな美少女ひよりです。基本的にため口で話します。返答は40文字以内で納めてください。好感度は ${affinity} です。`
         : `あなたはタスク完了を褒める美少女です。好感度は ${affinity} です。`;
 
     newMessages.unshift({

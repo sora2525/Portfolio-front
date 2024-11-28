@@ -56,20 +56,20 @@ export default function TaskForm({ onSubmit, tags, isVisible }: TaskFormProps) {
                 }`}
         >
             <div className="text-center">
-                <h2 className="text-2xl font-bold ">新しいタスクを作成</h2>
+                <h2 className="text-lg sm:text-2xl  font-bold ">新しいタスクを作成</h2>
                 <input
                     type="text"
                     name="title"
                     value={formData.title}
                     onChange={handleInputChange}
-                    className="w-full p-2 mt-4 border border-gray-300 rounded"
+                    className="w-full p-1 sm:p-2 mt-4 border border-gray-300 rounded"
                     placeholder="タイトル"
                 />
                 <textarea
                     name="description"
                     value={formData.description}
                     onChange={handleInputChange}
-                    className="w-full p-2 mt-4 border border-gray-300 rounded"
+                    className="w-full p-1 sm:p-2 mt-4 border border-gray-300 rounded"
                     placeholder="説明"
                 ></textarea>
                 <input
@@ -77,13 +77,13 @@ export default function TaskForm({ onSubmit, tags, isVisible }: TaskFormProps) {
                     name="due_date"
                     value={formData.due_date}
                     onChange={handleInputChange}
-                    className="w-full p-2 mt-4 border border-gray-300 rounded"
+                    className="w-full p-1 sm:p-2 mt-4 border border-gray-300 rounded"
                 />
                 <select
                     name="priority"
                     value={formData.priority}
                     onChange={handleInputChange}
-                    className="w-full p-2 mt-4 border border-gray-300 rounded"
+                    className="w-full p-1 sm:p-2 mt-4 border border-gray-300 rounded"
                 >
                     <option value={1}>低</option>
                     <option value={2}>中</option>
@@ -94,7 +94,7 @@ export default function TaskForm({ onSubmit, tags, isVisible }: TaskFormProps) {
                     name="reminder_time"
                     value={formData.reminder_time}
                     onChange={handleInputChange}
-                    className="w-full p-2 mt-4 border border-gray-300 rounded"
+                    className="w-full p-1 sm:p-2 mt-4 border border-gray-300 rounded"
                 />
             </div>
 
