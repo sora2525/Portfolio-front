@@ -32,11 +32,17 @@ export default function PageHeader() {
 
                 </>
             ) : (
-                <div>
-                    <Link href="/sign_in" className="text-white font-bold ml-6">ログイン</Link>
+                <div className="flex w-full justify-end">
+                    <Link href="/sign_in" className="text-white font-bold flex items-center">
+                        <span className="material-icons">
+                            login
+                        </span>
+                        <p className="ml-2">ログイン</p>
+                    </Link>
                     <Link href="/sign_up" className="text-white font-bold ml-6">サインアップ</Link>
                 </div>
-                
+
+
             )}
         </div>
     );

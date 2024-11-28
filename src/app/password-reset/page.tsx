@@ -42,36 +42,45 @@ const PasswordReset = ({ searchParams }: PasswordResetProps) => {
     };
 
     return (
-        <div className="pointer-events-auto">
-            <h1>パスワードリセット</h1>
-            {/* エラー・成功メッセージ */}
-            {(localError || error) && <p style={{ color: "red" }}>{localError || error}</p>}
-            {success && <p style={{ color: "green" }}>{success}</p>}
+        <div className="flex justify-center items-center min-h-screen w-screen p-6">
+            <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg pointer-events-auto">
+                <h1 className="text-2xl font-semibold text-center text-teal-600 mb-6">パスワードリセット</h1>
 
-            {/* パスワードリセットフォーム */}
-            <form onSubmit={handlePasswordReset}>
-                <div>
-                    <label>新しいパスワード</label>
-                    <input
-                        type="password"
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>パスワード確認</label>
-                    <input
-                        type="password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit" disabled={loading}>
-                    {loading ? "リセット中..." : "パスワードをリセット"}
-                </button>
-            </form>
+                {(localError || error) && <p className="text-red-600 text-center mb-4">{localError || error}</p>}
+                {success && <p className="text-green-600 text-center mb-4">{success}</p>}
+
+                <form onSubmit={handlePasswordReset} className="space-y-4">
+                    <div>
+                        <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700">新しいパスワード</label>
+                        <input
+                            type="password"
+                            id="newPassword"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">パスワード確認</label>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                            required
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full py-3 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    >
+                        {loading ? "リセット中..." : "パスワードをリセット"}
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

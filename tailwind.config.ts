@@ -13,10 +13,10 @@ const config: Config = {
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        custom: ['"Custom Font"', "sans-serif"], // カスタムフォントの追加
+        custom: ['"Custom Font"', "sans-serif"], 
       },
       screens: {
-        xxs: "376px", // 376px以下のカスタムブレークポイント
+        xxs: "400px", 
       },
     },
   },

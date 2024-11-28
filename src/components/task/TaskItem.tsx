@@ -37,7 +37,7 @@ export default function TaskItem({
     const { completeTask, addCompletionMessage } = useTasks();
     const [isLoading, setIsLoading] = useState(false);
     const { generateResponse } = useAIResponse();
-    const [isCompleted, setIsCompleted] = useState(!!completion_date); // 初期状態を`completion_date`で設定
+    const [isCompleted, setIsCompleted] = useState(!!completion_date); 
 
     // `completion_date`が変わった場合に状態を更新
     useEffect(() => {
@@ -75,7 +75,7 @@ export default function TaskItem({
             {/* 完了状態のアイコン */}
             {isLoading ? (
                 <div className="w-10 h-10 flex items-center justify-center">
-                    <span className="loader"></span> {/* ローディング用のスピナー */}
+                    <span className="loader"></span> 
                 </div>
             ) : (
                 <div
@@ -115,7 +115,7 @@ export default function TaskItem({
             {/* 完了メッセージ表示 */}
             {completion_date && (
                 <div className="mt-2 text-green-700">
-                    <Link href={`message/${id}`}> {/* リンク先のページURLを指定 */}
+                    <Link href={`message/${id}`}> 
                         <span className="material-icons" style={{ fontSize: '38px' }}>
                             textsms
                         </span>
