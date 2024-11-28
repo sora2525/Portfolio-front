@@ -35,7 +35,7 @@ export default function Live2dView() {
 
   return (
     <div id="live2d-container">
-      <canvas className="w-screen h-[1200px]" ref={ref} />
+      <canvas className="w-screen h-[800px] xxs:h-[900px] sm:h-[1200px]" ref={ref} />
     </div>
   );
 }
