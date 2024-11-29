@@ -60,6 +60,24 @@ export const useChatLog = () => {
     }
   };
 
+  const clearChats = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      await axiosInstance.delete("/chats"); // チャットを削除するAPIを呼び出し
+      setChats([]); // 状態のチャット履歴を空にする
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error("Failed to clear chats:", err);
+        setError(err.message || "チャット履歴の削除に失敗しました");
+      } else {
+        setError("未知のエラーが発生しました");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   /**
    * 初回レンダリング時にチャット履歴を取得
    */
@@ -67,5 +85,5 @@ export const useChatLog = () => {
     getChats();
   }, []);
 
-  return { getChats, createChat, chats, loading, error };
+  return { getChats, createChat, clearChats, chats, loading, error };
 };

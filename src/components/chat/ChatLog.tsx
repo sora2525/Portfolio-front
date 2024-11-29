@@ -6,9 +6,10 @@ import Link from 'next/link';
 
 type ChatLogProps = {
     chats: ChatMessage[];
+    onClearChats: () => void; // チャット削除関数をプロパティとして受け取る
 };
 
-export default function ChatLog({ chats }: ChatLogProps) {
+export default function ChatLog({ chats, onClearChats }: ChatLogProps) {
     const [showAll, setShowAll] = useState(false); // 全履歴を表示するかどうかの状態
     const chatContainerRef = useRef<HTMLDivElement>(null); // チャット履歴のコンテナへの参照
 
@@ -23,11 +24,17 @@ export default function ChatLog({ chats }: ChatLogProps) {
 
     return (
         <div className="chat-log-container">
-            {/* トグルボタン */}
-            <div className="flex items-center space-x-8">
+            {/* チャット削除ボタン */}
+            <div className="flex justify-between items-center mb-2">
                 <button
-                    onClick={() => setShowAll(!showAll)} // 状態をトグル
-                    className="toggle-button px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition"
+                    onClick={onClearChats} // チャット削除を実行
+                    className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition text-sm xxs:text-lg"
+                >
+                    チャットを削除
+                </button>
+                <button
+                    onClick={() => setShowAll(!showAll)} // 状態をトグル 
+                    className="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition text-sm xxs:text-lg"
                 >
                     {showAll ? '最新メッセージのみ表示' : '全履歴を表示'}
                 </button>
