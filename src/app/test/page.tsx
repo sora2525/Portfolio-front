@@ -1,61 +1,76 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { useTextToLipSync } from "@/lib/hooks/useTextToLipSync";
+"use client"
+import React, { useState, useRef, useEffect } from "react";
+import { useVoicevox } from "@/lib/hooks/useVoicevox";
+import { useLipSyncHandler } from "@/lib/hooks/useLipSyncHandler"; // リップシンク用のフック
 
-export default function LipSyncPage() {
-  const [text, setText] = useState<string>("");
-  const { loading, error, lipSyncError, generateAndSyncLipSync } = useTextToLipSync();
-  const [previousText, setPreviousText] = useState<string>('');
+const TextToSpeech = () => {
+  const [text, setText] = useState(""); // 入力されたテキストを管理
+  const { loading, error, audioUrl, fetchAudio } = useVoicevox(); // 音声合成用のフック
+  const { startLipSync } = useLipSyncHandler(); // リップシンク用のフック
+  const audioRef = useRef<HTMLAudioElement | null>(null); // 再生中の音声を追跡
 
+  // 音声URLが更新された時にリップシンクを開始
   useEffect(() => {
-    // テキストが変更された場合、再生されないようにリセット
-    if (text !== previousText) {
-      setPreviousText(text);
-    }
-  }, [text, previousText]);
+    if (audioUrl) {
+      // 再生中の音声があれば停止
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0; // 再生位置をリセット
+      }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+      // 新しい音声でリップシンクを開始
+      startLipSync(audioUrl);
+
+      // 新しい音声を再生
+      const audio = new Audio(audioUrl);
+      audioRef.current = audio; // 再生中の音声を保存
+      audio.play();
+    }
+  }, [audioUrl]); // audioUrlが更新されるたびに処理を実行
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (text.trim() === "") {
-      alert("テキストを入力してください！");
-      return;
+    if (text.trim()) {
+      fetchAudio(text); // テキストが空でなければ音声を生成
     }
-
-    // 新しいテキストが入力されたら音声合成を開始
-    await generateAndSyncLipSync(text);
   };
 
   return (
-    <div className="pointer-events-auto flex flex-col items-center justify-center w-full h-screen p-6">
-      <h1 className="text-2xl mb-4">リップシンク付き音声合成</h1>
+    <div className="text-center pointer-events-auto">
+      <h2 className="text-2xl font-semibold mb-4">テキストを音声で再生</h2>
 
-      {/* フォーム */}
-      <form onSubmit={handleSubmit} className="mb-4">
+      {/* テキスト入力フォーム */}
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="読み上げるテキスト"
-          className="p-2 border border-gray-300 rounded mb-2"
+          placeholder="テキストを入力"
+          className="p-3 border border-gray-300 rounded-md"
         />
         <button
           type="submit"
           disabled={loading}
-          className="p-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+          className="ml-2 p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
-          {loading ? "音声合成中..." : "合成開始"}
+          {loading ? "生成中..." : "音声を再生"}
         </button>
       </form>
 
       {/* エラーメッセージ */}
-      {lipSyncError && <p className="text-red-500">{lipSyncError}</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-600 mt-4">{error}</p>}
 
-      {/* 成功時 */}
-      {!loading && !error && !lipSyncError && text && (
-        <p className="text-green-500 mt-4">音声生成とリップシンクが開始されました。</p>
+      {/* 音声の再生 */}
+      {audioUrl && (
+        <div className="mt-4">
+          <audio controls>
+            <source src={audioUrl} type="audio/wav" />
+            あなたのブラウザは音声タグをサポートしていません。
+          </audio>
+        </div>
       )}
     </div>
   );
-}
+};
+
+export default TextToSpeech;

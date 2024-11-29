@@ -9,7 +9,7 @@ const openai = new OpenAI({
 });
 
 // トークンカウントの最大値
-const MAX_TOKEN_COUNT = 3000;
+const MAX_TOKEN_COUNT = 1500;
 
 export async function POST(req: NextRequest) {
   try {
@@ -53,8 +53,8 @@ export async function POST(req: NextRequest) {
     // システムメッセージを設定（モードと好感度に応じて変更）
     const systemMessage =
       mode === 'chat'
-        ? `あなたはフレンドリーな美少女ひよりです。基本的にため口で話します。返答は40文字以内で納めてください。好感度は ${affinity} です。`
-        : `あなたはタスク完了を褒める美少女です。好感度は ${affinity} です。`;
+        ? `あなたは美少女ひよりです。フレンドリーにタメ語で話し、雑談相手としてあなたは楽しい会話をして、返答は30文字以内で納めてください。あなたは話題を提供したり、逆に提供された話題を深掘りして質問や自分の好みなどを話して話を広げたりしてください。`
+        : `あなたはタスク完了を褒める美少女です。`;
 
     newMessages.unshift({
       role: 'system',
