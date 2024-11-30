@@ -43,7 +43,7 @@ export default function ChatLog({ chats, onClearChats }: ChatLogProps) {
             {/* チャット履歴表示部分 */}
             <div className="flex flex-col gap-4 p-4 bg-[rgba(243,244,246,0.85)] rounded-lg overflow-y-auto">
                 <div
-                    className="overflow-y-auto max-h-[400px] xxs:max-h-[550px]"
+                    className="overflow-y-auto max-h-[400px] xxs:max-h-[550px] lg:max-h-[650px]"
                     ref={chatContainerRef} // チャットコンテナに参照を設定
                 >
                     {visibleChats.map((chat) => (

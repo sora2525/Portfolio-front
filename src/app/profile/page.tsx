@@ -15,7 +15,7 @@ export default function Profile() {
     };
 
     return (
-        <div className="flex flex-col justify-center items-center w-screen h-screen p-6 pointer-events-auto">
+        <div className="flex flex-col justify-center items-center w-full h-screen p-6 pointer-events-auto">
             <Link href="/" className="absolute top-[80px] left-4 text-3xl text-[#008080]">
                 <span className="material-icons" style={{ fontSize: '48px' }}>
                 reply

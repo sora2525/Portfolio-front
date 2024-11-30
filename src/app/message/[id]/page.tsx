@@ -47,7 +47,7 @@ export default function TaskPage({ params }: { params: { id: string } }) {
 
     return (
         <>
-        <div className="pointer-events-auto w-screen h-screen flex justify-end items-center flex-col relative">
+        <div className="pointer-events-auto w-full h-screen flex justify-end items-center flex-col relative">
             <Link href="/tasks" className="absolute top-[80px] left-4 text-3xl text-[#008080]">
                 <span className="material-icons" style={{ fontSize: '48px' }}>
                 reply

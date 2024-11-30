@@ -35,7 +35,7 @@ export default function Chat() {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col justify-end items-center">
+    <div className="w-full h-screen flex flex-col justify-end items-center">
       <Link href="/" className="absolute top-[80px] left-4 text-3xl text-[#008080] pointer-events-auto">
         <span className="material-icons" style={{ fontSize: '48px' }}>
           reply
