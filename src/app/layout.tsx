@@ -54,7 +54,7 @@ export default function RootLayout({
                 <PageHeader />
               </div>
               <div className="flex flex-row-reverse w-full">
-                <div className="absolute z-10 pointer-events-none w-full lg:w-[60%]">
+                <div className="absolute z-10 pointer-events-none w-full lg:w-[60%] text-brack">
                   {children}
                 </div>
                 <div className="absolute inset-0 z-0">

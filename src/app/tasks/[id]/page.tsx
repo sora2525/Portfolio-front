@@ -1,10 +1,10 @@
-"use client";
-
+'use client';
 import { useEffect, useState } from "react";
 import { useTasks } from "@/lib/hooks/useTasks";
 import { useRouter } from "next/navigation";
 import { useTags } from "@/lib/hooks/useTags";
 import TagItem from "@/components/tag/TagItem";
+import TaskForm from "@/components/task/TaskForm";
 
 type Task = {
     id: number;
@@ -47,7 +47,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                     priority: fetchedTask.priority,
                     reminder_time: fetchedTask.reminder_time
                 });
-                setSelectedTags(fetchedTask.tags.map((tag) => tag.id));
+                setSelectedTags(fetchedTask.tags.map((tag) => tag.id)); // タグIDの配列を設定
             } else {
                 setError("タスクの取得に失敗しました");
             }
@@ -64,29 +64,24 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
         }
     };
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleFormSubmit = async () => {
+    const handleFormSubmit = async (title, description, dueDate, priority, reminderTime, selectedTags) => {
         if (task) {
             await updateTask(
                 task.id,
-                formData.title,
-                formData.description,
-                formData.due_date,
-                Number(formData.priority),
-                formData.reminder_time,
+                title,
+                description,
+                dueDate,
+                Number(priority),
+                reminderTime,
                 selectedTags
             );
             setTask({
                 ...task,
-                title: formData.title,
-                description: formData.description,
-                due_date: formData.due_date,
-                priority: formData.priority,
-                reminder_time: formData.reminder_time,
+                title,
+                description,
+                due_date: dueDate,
+                priority,
+                reminder_time: reminderTime,
                 tags: tags.filter((tag) => selectedTags.includes(tag.id)),
             });
             setIsEditing(false);
@@ -103,20 +98,17 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
         }
     };
 
-    const handleTagClick = (tagId: number) => {
-        setSelectedTags((prevTags) =>
-            prevTags.includes(tagId) ? prevTags.filter((id) => id !== tagId) : [...prevTags, tagId]
-        );
-    };
+    // taskがnullの間はローディング中の表示
+    if (!task) {
+        return <p>タスクを読み込み中...</p>;
+    }
 
     return (
         <>
-            <div className="pointer-events-auto flex flex-col items-center  w-full h-screen relative justify-end">
+            <div className="pointer-events-auto flex flex-col items-center w-full h-screen relative justify-end">
                 <div className="bg-[rgba(243,244,246,0.85)] w-[95%] h-[85%] p-4 rounded-lg shadow-lg flex flex-col justify-between mb-5">
                     {error ? (
                         <p style={{ color: "red" }}>{error}</p>
-                    ) : !task ? (
-                        <p>読み込み中...</p>
                     ) : (
                         <div className="flex flex-col h-full">
                             <div>
@@ -151,7 +143,6 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                                         <p>編集</p>
                                     </div>
                                     <div className="w-[100%] h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
-
                                 </button>
                                 <button onClick={handleDelete} className="p-2  text-red-500 rounded text-3xl group">
                                     <div className="flex items-center">
@@ -161,7 +152,6 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                                         <p>削除</p>
                                     </div>
                                     <div className="w-[100%] h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
-
                                 </button>
                             </div>
                         </div>
@@ -169,92 +159,20 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                 </div>
 
                 {/* 編集フォームモーダル */}
-                <div className={`fixed flex flex-col h-[80vh] sm:h-[80vh] bottom-0 left-0 right-0 bg-white p-5 shadow-lg rounded-t-lg transition-transform duration-300 z-50 ${isEditing ? 'translate-y-0' : 'translate-y-full'}`}>
-                    <div className="text-center">
-                        <h2 className="text-2xl font-bold">タスクを編集</h2>
-                        <input
-                            type="text"
-                            name="title"
-                            value={formData.title}
-                            onChange={handleInputChange}
-                            className="w-full p-2 mt-4 border border-gray-300 rounded"
-                            placeholder="タイトル"
-                        />
-                        <textarea
-                            name="description"
-                            value={formData.description}
-                            onChange={handleInputChange}
-                            className="w-full p-2 mt-4 border border-gray-300 rounded"
-                            placeholder="説明"
-                        ></textarea>
-                        <input
-                            type="date"
-                            name="due_date"
-                            value={formData.due_date}
-                            onChange={handleInputChange}
-                            className="w-full p-2 mt-4 border border-gray-300 rounded"
-                        />
-                        <select
-                            name="priority"
-                            value={formData.priority}
-                            onChange={handleInputChange}
-                            className="w-full p-2 mt-4 border border-gray-300 rounded"
-                        >
-                            <option value={1}>低</option>
-                            <option value={2}>中</option>
-                            <option value={3}>高</option>
-                        </select>
-                        <input
-                            type="datetime-local"
-                            name="reminder_time"
-                            value={formData.reminder_time}
-                            onChange={handleInputChange}
-                            className="w-full p-2 mt-4 border border-gray-300 rounded"
-                        />
-                    </div>
-
-                    <div className="mt-4">
-                        <h3>タグを選択:</h3>
-                        <div className="flex flex-wrap gap-2">
-                            {tags.map((tag) => (
-                                <div key={tag.id} onClick={() => handleTagClick(tag.id)}>
-                                    <TagItem id={tag.id} name={tag.name} color={tag.color} />
-                                </div>
-                            ))}
-                        </div>
-                        <div className="mt-4">
-                            <h4>選択したタグ:</h4>
-                            <div className="flex flex-wrap gap-2">
-                                {selectedTags.map((tagId) => {
-                                    const tag = tags.find((t) => t.id === tagId);
-                                    return tag ? <TagItem key={tag.id} id={tag.id} name={tag.name} color={tag.color} /> : null;
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col mt-auto mb-10 items-center justify-center space-y-5">
-                        <button onClick={handleFormSubmit} className="p-2 text-green-500 rounded text-3xl group">
-                            <div className="flex items-center">
-                                <span className="material-icons" style={{ fontSize: '46px' }}>
-                                    edit
-                                </span>
-                                <p>更新</p>
-                            </div>
-                            <div className="w-full h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
-
-                        </button>
-                        <button onClick={handleEditToggle} className="p-2 text-gray-500 rounded text-3xl group">
-                            <div className="flex items-center">
-                                <span className="material-icons" style={{ fontSize: '46px' }}>
-                                    close
-                                </span>
-                                <p>キャンセル</p>
-                            </div>
-                            <div className="w-full h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
-
-                        </button>
-                    </div>
-                </div>
+                <TaskForm
+                    onSubmit={handleFormSubmit}
+                    tags={tags}
+                    isVisible={isEditing}
+                    editMode={true}
+                    selectedTask={{ // selectedTaskを編集用に渡す
+                        title: task.title,
+                        description: task.description,
+                        due_date: task.due_date,
+                        priority: task.priority,
+                        reminder_time: task.reminder_time,
+                        tags: selectedTags // タグIDを渡す
+                    }}
+                />
             </div>
         </>
     );

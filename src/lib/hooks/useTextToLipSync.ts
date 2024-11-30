@@ -64,6 +64,7 @@ export const useTextToLipSync = () => {
     if (audioUrl) {
       playAudioWithLipSync(audioUrl); // 音声を再生してリップシンクを開始
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audioUrl]); // audioUrlが変更されるたびに実行
 
   return {
