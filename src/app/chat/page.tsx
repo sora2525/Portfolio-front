@@ -10,7 +10,7 @@ import { useTextToLipSync } from '@/lib/hooks/useTextToLipSync';
 import Link from 'next/link';
 
 export default function Chat() {
-  const { chats, createChat, getChats, clearChats } = useChatLog(); // clearChats関数を取得
+  const { chats, createChat, getChats, clearChats } = useChatLog();
   const { generateResponse } = useAIResponse();
   const { generateAndSyncLipSync } = useTextToLipSync();
 
@@ -55,6 +55,7 @@ export default function Chat() {
       </Link>
       <div className="pointer-events-auto sticky bottom-0 chat-container flex flex-col w-full max-w-lg p-4 rounded-lg ">
         <ChatLog chats={chats} onClearChats={clearChats} />
+
         {/* onPlayAudio プロパティを ChatForm に渡す */}
         <ChatForm onSendMessage={handleSendMessage} onPlayAudio={handlePlayAudio} />
       </div>
