@@ -42,7 +42,7 @@ export default function RootLayout({
           src="/live2d/live2dcubismcore.min.js"
           strategy="beforeInteractive"
         />
-         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -50,14 +50,16 @@ export default function RootLayout({
         <RecoilRoot>
           <AuthLoader>
             <div className="h-screen w-screen bg-[url('/images/sample.jpg')] bg-cover bg-no-repeat bg-center relative overflow-hidden">
-              <div className="absolute  top-0 left-0 w-full z-20">
+              <div className="absolute top-0 left-0 w-full z-20">
                 <PageHeader />
               </div>
-              <div className="absolute  z-10 pointer-events-none">
-                {children}
-              </div>
-              <div className="absolute inset-0 z-0">
-                <Live2dView />
+              <div className="flex flex-row-reverse w-full">
+                <div className="absolute z-10 pointer-events-none w-full lg:w-[60%]">
+                  {children}
+                </div>
+                <div className="absolute inset-0 z-0">
+                  <Live2dView />
+                </div>
               </div>
             </div>
           </AuthLoader>
