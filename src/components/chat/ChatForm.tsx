@@ -4,11 +4,13 @@ import React, { useRef, useState } from 'react';
 
 type ChatFormProps = {
   onSendMessage: (message: string) => Promise<void>;
+  onPlayAudio: () => void; // 音声再生を開始する関数を受け取る
 };
 
-export default function ChatForm({ onSendMessage }: ChatFormProps) {
+export default function ChatForm({ onSendMessage, onPlayAudio }: ChatFormProps) {
   const messageRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false); // ローディング状態を管理
+  const [audioUrl, setAudioUrl] = useState<string | null>(null); // 音声URLを管理
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,6 +21,17 @@ export default function ChatForm({ onSendMessage }: ChatFormProps) {
       await onSendMessage(userMessage);
       messageRef.current!.value = ''; // 入力フォームをクリア
       setLoading(false); // リクエストが完了したらローディングを停止
+
+      // ユーザーのアクション後に音声再生を開始
+      onPlayAudio(); // 音声再生関数を呼び出す
+    }
+  };
+
+  // 音声を再生する関数
+  const handlePlayMessage = () => {
+    if (audioUrl) {
+      const audio = new Audio(audioUrl);
+      audio.play().catch((err) => console.error('音声再生エラー:', err));
     }
   };
 
@@ -43,6 +56,16 @@ export default function ChatForm({ onSendMessage }: ChatFormProps) {
           </span>
         </button>
       </form>
+
+      {/* 音声再生ボタン */}
+      {audioUrl && (
+        <button
+          onClick={handlePlayMessage}
+          className="mt-4 p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        >
+          音声再生
+        </button>
+      )}
     </div>
   );
 }
