@@ -1,4 +1,3 @@
-// Chat.tsx
 'use client';
 
 import React from 'react';
@@ -10,7 +9,7 @@ import { useTextToLipSync } from '@/lib/hooks/useTextToLipSync';
 import Link from 'next/link';
 
 export default function Chat() {
-  const { chats, createChat, getChats, clearChats } = useChatLog(); // clearChats関数を取得
+  const { chats, createChat, getChats, clearChats } = useChatLog();
   const { generateResponse } = useAIResponse();
   const { generateAndSyncLipSync } = useTextToLipSync();
 
@@ -43,7 +42,7 @@ export default function Chat() {
         </span>
       </Link>
       <div className="pointer-events-auto sticky bottom-0 chat-container flex flex-col w-full max-w-lg p-4 rounded-lg ">
-        <ChatLog chats={chats} onClearChats={clearChats} /> 
+        <ChatLog chats={chats} onClearChats={clearChats} />
         <ChatForm onSendMessage={handleSendMessage} />
       </div>
     </div>
