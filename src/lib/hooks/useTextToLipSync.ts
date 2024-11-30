@@ -1,14 +1,15 @@
-'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useVoicevox } from './useVoicevox'; // 音声合成
-import { useLipSyncHandler } from './useLipSyncHandler'; // リップシンク
+import { useVoicevox } from '@/lib/hooks/useVoicevox';
+import { useLipSyncHandler } from '@/lib/hooks/useLipSyncHandler'; // リップシンク用のフック
+
 
 export const useTextToLipSync = () => {
-  const { loading, error, audioUrl, fetchAudio } = useVoicevox();
-  const { startLipSync } = useLipSyncHandler();
+  const { loading, error, audioUrl, fetchAudio } = useVoicevox(); // 音声合成用フック
+  const { startLipSync } = useLipSyncHandler(); // リップシンク用フック
   const [lipSyncError, setLipSyncError] = useState<string | null>(null);
   const isAudioPlayingRef = useRef<boolean>(false); // 音声再生状態を追跡
+  const audioRef = useRef<HTMLAudioElement | null>(null); // 音声の参照を保持
 
   // テキストを受け取って音声合成とリップシンクを実行する関数
   const generateAndSyncLipSync = async (text: string, speakerId: number = 58) => {
@@ -40,10 +41,21 @@ export const useTextToLipSync = () => {
     }
   }, [audioUrl]); // audioUrlが更新された時のみリップシンクを開始
 
+  // 音声再生をユーザーアクション後に行う関数
+  const playAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.play().catch((err) => {
+        setLipSyncError('音声再生に失敗しました');
+        console.error('音声再生エラー:', err);
+      });
+    }
+  };
+
   return {
     loading,
     error,
     lipSyncError,
     generateAndSyncLipSync, // 音声生成とリップシンクを行う関数
+    playAudio, // 音声再生を行う関数
   };
 };
