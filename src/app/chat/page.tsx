@@ -1,7 +1,7 @@
-// Chat.tsx
 'use client';
 
 import React from 'react';
+import { useRef } from 'react';
 import ChatForm from '@/components/chat/ChatForm';
 import ChatLog from '@/components/chat/ChatLog';
 import { useChatLog } from '@/lib/hooks/useChatLog';
@@ -13,6 +13,17 @@ export default function Chat() {
   const { chats, createChat, getChats, clearChats } = useChatLog(); // clearChats関数を取得
   const { generateResponse } = useAIResponse();
   const { generateAndSyncLipSync } = useTextToLipSync();
+
+  const audioRef = useRef<HTMLAudioElement | null>(null); // 音声の参照
+
+  // 音声再生関数
+  const handlePlayAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.play().catch((err) => {
+        console.error('音声再生に失敗しました:', err);
+      });
+    }
+  };
 
   const handleSendMessage = async (userMessage: string) => {
     await createChat(userMessage, 'user');
@@ -43,8 +54,9 @@ export default function Chat() {
         </span>
       </Link>
       <div className="pointer-events-auto sticky bottom-0 chat-container flex flex-col w-full max-w-lg p-4 rounded-lg ">
-        <ChatLog chats={chats} onClearChats={clearChats} /> 
-        <ChatForm onSendMessage={handleSendMessage} />
+        <ChatLog chats={chats} onClearChats={clearChats} />
+        {/* onPlayAudio プロパティを ChatForm に渡す */}
+        <ChatForm onSendMessage={handleSendMessage} onPlayAudio={handlePlayAudio} />
       </div>
     </div>
   );

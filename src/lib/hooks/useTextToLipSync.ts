@@ -1,14 +1,14 @@
-"use client";
-import React, { useEffect, useState,useRef } from "react";
-import { useVoicevox } from "@/lib/hooks/useVoicevox";
-import { useLipSyncHandler } from "@/lib/hooks/useLipSyncHandler"; // リップシンク用のフック
+import React, { useState, useEffect, useRef } from 'react';
+import { useVoicevox } from '@/lib/hooks/useVoicevox';
+import { useLipSyncHandler } from '@/lib/hooks/useLipSyncHandler'; // リップシンク用のフック
 
 export const useTextToLipSync = () => {
-  const { loading, error, audioUrl, fetchAudio } = useVoicevox();
-  const { startLipSync } = useLipSyncHandler();
+  const { loading, error, audioUrl, fetchAudio } = useVoicevox(); // 音声合成用フック
+  const { startLipSync } = useLipSyncHandler(); // リップシンク用フック
   const [lipSyncError, setLipSyncError] = useState<string | null>(null);
   const [previousAudioUrl, setPreviousAudioUrl] = useState<string | null>(null); // 前回のaudioUrlを管理
   const isAudioPlayingRef = useRef<boolean>(false); // 音声再生状態を追跡
+  const audioRef = useRef<HTMLAudioElement | null>(null); // 音声の参照を保持
 
   // テキストを受け取って音声合成とリップシンクを実行する関数
   const generateAndSyncLipSync = async (text: string, speakerId: number = 58) => {
@@ -41,10 +41,21 @@ export const useTextToLipSync = () => {
     }
   }, [audioUrl, previousAudioUrl]); // audioUrlとpreviousAudioUrlが変更された場合のみ処理を実行
 
+  // 音声再生をユーザーアクション後に行う関数
+  const playAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.play().catch((err) => {
+        setLipSyncError('音声再生に失敗しました');
+        console.error('音声再生エラー:', err);
+      });
+    }
+  };
+
   return {
     loading,
     error,
     lipSyncError,
     generateAndSyncLipSync, // 音声生成とリップシンクを行う関数
+    playAudio, // 音声再生を行う関数
   };
 };
