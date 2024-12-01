@@ -5,7 +5,7 @@ const Test = () => {
 
   return (
     <div className="text-center pointer-events-auto">
-     TEST
+     
     </div>
   );
 };
