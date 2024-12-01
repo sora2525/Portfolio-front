@@ -1,31 +1,24 @@
+'use client';
 import { useState } from 'react';
-import { useTags } from '@/lib/hooks/useTags';
 
-export default function TagForm() {
-  const { createTag } = useTags(); 
-  const [name, setName] = useState(''); 
-  const [color, setColor] = useState('#FFFFFF'); 
-  const [message, setMessage] = useState(''); 
+type TagFormProps = {
+  onCreateTag: (name: string, color: string) => void;
+};
 
-  const handleSubmit = async (e) => {
+export default function TagForm({ onCreateTag }: TagFormProps) {
+  const [name, setName] = useState('');
+  const [color, setColor] = useState('#0000ff');
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    const newTag = await createTag(name, color);
-
-    if (newTag) {
-      setMessage('タグが正常に作成されました');
-      setName(''); 
-      setColor('#FFFFFF');
-    } else {
-      setMessage('タグの作成に失敗しました');
-    }
+    onCreateTag(name, color);  // タグ作成
+    setName('');
+    setColor('#0000ff');
   };
 
   return (
-    <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md w-full max-w-md mx-auto">
-      <h2 className="text-2xl font-semibold mb-4 text-center">新規タグ作成</h2>
-      <form onSubmit={handleSubmit} className="w-full space-y-4">
-        <div className="flex flex-col">
+    <form onSubmit={handleSubmit} className="space-y-4 bg-white p-4 rounded-lg">
+      <div className="flex flex-col">
           <label className="text-gray-700 font-medium mb-2">タグ名</label>
           <input
             type="text"
@@ -36,7 +29,8 @@ export default function TagForm() {
             className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-        <div className="flex flex-col">
+      <div>
+      <div className="flex flex-col">
           <label className="text-gray-700 font-medium mb-2">カラー</label>
           <input
             type="color"
@@ -45,18 +39,10 @@ export default function TagForm() {
             className="w-full h-10 cursor-pointer border-none"
           />
         </div>
-        <button
-          type="submit"
-          className="w-full p-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300"
-        >
-          タグを作成
-        </button>
-      </form>
-      {message && (
-        <p className={`mt-4 text-center ${message.includes('正常') ? 'text-green-500' : 'text-red-500'}`}>
-          {message}
-        </p>
-      )}
-    </div>
+      </div>
+      <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        タグを作成
+      </button>
+    </form>
   );
 }

@@ -17,7 +17,7 @@ export default function ChatForm({ onSendMessage, onPlayAudio }: ChatFormProps) 
     const userMessage = messageRef.current?.value;
 
     if (userMessage) {
-      setLoading(true); // リクエスト送信中にローディングを開始
+      setLoading(true); 
       await onSendMessage(userMessage);
       messageRef.current!.value = ''; // 入力フォームをクリア
       setLoading(false); // リクエストが完了したらローディングを停止

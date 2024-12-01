@@ -28,13 +28,13 @@ export default function ChatLog({ chats, onClearChats }: ChatLogProps) {
             <div className="flex justify-between items-center mb-2">
                 <button
                     onClick={onClearChats} // チャット削除を実行
-                    className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition text-sm xxs:text-lg"
+                    className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition text-sm md:text-lg"
                 >
                     チャットを削除
                 </button>
                 <button
                     onClick={() => setShowAll(!showAll)} // 状態をトグル 
-                    className="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition text-sm xxs:text-lg"
+                    className="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition text-sm md:text-lg"
                 >
                     {showAll ? '最新メッセージのみ表示' : '全履歴を表示'}
                 </button>
