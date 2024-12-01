@@ -8,17 +8,17 @@ type ChatFormProps = {
 
 export default function ChatForm({ onSendMessage }: ChatFormProps) {
   const messageRef = useRef<HTMLInputElement>(null);
-  const [loading, setLoading] = useState(false); // ローディング状態を管理
+  const [loading, setLoading] = useState(false); 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userMessage = messageRef.current?.value;
 
     if (userMessage) {
-      setLoading(true); // リクエスト送信中にローディングを開始
+      setLoading(true); 
       await onSendMessage(userMessage);
-      messageRef.current!.value = ''; // 入力フォームをクリア
-      setLoading(false); // リクエストが完了したらローディングを停止
+      messageRef.current!.value = ''; 
+      setLoading(false); 
     }
   };
 

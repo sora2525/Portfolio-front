@@ -13,7 +13,7 @@ export default function Task() {
     const [sortBy, setSortBy] = useState("created_at");
     const [order, setOrder] = useState("desc");
     const [selectedTag, setSelectedTag] = useState("");
-    const [selectedTask, setSelectedTask] = useState(null); 
+    const [selectedTask, setSelectedTask] = useState(null);
 
     useEffect(() => {
         getTasks(sortBy, order, selectedTag);
@@ -34,13 +34,13 @@ export default function Task() {
         }
         setIsCreating(false);
     };
-    
+
     return (
         <div className="pointer-events-auto flex flex-col items-center justify-end w-full h-screen">
             <div className="bg-[rgba(243,244,246,0.85)] w-[95%] h-[90%]  p-3 rounded-lg shadow-lg mb-2">
                 <div className="flex w-full justify-between items-center">
                     <Link href="/"><span className="material-icons text-[#008080]" style={{ fontSize: '42px' }} >
-                    reply
+                        reply
                     </span></Link>
                     <h1 className="sm:text-2xl text-xl font-semibold sm:mb-4 mb-2 text-center mx-auto">タスク一覧</h1>
                 </div>
@@ -64,6 +64,7 @@ export default function Task() {
                             <option key={tag.id} value={tag.id}>{tag.name}</option>
                         ))}
                     </select>
+                    
                 </div>
 
                 <div className="overflow-y-auto max-h-[80%] mt-4">
@@ -110,8 +111,8 @@ export default function Task() {
                 onSubmit={handleFormSubmit}
                 tags={tags}
                 isVisible={isCreating}
-                editMode={false} 
-                selectedTask={selectedTask} 
+                editMode={false}
+                selectedTask={selectedTask}
             />
         </div>
     );

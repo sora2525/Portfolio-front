@@ -9,7 +9,7 @@ import { useTextToLipSync } from '@/lib/hooks/useTextToLipSync';
 import Link from 'next/link';
 
 export default function Chat() {
-  const { chats, createChat, getChats, clearChats } = useChatLog(); // clearChats関数を取得
+  const { chats, createChat, getChats, clearChats } = useChatLog(); 
   const { generateResponse } = useAIResponse();
   const { generateAndSyncLipSync } = useTextToLipSync();
 

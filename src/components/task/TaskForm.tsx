@@ -168,7 +168,7 @@ export default function TaskForm({
       </div>
 
 
-      <div className="flex xxs:flex-col xxs:text-3xl mt-auto mb-10 items-center justify-center xxs:space-y-5">
+      <div className="flex lg:flex-col text-xl lg:text-3xl mt-auto mb-10 items-center justify-center lg:space-y-5">
         <button onClick={handleFormSubmit} className="p-2 text-[#008080] group">
           <div className="flex items-center">
             <span className="material-icons" style={{ fontSize: "52px" }}>
