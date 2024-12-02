@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ChatForm from '@/components/chat/ChatForm';
 import ChatLog from '@/components/chat/ChatLog';
 import { useChatLog } from '@/lib/hooks/useChatLog';
@@ -9,9 +9,25 @@ import { useTextToLipSync } from '@/lib/hooks/useTextToLipSync';
 import Link from 'next/link';
 
 export default function Chat() {
-  const { chats, createChat, getChats, clearChats } = useChatLog(); 
+  const { chats, createChat, getChats, clearChats } = useChatLog();
   const { generateResponse } = useAIResponse();
   const { generateAndSyncLipSync } = useTextToLipSync();
+  const [isMobile, setIsMobile] = useState(false);
+
+  // 画面サイズが変更されるたびにisMobileを更新
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 1024); 
+    };
+
+    checkScreenSize();
+
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => {
+      window.removeEventListener('resize', checkScreenSize);
+    };
+  }, []);
 
   const handleSendMessage = async (userMessage: string) => {
     await createChat(userMessage, 'user');
@@ -28,11 +44,20 @@ export default function Chat() {
 
     if (aiResponse) {
       await createChat(aiResponse, 'character');
-      generateAndSyncLipSync(aiResponse);
+      
+      // スマホサイズの場合はgenerateAndSyncLipSyncを呼ばない
+      if (!isMobile) {
+        generateAndSyncLipSync(aiResponse); 
+      }
     }
 
     await getChats();
   };
+
+  const onClickCharacterMessage = async (characterMessage: string) => {
+   
+      generateAndSyncLipSync(characterMessage); 
+  }
 
   return (
     <div className="w-full h-screen flex flex-col justify-end items-center">
@@ -41,8 +66,8 @@ export default function Chat() {
           reply
         </span>
       </Link>
-      <div className="pointer-events-auto sticky bottom-0 chat-container flex flex-col w-full max-w-lg p-4 rounded-lg ">
-        <ChatLog chats={chats} onClearChats={clearChats} /> 
+      <div className="pointer-events-auto sticky bottom-0 chat-container flex flex-col w-full max-w-lg lg:max-w-[700px] p-4 rounded-lg">
+        <ChatLog chats={chats} onClearChats={clearChats} onCharacterMessageClick={onClickCharacterMessage } />
         <ChatForm onSendMessage={handleSendMessage} />
       </div>
     </div>

@@ -7,11 +7,12 @@ import Link from 'next/link';
 type ChatLogProps = {
     chats: ChatMessage[];
     onClearChats: () => void; // チャット削除関数をプロパティとして受け取る
+    onCharacterMessageClick: (message: string) => void; // キャラクターのメッセージに対するクリックイベント
 };
 
-export default function ChatLog({ chats, onClearChats }: ChatLogProps) {
+export default function ChatLog({ chats, onClearChats, onCharacterMessageClick }: ChatLogProps) {
     const [showAll, setShowAll] = useState(false); // 全履歴を表示するかどうかの状態
-    const chatContainerRef = useRef<HTMLDivElement>(null); // チャット履歴のコンテナへの参照
+    const chatContainerRef = useRef<HTMLDivElement>(null); 
 
     const visibleChats = showAll ? chats : chats.slice(-2); // 表示するチャット履歴を切り替え
 
@@ -23,7 +24,7 @@ export default function ChatLog({ chats, onClearChats }: ChatLogProps) {
     }, [visibleChats]);
 
     return (
-        <div className="chat-log-container">
+        <div className="w-full">
             {/* チャット削除ボタン */}
             <div className="flex justify-between items-center mb-2">
                 <button
@@ -49,15 +50,30 @@ export default function ChatLog({ chats, onClearChats }: ChatLogProps) {
                     {visibleChats.map((chat) => (
                         <div
                             key={chat.id}
-                            className={`chat-message flex ${chat.message_type === 'user' ? 'justify-end' : 'justify-start'}`}
+                            className={`chat-message flex items-center ${chat.message_type === 'user' ? 'justify-end' : 'justify-start'}`}
+                            onClick={() => {
+                                if (chat.message_type === 'character') {
+                                    onCharacterMessageClick(chat.message); // キャラクターのメッセージをクりｋｋ
+                                }
+                            }}
                         >
                             <div
                                 className={`max-w-[70%] px-4 py-2 rounded-lg text-sm ${chat.message_type === 'user' 
                                     ? 'bg-blue-500 text-white' 
-                                    : 'bg-gray-200 text-gray-800'}`}
+                                    : 'bg-gray-200 text-gray-800'} 
+                                    ${chat.message_type === 'character' ? 'cursor-pointer hover:bg-blue-200' : ''}`}
                             >
                                 {chat.message}
                             </div>
+
+                            {/* キャラクターのメッセージにだけアイコンを表示 */}
+                            {chat.message_type === 'character' && (
+                                <span
+                                    className="material-icons ml-1 text-xl text-gray-600"
+                                >
+                                    volume_up
+                                </span>
+                            )}
                         </div>
                     ))}
                 </div>
