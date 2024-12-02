@@ -56,7 +56,6 @@ export default function TaskPage({ params }: { params: { id: string } }) {
 
             <div className="space text-center">
                 <h2>{task.title}</h2>
-                <p>{task.description}</p>
             </div>
             
             <Message completion_message={task.completion_message} />
