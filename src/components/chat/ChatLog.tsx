@@ -12,7 +12,7 @@ type ChatLogProps = {
 
 export default function ChatLog({ chats, onClearChats, onCharacterMessageClick }: ChatLogProps) {
     const [showAll, setShowAll] = useState(false); // 全履歴を表示するかどうかの状態
-    const chatContainerRef = useRef<HTMLDivElement>(null); 
+    const chatContainerRef = useRef<HTMLDivElement>(null);
 
     const visibleChats = showAll ? chats : chats.slice(-2); // 表示するチャット履歴を切り替え
 
@@ -58,22 +58,23 @@ export default function ChatLog({ chats, onClearChats, onCharacterMessageClick }
                             }}
                         >
                             <div
-                                className={`max-w-[70%] px-4 py-2 rounded-lg text-sm ${chat.message_type === 'user' 
-                                    ? 'bg-blue-500 text-white' 
+                                className={`flex items-center max-w-[70%] px-4 py-2 mt-2 rounded-lg text-sm ${chat.message_type === 'user'
+                                    ? 'bg-blue-500 text-white'
                                     : 'bg-gray-200 text-gray-800'} 
                                     ${chat.message_type === 'character' ? 'cursor-pointer hover:bg-blue-200' : ''}`}
                             >
-                                {chat.message}
+                                <p>
+                                    {chat.message}
+                                </p>
+                                {/* キャラクターのメッセージにだけアイコンを表示 */}
+                                {chat.message_type === 'character' && (
+                                    <span
+                                        className="material-icons ml-2 text-xl text-gray-600"
+                                    >
+                                        volume_up
+                                    </span>
+                                )}
                             </div>
-
-                            {/* キャラクターのメッセージにだけアイコンを表示 */}
-                            {chat.message_type === 'character' && (
-                                <span
-                                    className="material-icons ml-1 text-xl text-gray-600"
-                                >
-                                    volume_up
-                                </span>
-                            )}
                         </div>
                     ))}
                 </div>
