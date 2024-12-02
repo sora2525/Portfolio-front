@@ -46,12 +46,17 @@ export const useTasks = () => {
         dueDate: string,
         priority: number,
         reminderTime: string,
-        tags:number[]
+        tags: number[]
     ) => {
         setError(null);
+
+        if (tags.length > 5) {
+            setError("タグは最大5個までです");
+            return;
+        }
         try {
             const response = await axiosInstance.post("/tasks", {
-                task: { title, description, due_date: dueDate, priority, reminder_time: reminderTime,tags }
+                task: { title, description, due_date: dueDate, priority, reminder_time: reminderTime, tags }
             });
             setTasks((prevTasks) => [...prevTasks, response.data]);
         } catch (e: unknown) {
@@ -70,12 +75,12 @@ export const useTasks = () => {
         dueDate: string,
         priority: number,
         reminderTime: string,
-        tags:number[]
+        tags: number[]
     ) => {
         setError(null);
         try {
             const response = await axiosInstance.put(`/tasks/${id}`, {
-                task: { title, description, due_date: dueDate, priority, reminder_time: reminderTime,tags }
+                task: { title, description, due_date: dueDate, priority, reminder_time: reminderTime, tags }
             });
             setTasks((prevTasks) =>
                 prevTasks.map((task) =>
@@ -154,5 +159,5 @@ export const useTasks = () => {
 
 
 
-    return { tasks, getTasks, getTask, createTask, updateTask, destroyTask, addCompletionMessage,  error, completeTask };
+    return { tasks, getTasks, getTask, createTask, updateTask, destroyTask, addCompletionMessage, error, completeTask };
 };

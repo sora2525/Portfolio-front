@@ -1,4 +1,5 @@
 'use client';
+
 import { useState, useEffect } from "react";
 import TagItem from "@/components/tag/TagItem";
 import Link from "next/link";
@@ -10,12 +11,12 @@ type TaskFormProps = {
     dueDate: string,
     priority: number,
     reminderTime: string,
-    tags: number[] 
+    tags: number[]
   ) => void;
   tags: Array<{ id: number; name: string; color: string }>;
   isVisible: boolean;
-  editMode: boolean; 
-  selectedTask?: { 
+  editMode: boolean;
+  selectedTask?: {
     title: string;
     description: string;
     due_date: string;
@@ -41,6 +42,7 @@ export default function TaskForm({
   });
 
   const [selectedTags, setSelectedTags] = useState<number[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   useEffect(() => {
     if (editMode && selectedTask) {
@@ -63,6 +65,13 @@ export default function TaskForm({
   };
 
   const handleTagClick = (tagId: number) => {
+    if (selectedTags.length >= 5 && !selectedTags.includes(tagId)) {
+      setErrorMessage("タグは最大5個までしか追加できません");
+      return;
+    }
+
+    setErrorMessage(""); // エラーメッセージをリセット
+
     setSelectedTags((prevTags) =>
       prevTags.includes(tagId)
         ? prevTags.filter((id) => id !== tagId)
@@ -77,7 +86,7 @@ export default function TaskForm({
       formData.due_date,
       Number(formData.priority),
       formData.reminder_time,
-      selectedTags 
+      selectedTags
     );
     setFormData({
       title: "",
@@ -148,6 +157,8 @@ export default function TaskForm({
           ))}
         </div>
 
+        {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
+
         <div className="mt-5 mb-5">
           <Link href="/tags" className="bg-blue-500 text-white p-2 font-bold">
             タグの新規作成
@@ -167,19 +178,18 @@ export default function TaskForm({
         </div>
       </div>
 
-
       <div className="flex lg:flex-col text-xl lg:text-3xl mt-auto mb-10 items-center justify-center lg:space-y-5">
         <button onClick={handleFormSubmit} className="p-2 text-[#008080] group">
           <div className="flex items-center">
             <span className="material-icons" style={{ fontSize: "52px" }}>
               {editMode ? "edit" : "fiber_new"}
             </span>
-            <p>{editMode ? "更新" : "作成"}</p> 
+            <p>{editMode ? "更新" : "作成"}</p>
           </div>
           <div className="w-[100%] h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
         </button>
         <button
-          onClick={() => onSubmit(formData.title, formData.description, formData.due_date, formData.priority, formData.reminder_time,selectedTags )}
+          onClick={() => onSubmit(formData.title, formData.description, formData.due_date, formData.priority, formData.reminder_time, selectedTags)}
           className="p-2 text-gray-500 group"
         >
           <div className="flex items-center">
