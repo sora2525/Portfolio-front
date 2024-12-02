@@ -189,7 +189,7 @@ export default function TaskForm({
           <div className="w-[100%] h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
         </button>
         <button
-          onClick={() => onSubmit(formData.title, formData.description, formData.due_date, formData.priority, formData.reminder_time, selectedTags)}
+          onClick={() => onSubmit("", "", "", 1, "", selectedTags)}
           className="p-2 text-gray-500 group"
         >
           <div className="flex items-center">
