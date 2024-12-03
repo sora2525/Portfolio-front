@@ -6,8 +6,8 @@ type TagFormProps = {
 };
 
 export default function TagForm({ onCreateTag }: TagFormProps) {
-  const [name, setName] = useState('');
-  const [color, setColor] = useState('#0000ff');
+  const [name, setName] = useState<string>('');
+  const [color, setColor] = useState<string>('#0000ff');
   const [error, setError] = useState<string | null>(null); // エラーメッセージの状態
 
   const handleSubmit = (e: React.FormEvent) => {

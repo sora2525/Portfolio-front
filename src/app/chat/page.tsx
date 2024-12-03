@@ -12,7 +12,7 @@ export default function Chat() {
   const { chats, createChat, getChats, clearChats } = useChatLog();
   const { generateResponse } = useAIResponse();
   const { generateAndSyncLipSync } = useTextToLipSync();
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   // 画面サイズが変更されるたびにisMobileを更新
   useEffect(() => {
