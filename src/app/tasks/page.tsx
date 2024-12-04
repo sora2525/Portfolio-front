@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from "react";
 import { useTasks } from "@/lib/hooks/useTasks";
 import TaskItem from "@/components/task/TaskItem";
@@ -9,27 +9,28 @@ import Link from "next/link";
 export default function Task() {
     const { getTasks, createTask, tasks, error } = useTasks();
     const { getTags, tags } = useTags();
-    const [isCreating, setIsCreating] = useState(false);
-    const [sortBy, setSortBy] = useState("created_at");
-    const [order, setOrder] = useState("desc");
-    const [selectedTag, setSelectedTag] = useState("");
+    const [isCreating, setIsCreating] = useState<boolean>(false);
+    const [sortBy, setSortBy] = useState<string>("created_at");
+    const [order, setOrder] = useState<string>("desc");
+    const [selectedTag, setSelectedTag] = useState<string>("");
+    const [status, setStatus] = useState<string>("all");
     const [selectedTask, setSelectedTask] = useState(null);
 
     useEffect(() => {
-        getTasks(sortBy, order, selectedTag);
+        getTasks(sortBy, order, selectedTag, status);
         getTags();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [sortBy, order, selectedTag]);
+    }, [sortBy, order, selectedTag, status]);
 
     const handleCreateToggle = () => {
         setIsCreating(!isCreating);
-        setSelectedTask(null); // 新規作成時に選択したタスクをリセット
+        setSelectedTask(null);
     };
 
     const handleFormSubmit = (title, description, dueDate, priority, reminderTime, selectedTags) => {
         if (title) {
             createTask(title, description, dueDate, priority, reminderTime, selectedTags).then(() => {
-                getTasks(sortBy, order, selectedTag);
+                getTasks(sortBy, order, selectedTag, status);
             });
         }
         setIsCreating(false);
@@ -45,13 +46,34 @@ export default function Task() {
                     <h1 className="sm:text-2xl text-xl font-semibold sm:mb-4 mb-2 text-center mx-auto">タスク一覧</h1>
                 </div>
 
+                {/* 状態の選択タブ */}
+                <div className="flex w-full font-semibold lg:text-lg space-x-6">
+                    <div 
+                        onClick={() => setStatus("all")} 
+                        className={`w-1/3 text-center ${status === "all" ? "border-b-4 border-red-500" : ""}`}
+                    >
+                        <p>All</p>
+                    </div>
+                    <div 
+                        onClick={() => setStatus("incomplete")} 
+                        className={`w-1/3 text-center ${status === "incomplete" ? "border-b-4 border-red-500" : ""}`}
+                    >
+                        <p>Incomplete</p>
+                    </div>
+                    <div 
+                        onClick={() => setStatus("completed")} 
+                        className={`w-1/3 text-center ${status === "completed" ? "border-b-4 border-red-500" : ""}`}
+                    >
+                        <p>Completed</p>
+                    </div>
+                </div>
+
                 {/* ソートセレクトボックス */}
-                <div className="flex gap-2">
+                <div className="flex gap-2 mt-4">
                     <select onChange={(e) => setSortBy(e.target.value)} value={sortBy} className="h-[5%]">
                         <option value="created_at">作成日順</option>
                         <option value="due_date">期限順</option>
                         <option value="priority">優先度順</option>
-                        <option value="completion_date">完了状態順</option>
                     </select>
 
                     <select onChange={(e) => setOrder(e.target.value)} value={order} className="h-[5%]">
@@ -64,12 +86,11 @@ export default function Task() {
                             <option key={tag.id} value={tag.id}>{tag.name}</option>
                         ))}
                     </select>
-                    
                 </div>
 
-                <div className="overflow-y-auto max-h-[80%] mt-4">
+                <div className="overflow-y-auto max-h-[60vh] xxs:max-h-[65vh] mt-4">
                     {error && <p style={{ color: "red" }}>{error}</p>}
-                    <ul className="space-y-4">
+                    <ul className="space-y-2 lg:space-y-4">
                         {tasks.length > 0 ? (
                             tasks.map((task) => (
                                 <TaskItem
@@ -83,7 +104,7 @@ export default function Task() {
                                     completion_date={task.completion_date}
                                     completion_message={task.completion_message}
                                     tags={task.tags || []}
-                                    onCompletionToggle={() => getTasks(sortBy, order, selectedTag)}
+                                    onCompletionToggle={() => getTasks(sortBy, order, selectedTag, status)}
                                 />
                             ))
                         ) : (
