@@ -37,7 +37,7 @@ export default function TaskItem({
     const { completeTask, addCompletionMessage } = useTasks();
     const [isLoading, setIsLoading] = useState(false);
     const { generateResponse } = useAIResponse();
-    const [isCompleted, setIsCompleted] = useState(!!completion_date); 
+    const [isCompleted, setIsCompleted] = useState(!!completion_date);
 
     // `completion_date`が変わった場合に状態を更新
     useEffect(() => {
@@ -75,7 +75,7 @@ export default function TaskItem({
             {/* 完了状態のアイコン */}
             {isLoading ? (
                 <div className="w-10 h-10 flex items-center justify-center">
-                    <span className="loader"></span> 
+                    <span className="loader"></span>
                 </div>
             ) : (
                 <div
@@ -91,12 +91,13 @@ export default function TaskItem({
             )}
 
             {/* タスク詳細 */}
-            <li className="ml-2 sm:ml-4 w-full">
-                <Link href={`tasks/${id}`} className="flex flex-wrap">
-                    <h2 className="text-lg font-bold w-1/2 px-2 lg:p-2 overflow-hidden text-ellipsis whitespace-nowrap">{title}</h2>
-                    <p className="w-1/2 px-2 md:p-2 ">{`優先度: ${priority}`}</p>
-                    <p className="w-1/2 px-2 md:p-2  overflow-hidden text-ellipsis whitespace-nowrap">{description}</p>
-                    <p className="w-1/2 px-2 md:p-2  text-red-500 text-sm">{due_date}</p>
+            <li className="ml-2 sm:ml-4 w-[75%]">
+                <Link href={`tasks/${id}`} className="flex flex-col flex-wrap">
+                    <h2 className="text-lg font-bold w-full sm:px-2 lg:p-2 overflow-hidden text-ellipsis whitespace-nowrap">{title}</h2>
+                    <div className="flex w-full">
+                        <p className="w-1/2 sm:px-2 md:p-2">{`優先度: ${priority}`}</p>
+                        <p className="w-1/2 sm:px-2 md:p-2  text-red-500 text-sm">{due_date}</p>
+                    </div>
 
                     <div className="flex flex-wrap gap-2 mt-2">
                         {tags.map((tag) => (
@@ -114,7 +115,7 @@ export default function TaskItem({
             {/* 完了メッセージ表示 */}
             {completion_date && (
                 <div className="mt-2 text-green-700">
-                    <Link href={`message/${id}`}> 
+                    <Link href={`message/${id}`}>
                         <span className="material-icons" style={{ fontSize: '38px' }}>
                             textsms
                         </span>
