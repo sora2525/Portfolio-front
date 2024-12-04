@@ -50,19 +50,19 @@ export default function Task() {
                 <div className="flex w-full font-semibold lg:text-lg space-x-6">
                     <div 
                         onClick={() => setStatus("all")} 
-                        className={`w-1/3 text-center ${status === "all" ? "border-b-4 border-red-500" : ""}`}
+                        className={`w-1/3 text-center ${status === "all" ? "border-b-4 border-red-500" : ""} cursor-pointer`}
                     >
                         <p>All</p>
                     </div>
                     <div 
                         onClick={() => setStatus("incomplete")} 
-                        className={`w-1/3 text-center ${status === "incomplete" ? "border-b-4 border-red-500" : ""}`}
+                        className={`w-1/3 text-center ${status === "incomplete" ? "border-b-4 border-red-500" : ""} cursor-pointer`}
                     >
                         <p>Incomplete</p>
                     </div>
                     <div 
                         onClick={() => setStatus("completed")} 
-                        className={`w-1/3 text-center ${status === "completed" ? "border-b-4 border-red-500" : ""}`}
+                        className={`w-1/3 text-center ${status === "completed" ? "border-b-4 border-red-500" : ""} cursor-pointer`}
                     >
                         <p>Completed</p>
                     </div>
