@@ -31,6 +31,7 @@ export const useAuth = () => {
                 setAuth({ isAuthenticated: true, user: response.data.data });
                 setSuccess("ユーザー登録に成功しました！");
                 setError(null);
+                router.push("/");
             } else {
                 setError("トークン情報が取得できませんでした");
             }

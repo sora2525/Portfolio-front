@@ -15,12 +15,9 @@ interface PasswordResetProps {
 const PasswordReset = ({ searchParams }: PasswordResetProps) => {
     const { success, error, loading, resetPasswordConfirm } = useAuth();
 
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [newPassword, setNewPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [localError, setLocalError] = useState<string | null>(null);
-
-    console.log("searchParams:", searchParams);
-    console.log("searchParams.token:", searchParams.token);
 
     const handlePasswordReset = async (e: React.FormEvent) => {
         e.preventDefault();

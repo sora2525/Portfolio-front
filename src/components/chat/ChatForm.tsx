@@ -8,7 +8,7 @@ type ChatFormProps = {
 
 export default function ChatForm({ onSendMessage }: ChatFormProps) {
   const messageRef = useRef<HTMLInputElement>(null);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState<boolean>(false); 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

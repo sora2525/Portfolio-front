@@ -11,7 +11,7 @@ type ChatLogProps = {
 };
 
 export default function ChatLog({ chats, onClearChats, onCharacterMessageClick }: ChatLogProps) {
-    const [showAll, setShowAll] = useState(false); // 全履歴を表示するかどうかの状態
+    const [showAll, setShowAll] = useState<boolean>(false); // 全履歴を表示するかどうかの状態
     const chatContainerRef = useRef<HTMLDivElement>(null);
 
     const visibleChats = showAll ? chats : chats.slice(-2); // 表示するチャット履歴を切り替え
