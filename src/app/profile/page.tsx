@@ -2,10 +2,12 @@
 import { useAuth } from "@/lib/hooks/useAuth";
 import { useRecoilState } from "recoil";
 import { authState } from "@/lib/atom/authAtom";
+import { useRequireAuth } from '@/lib/hooks/useRequireAuth';
 import Link from "next/link";
 
 export default function Profile() {
     const [auth, ] = useRecoilState(authState);
+    const login = useRequireAuth(); 
     const { passwordReset } = useAuth();
 
     const handleClick = () => {
@@ -13,6 +15,11 @@ export default function Profile() {
             passwordReset(auth.user.email);
         }
     };
+
+   
+    if (!auth.isAuthenticated) {
+        return null; // ログインチェック中は何も描画しない
+      }
 
     return (
         <div className="flex flex-col justify-center items-center w-full h-screen p-6 pointer-events-auto">

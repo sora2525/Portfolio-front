@@ -5,13 +5,15 @@ import ChatForm from '@/components/chat/ChatForm';
 import ChatLog from '@/components/chat/ChatLog';
 import { useChatLog } from '@/lib/hooks/useChatLog';
 import { useAIResponse } from '@/lib/hooks/useAIResponse';
-import { useTextToLipSync } from '@/lib/hooks/useTextToLipSync';
+import { useTextToLipSync } from '@/lib/hooks/useTextToLipSync'
+import { useRequireAuth } from '@/lib/hooks/useRequireAuth';
 import Link from 'next/link';
 
 export default function Chat() {
   const { chats, createChat, getChats, clearChats } = useChatLog();
   const { generateResponse } = useAIResponse();
   const { generateAndSyncLipSync } = useTextToLipSync();
+  const auth = useRequireAuth();
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   // 画面サイズが変更されるたびにisMobileを更新
@@ -57,6 +59,10 @@ export default function Chat() {
   const onClickCharacterMessage = async (characterMessage: string) => {
    
       generateAndSyncLipSync(characterMessage); 
+  }
+
+  if (!auth.isAuthenticated) {
+    return null; 
   }
 
   return (
