@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useTags } from "@/lib/hooks/useTags";
 import TagItem from "@/components/tag/TagItem";
 import TaskForm from "@/components/task/TaskForm";
+import { useRequireAuth } from '@/lib/hooks/useRequireAuth';
 
 type Task = {
     id: number;
@@ -26,6 +27,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
     const taskId = Number(params.id);
     const { getTags, tags } = useTags();
     const [selectedTags, setSelectedTags] = useState<number[]>([]);
+    const auth = useRequireAuth();
 
     // タスクとタグを取得
     useEffect(() => {
@@ -85,6 +87,9 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
         }
     };
 
+    if (!auth.isAuthenticated) {
+      return null; 
+    }
     // taskがnullの間はローディング中の表示
     if (!task) {
         return <p>タスクを読み込み中...</p>;

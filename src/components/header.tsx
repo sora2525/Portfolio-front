@@ -32,7 +32,7 @@ export default function PageHeader() {
 
                 </>
             ) : (
-                <div className="flex w-full justify-end">
+                <div className="flex w-full justify-end pr-5">
                     <Link href="/sign_in" className="text-white font-bold flex items-center">
                         <span className="material-icons">
                             login

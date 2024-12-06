@@ -24,13 +24,13 @@ export default function SignInPage() {
 
     return (
         <>
-            <div className="flex justify-center items-center w-full h-screen p-6">
-            <Link href="/" className="absolute top-[80px] left-4 text-3xl text-[#008080] pointer-events-auto">
+            <div className="flex flex-col justify-center items-center w-full h-screen p-6">
+            <Link href="/" className="absolute top-[80px] left-4 text-3xl text-[#008080] pointer-events-auto ">
                 <span className="material-icons" style={{ fontSize: '48px' }}>
                 reply
                 </span>
             </Link>
-                <div className="bg-white w-full max-w-md p-8 rounded-lg shadow-lg space-y-6 pointer-events-auto">
+                <div className="bg-white w-full max-w-md p-8 rounded-lg shadow-lg space-y-6 pointer-events-auto mb-10">
                     <h2 className="text-2xl font-semibold text-center text-teal-600">ログイン</h2>
 
                     <form onSubmit={handleSubmit} className="space-y-4">
@@ -70,6 +70,7 @@ export default function SignInPage() {
                     {error && <p className="text-red-600 text-center mt-4">{error}</p>}
                     {validationError && <p className="text-red-600 text-center mt-4">{validationError}</p>}
                 </div>
+                <Link href="/sign_up" className="pointer-events-auto bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 p-1">新規登録はこちら</Link>
             </div>
         </>
     );

@@ -4,6 +4,7 @@ import { useTasks } from "@/lib/hooks/useTasks";
 import TaskItem from "@/components/task/TaskItem";
 import { useTags } from "@/lib/hooks/useTags";
 import TaskForm from "@/components/task/TaskForm";
+import { useRequireAuth } from '@/lib/hooks/useRequireAuth';
 import Link from "next/link";
 
 export default function Task() {
@@ -15,6 +16,7 @@ export default function Task() {
     const [selectedTag, setSelectedTag] = useState<string>("");
     const [status, setStatus] = useState<string>("all");
     const [selectedTask, setSelectedTask] = useState(null);
+    const auth = useRequireAuth();
 
     useEffect(() => {
         getTasks(sortBy, order, selectedTag, status);
@@ -35,6 +37,10 @@ export default function Task() {
         }
         setIsCreating(false);
     };
+
+    if (!auth.isAuthenticated) {
+        return null;
+      }
 
     return (
         <div className="pointer-events-auto flex flex-col items-center justify-end w-full h-screen">
