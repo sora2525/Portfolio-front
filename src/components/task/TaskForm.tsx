@@ -37,7 +37,7 @@ export default function TaskForm({
     title: "",
     description: "",
     due_date: "",
-    priority: 1,
+    priority: 0,
     reminder_time: "",
   });
 
@@ -92,7 +92,7 @@ export default function TaskForm({
       title: "",
       description: "",
       due_date: "",
-      priority: 1,
+      priority: 0,
       reminder_time: "",
     });
     setSelectedTags([]);
@@ -135,6 +135,7 @@ export default function TaskForm({
           onChange={handleInputChange}
           className="w-full max-w-[1000px] p-1 sm:p-2 mt-4 border border-gray-300 rounded"
         >
+          <option value={0}>なし</option>
           <option value={1}>低</option>
           <option value={2}>中</option>
           <option value={3}>高</option>
