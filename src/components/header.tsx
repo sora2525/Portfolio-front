@@ -13,36 +13,29 @@ export default function PageHeader() {
     };
 
     return (
-        <div className="bg-pink-400 flex h-[50px] items-center pointer-events-auto">
+        <div className="bg-pink-400 flex h-[50px] items-center pointer-events-auto justify-between px-4">
+            <div className="flex-shrink-0 whitespace-nowrap">
+                <Link href="/" className="text-white font-bold lg:ml-6 whitespace-nowrap">
+                    タスクエール
+                </Link>
+            </div>
             {auth.isAuthenticated && auth.user ? (
-                <>
-                    <div className="flex justify-between items-center w-full px-4">
-                        <div className="user-info">
-                            <Link href="/" className="text-white font-bold ml-6">{auth.user.name}</Link>
-                        </div>
-                        <div className="">
-                            <button onClick={handleLogout} className="text-white font-bold flex">
-                                <span className="material-icons">
-                                    logout
-                                </span>
-                                <p>ログアウト</p>
-                            </button>
-                        </div>
-                    </div>
-
-                </>
-            ) : (
-                <div className="flex w-full justify-end pr-5">
-                    <Link href="/sign_in" className="text-white font-bold flex items-center">
+                <div className="flex justify-end items-center">
+                    <button onClick={handleLogout} className="text-white font-bold flex">
                         <span className="material-icons">
-                            login
+                            logout
                         </span>
+                        <p>ログアウト</p>
+                    </button>
+                </div>
+            ) : (
+                <div className="flex w-full justify-end ">
+                    <Link href="/sign_in" className="text-white font-bold flex items-center">
+                        <span className="material-icons">login</span>
                         <p className="ml-2">ログイン</p>
                     </Link>
-                    <Link href="/sign_up" className="text-white font-bold ml-6">サインアップ</Link>
+                    <Link href="/sign_up" className="text-white font-bold ml-2 lg:ml-6">サインアップ</Link>
                 </div>
-
-
             )}
         </div>
     );

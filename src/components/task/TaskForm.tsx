@@ -100,7 +100,7 @@ export default function TaskForm({
 
   return (
     <div
-      className={`fixed flex flex-col h-[85vh] sm:h-[80vh] bottom-0 left-0 right-0 bg-white p-5 shadow-lg rounded-t-lg transition-transform duration-300 z-50 ${isVisible ? "translate-y-0" : "translate-y-full"
+      className={`fixed flex flex-col h-[90vh] xxs:h-[85vh] sm:h-[80vh] bottom-0 left-0 right-0 bg-white p-5 shadow-lg rounded-t-lg transition-transform duration-300 z-50 ${isVisible ? "translate-y-0" : "translate-y-full"
         }`}
     >
       <div className="text-center flex flex-col justify-center items-center">
