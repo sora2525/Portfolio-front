@@ -113,7 +113,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
           <p className="text-xl mt-5">{task.description}</p>
           <p className="text-red-500 text-xl mt-5">期日: {task.due_date}</p>
           <p className="text-blue-500 text-xl mt-5">優先度: {task.priority}</p>
-          <p className="text-xl mt-5">リマインダー: {task.reminder_time}</p>
+          {/* <p className="text-xl mt-5">リマインダー: {task.reminder_time}</p> */}
 
           {/* 登録タグ */}
           <div className="mt-5">
