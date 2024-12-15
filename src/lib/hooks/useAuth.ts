@@ -115,21 +115,25 @@ export const useAuth = () => {
     };
 
     // パスワードリセット
-    const passwordReset = async (email: string) => {
-        setLoading(true);
-        setError(null);
-        setSuccess(null);
+   const passwordReset = async (email: string) => {
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
 
-        try {
-            await axiosInstance.post("/auth/password", { email });
-            setSuccess("パスワードリセットメールが送信されました。メールを確認してください。");
-        } catch (e) {
-            setError("パスワードリセットのリクエストに失敗しました");
-        } finally {
-            setLoading(false);
-        }
-    };
+    try {
+        await axiosInstance.post("/auth/password", {
+            email,
+            redirect_url: process.env.NEXT_PUBLIC_REDIRECT_URL
+        });
+        setSuccess("パスワードリセットメールが送信されました。メールを確認してください。");
+    } catch (e) {
+        setError("パスワードリセットのリクエストに失敗しました");
+    } finally {
+        setLoading(false);
+    }
+};
 
+    
     // パスワードリセット確認
     const resetPasswordConfirm = async (
         password: string,
