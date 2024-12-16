@@ -115,63 +115,57 @@ export const useAuth = () => {
     };
 
     // パスワードリセット
-   const passwordReset = async (email: string) => {
-    setLoading(true);
-    setError(null);
-    setSuccess(null);
-
-    try {
-        await axiosInstance.post("/auth/password", {
-            email,
-            redirect_url: process.env.NEXT_PUBLIC_REDIRECT_URL
-        });
-        setSuccess("パスワードリセットメールが送信されました。メールを確認してください。");
-    } catch (e) {
-        setError("パスワードリセットのリクエストに失敗しました");
-    } finally {
-        setLoading(false);
-    }
-};
+    const passwordReset = async (email: string) => {
+        setLoading(true);
+        setError(null);
+        setSuccess(null);
+    
+        try {
+            await axiosInstance.post("/auth/password", {
+                email,
+                redirect_url: process.env.NEXT_PUBLIC_REDIRECT_URL
+            });
+            setSuccess("パスワードリセットメールが送信されました。メールを確認してください。");
+        } catch (e) {
+            setError("パスワードリセットのリクエストに失敗しました。");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     
     // パスワードリセット確認
     const resetPasswordConfirm = async (
         password: string,
         password_confirmation: string,
-        reset_password_token: string,
-        accessToken: string,
-        client: string,
-        uid: string
+        reset_password_token: string
     ) => {
         setLoading(true);
         setError(null);
         setSuccess(null);
-
+    
         try {
             const response = await axiosInstance.put("/auth/password", {
                 password,
                 password_confirmation,
                 reset_password_token
-            }, {
-                headers: {
-                    "access-token": accessToken,
-                    client: client,
-                    uid: uid,
-                },
             });
-
+    
             if (response.status === 200) {
                 setSuccess("パスワードが正常にリセットされました。新しいパスワードでログインしてください。");
-                setError(null);
             } else {
                 setError("パスワードリセットに失敗しました。");
             }
-        } catch {
-            setError("パスワードリセットに失敗しました");
+        } catch (error) {
+            setError(
+                error.response?.data?.errors?.[0] ||
+                "パスワードリセットに失敗しました。"
+            );
         } finally {
             setLoading(false);
         }
     };
+    
 
     return { success, error, loading, signUp, signIn, logout, checkAuthStatus, passwordReset, resetPasswordConfirm };
 };
