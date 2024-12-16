@@ -1,16 +1,15 @@
+// PasswordReset.tsx
 'use client';
 export const dynamic = "force-dynamic";
-import { useState } from "react";
+
+import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { useAuth } from "@/lib/hooks/useAuth";
 
-interface PasswordResetProps {
-    searchParams: {
-        reset_password_token?: string;
-    };
-}
-
-const PasswordReset = ({ searchParams }: PasswordResetProps) => {
+const PasswordResetForm = () => {
     const { success, error, loading, resetPasswordConfirm } = useAuth();
+    const searchParams = useSearchParams();
+    const resetToken = searchParams.get("reset_password_token") || "";
 
     const [newPassword, setNewPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -25,11 +24,12 @@ const PasswordReset = ({ searchParams }: PasswordResetProps) => {
             return;
         }
 
-        await resetPasswordConfirm(
-            newPassword,
-            confirmPassword,
-            searchParams.reset_password_token ?? "", 
-        );
+        if (!resetToken) {
+            setLocalError("パスワードリセットトークンが無効です。");
+            return;
+        }
+
+        await resetPasswordConfirm(newPassword, confirmPassword, resetToken);
     };
 
     return (
@@ -73,6 +73,15 @@ const PasswordReset = ({ searchParams }: PasswordResetProps) => {
                 </form>
             </div>
         </div>
+    );
+};
+
+// SuspenseでPasswordResetFormをラップ
+const PasswordReset = () => {
+    return (
+        <Suspense fallback={<div className="text-center mt-8">読み込み中...</div>}>
+            <PasswordResetForm />
+        </Suspense>
     );
 };
 
