@@ -5,7 +5,7 @@ import { useAuth } from "@/lib/hooks/useAuth";
 
 interface PasswordResetProps {
     searchParams: {
-        token?: string;
+        reset_password_token?: string;
     };
 }
 
@@ -28,7 +28,7 @@ const PasswordReset = ({ searchParams }: PasswordResetProps) => {
         await resetPasswordConfirm(
             newPassword,
             confirmPassword,
-            searchParams.token ?? "", 
+            searchParams.reset_password_token ?? "", 
         );
     };
 
