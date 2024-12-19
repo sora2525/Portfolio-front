@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { useAuth } from "@/lib/hooks/useAuth";
 import Live2dView from "@/components/live2d/live2dView";
 
+import { SessionProvider } from 'next-auth/react';
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -47,6 +49,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <SessionProvider>
         <RecoilRoot>
           <AuthLoader>
             <div className="h-screen w-screen bg-[url('/images/sample.jpg')] bg-cover bg-no-repeat bg-center relative overflow-hidden">
@@ -64,6 +67,7 @@ export default function RootLayout({
             </div>
           </AuthLoader>
         </RecoilRoot>
+        </SessionProvider>
       </body>
     </html>
   );
