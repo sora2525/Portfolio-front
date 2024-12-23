@@ -2,14 +2,27 @@ import { useAuth } from "@/lib/hooks/useAuth";
 import { useRecoilState } from "recoil";
 import { authState } from "@/lib/atom/authAtom";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 export default function PageHeader() {
     const { logout } = useAuth();
     const [auth, setAuth] = useRecoilState(authState);
 
-    const handleLogout = () => {
-        logout();
-        setAuth({ isAuthenticated: false, user: null });
+    const handleLogout = async () => {
+        try {
+            // Rails API のログアウト処理
+            await logout();
+    
+            // Auth.js のセッション終了
+            await signOut({ redirect: false });
+    
+            // 状態をリセット
+            setAuth({ isAuthenticated: false, user: null });
+    
+            // 認証不要なページへリダイレクト
+        } catch (err) {
+            console.error("ログアウト中にエラーが発生しました:", err);
+        }
     };
 
     return (

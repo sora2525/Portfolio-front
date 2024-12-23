@@ -166,6 +166,38 @@ export const useAuth = () => {
         }
     };
     
+    // グーグルログイン
+    const loginWithGoogle = async (uid: string, provider: string, email: string, name: string, image: string) => {
+        setLoading(true);
+        try {
+            const response = await axiosInstance.post("/auth/google_login", {
+                uid,
+                provider,
+                email,
+                name,
+                image,
+            });
 
-    return { success, error, loading, signUp, signIn, logout, checkAuthStatus, passwordReset, resetPasswordConfirm };
+            const { "access-token": accessToken, client, uid: userUid } = response.headers;
+
+            if (accessToken && client && userUid) {
+                Cookies.set("access-token", accessToken, { expires: 7 });
+                Cookies.set("client", client, { expires: 7 });
+                Cookies.set("uid", userUid, { expires: 7 });
+                setAuth({ isAuthenticated: true, user: response.data.user });
+                setSuccess("Googleログインに成功しました！");
+                setError(null);
+            } else {
+                setError("トークン情報が取得できませんでした");
+            }
+        } catch (err) {
+            setError("Googleログインに失敗しました");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    
+
+    return { success, error, loading, signUp, signIn, logout, checkAuthStatus, passwordReset, resetPasswordConfirm,loginWithGoogle };
 };
