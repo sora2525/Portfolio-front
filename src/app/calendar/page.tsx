@@ -59,25 +59,28 @@ const CalendarPage = () => {
     });
 
     try {
-        const task = await getTask(Number(info.event.id));
-        
-        if (!task) {
-            return;
-        }
-
-        const currentTags = task.tags.map((tag) => tag.id); 
-
-        await updateTask(
-            Number(info.event.id),
-            info.event.title, 
-            task.description,
-            newDueDate,       
-            task.priority,    
-            task.reminder_time, 
-            currentTags       
-        );
+      const task = await getTask(Number(info.event.id));
+      
+      if (!task) {
+        return;
+      }
+  
+      const currentTags = task.tags.map((tag) => tag.id); 
+  
+      await updateTask(
+        Number(info.event.id),
+        task.title, 
+        task.description,
+        newDueDate, 
+        task.priority,
+        task.reminder_time,
+        currentTags
+      );
+  
+      const updatedTasks = await getTasks('due_date', 'asc', '', '');
+      updateEvents(updatedTasks); 
     } catch (error) {
-        console.error('タスク更新エラー:', error);
+      console.error('タスク更新エラー:', error);
     }
 };
 
