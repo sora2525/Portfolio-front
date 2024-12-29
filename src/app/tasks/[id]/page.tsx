@@ -82,7 +82,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
             const confirmed = confirm("本当にこのタスクを削除しますか？");
             if (confirmed) {
                 await destroyTask(task.id);
-                router.push("/tasks");
+                router.back();
             }
         }
     };
