@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAuth } from "@/lib/hooks/useAuth";
 import Link from "next/link";
 import LoginButton from "@/components/GoogleLogin";
+import LineLoginButton from "@/components/LineLogin";
 
 export default function SignInPage() {
     const [email, setEmail] = useState<string>("");
@@ -66,6 +67,7 @@ export default function SignInPage() {
                         </button>
                     </form>
                         <LoginButton/>
+                        <LineLoginButton />
                     {/* 成功、エラー、バリデーションエラーメッセージ */}
                     {success && <p className="text-green-600 text-center mt-4">{success}</p>}
                     {error && <p className="text-red-600 text-center mt-4">{error}</p>}

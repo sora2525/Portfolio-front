@@ -19,26 +19,32 @@ export const useTasks = () => {
     const [tasks, setTasks] = useState<Task[]>([])
     const [error, setError] = useState<string | null>(null);
 
-    const getTasks = async (sortBy: string, order: string, tagId: string, status: string) => {
+    const getTasks = async (
+        sortBy: string,
+        order: string,
+        tagId: string,
+        status: string
+      ): Promise<Task[]> => {
         setError(null);
         try {
-            // クエリパラメータとしてソート順、並び順、タグID、完了状態を渡す
-            const response = await axiosInstance.get("/tasks", {
-                params: {
-                    q: { s: `${sortBy} ${order}` },  // ソート条件
-                    tag_id: tagId,  // タグIDによる絞り込み
-                    status: status  // 完了状態による絞り込み
-                }
-            });
-            setTasks(response.data);  
+          const response = await axiosInstance.get("/tasks", {
+            params: {
+              q: { s: `${sortBy} ${order}` },
+              tag_id: tagId,
+              status: status,
+            },
+          });
+          setTasks(response.data);
+          return response.data; // データを返す
         } catch (e: unknown) {
-            if (axios.isAxiosError(e) && e.response?.data.errors) {
-                setError(e.response.data.errors.join(", "));
-            } else {
-                setError("タスクの取得に失敗しました");
-            }
+          if (axios.isAxiosError(e) && e.response?.data.errors) {
+            setError(e.response.data.errors.join(", "));
+          } else {
+            setError("タスクの取得に失敗しました");
+          }
+          return []; // エラー時は空の配列を返す
         }
-    };
+      };
 
     const getTask = async (id: number) => {
         setError(null);
