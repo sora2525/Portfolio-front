@@ -132,7 +132,6 @@ export const useAuth = () => {
             setLoading(false);
         }
     };
-
     
     // パスワードリセット確認
     const resetPasswordConfirm = async (
@@ -197,7 +196,38 @@ export const useAuth = () => {
         }
     };
 
+
+    const loginWithLine= async (uid: string, provider: string, email: string, name: string, image: string,line_sub: string) => {
+        setLoading(true);
+        try {
+            const response = await axiosInstance.post("/auth/Line_login", {
+                uid,
+                provider,
+                email,
+                name,
+                image,
+                line_sub
+              });
+
+            const { "access-token": accessToken, client, uid: userUid } = response.headers;
+
+            if (accessToken && client && userUid) {
+                Cookies.set("access-token", accessToken, { expires: 7 });
+                Cookies.set("client", client, { expires: 7 });
+                Cookies.set("uid", userUid, { expires: 7 });
+                setAuth({ isAuthenticated: true, user: response.data.user });
+                setSuccess("Lineログインに成功しました！");
+                setError(null);
+            } else {
+                setError("トークン情報が取得できませんでした");
+            }
+        } catch (err) {
+            setError("Lineログインに失敗しました");
+        } finally {
+            setLoading(false);
+        }
+    };
     
 
-    return { success, error, loading, signUp, signIn, logout, checkAuthStatus, passwordReset, resetPasswordConfirm,loginWithGoogle };
+    return { success, error, loading, signUp, signIn, logout, checkAuthStatus, passwordReset, resetPasswordConfirm,loginWithGoogle,loginWithLine };
 };
