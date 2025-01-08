@@ -34,11 +34,7 @@ export default function LineLoginButton() {
       {/* ログインボタン */}
       <button
         onClick={handleLineLogin}
-        className="
-          px-6 py-3 text-white font-semibold rounded-lg shadow-md 
-          bg-green-500 hover:bg-green-600 focus:outline-none 
-          transition duration-300 ease-in-out transform hover:scale-105
-        "
+        className="px-6 py-3 text-white font-semibold rounded-lg shadow-md bg-green-500 hover:bg-green-600 focus:outline-none transition duration-300 ease-in-out transform hover:scale-105"
       >
         LINEでログイン
       </button>
@@ -53,6 +49,7 @@ export default function LineLoginButton() {
           <h2 className="font-bold text-lg mb-2">ログイン成功！</h2>
           <p><strong>ユーザー名:</strong> {session.user?.name}</p>
           <p><strong>メールアドレス:</strong> {session.user?.email}</p>
+          <p><strong>ユーザーID (sub):</strong> {session.user?.sub}</p> {/* subを表示 */}
           {session.user?.image && (
             <img
               src={session.user.image}

@@ -16,11 +16,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           scope: "openid profile email",
           response_type: "code",
           redirect_uri: `${process.env.AUTH_URL}/api/auth/callback/line`,
-          state:crypto.randomUUID(), 
+          state: crypto.randomUUID(),
         },
       },
       checks: ["pkce"],
     }),
   ],
-  secret: process.env.AUTH_SECRET, 
+  secret: process.env.AUTH_SECRET,
+  callbacks: {
+    // JWTに`sub`を保存
+    async jwt({ token, account, profile }) {
+      if (account && profile) {
+        token.sub = profile.sub; // LINEの`sub`をJWTに含める
+      }
+      return token;
+    },
+    // セッション情報に`sub`を含める
+    async session({ session, token }) {
+      session.user.sub = token.sub; // セッションに`sub`を追加
+      return session;
+    },
+  },
 });
