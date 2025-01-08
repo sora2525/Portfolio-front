@@ -11,7 +11,8 @@ export default function LineLoginButton() {
     try {
       // LINE認証を実行
       const result = await authSignIn("line", {
-        redirect: false, // リダイレクトを無効化
+        redirect: true,
+        callbackUrl: "/lineSession",
       });
 
       if (result?.error) {
