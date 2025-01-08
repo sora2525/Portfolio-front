@@ -200,7 +200,7 @@ export const useAuth = () => {
     const loginWithLine= async (uid: string, provider: string, email: string, name: string, image: string,line_sub: string) => {
         setLoading(true);
         try {
-            const response = await axiosInstance.post("/auth/Line_login", {
+            const response = await axiosInstance.post("/auth/line_login", {
                 uid,
                 provider,
                 email,
