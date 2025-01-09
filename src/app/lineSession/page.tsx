@@ -22,7 +22,7 @@ export default function LineSession() {
         }
 
         await loginWithLine(
-          session.user.email || "",
+          session.user.sub || "",
           "line",
           session.user.email || "",
           session.user.name || "",
