@@ -4,10 +4,11 @@ import { useRecoilState } from "recoil";
 import { authState } from "@/lib/atom/authAtom";
 import { useRequireAuth } from '@/lib/hooks/useRequireAuth';
 import Link from "next/link";
+import LineLinkButton from "@/components/LineLink";
 
 export default function Profile() {
-    const [auth, ] = useRecoilState(authState);
-    const login = useRequireAuth(); 
+    const [auth,] = useRecoilState(authState);
+    const login = useRequireAuth();
     const { passwordReset } = useAuth();
 
     const handleClick = () => {
@@ -16,16 +17,16 @@ export default function Profile() {
         }
     };
 
-   
+
     if (!auth.isAuthenticated) {
         return null; // ログインチェック中は何も描画しない
-      }
+    }
 
     return (
         <div className="flex flex-col justify-center items-center w-full h-screen p-6 pointer-events-auto">
             <Link href="/" className="absolute top-[80px] left-4 text-3xl text-[#008080]">
                 <span className="material-icons" style={{ fontSize: '48px' }}>
-                reply
+                    reply
                 </span>
             </Link>
 
@@ -48,6 +49,9 @@ export default function Profile() {
                     >
                         パスワードリセット
                     </button>
+                    <div className="pt-3">
+                        <LineLinkButton />
+                    </div>
                 </div>
             </div>
         </div>

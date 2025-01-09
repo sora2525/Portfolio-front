@@ -41,6 +41,7 @@ const CalendarPage = () => {
       updateEvents(data); 
     };
     fetchTasks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDateClick = async (info) => {

@@ -13,7 +13,6 @@ export default function GoogleSession() {
   useEffect(() => {
     const handleSession = async () => {
       try {
-        // セッション情報を取得
         const session = await getSession();
         if (!session || !session.user) {
           setError("セッション情報が取得できませんでした");
