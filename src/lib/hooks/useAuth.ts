@@ -119,7 +119,7 @@ export const useAuth = () => {
         setLoading(true);
         setError(null);
         setSuccess(null);
-    
+
         try {
             await axiosInstance.post("/auth/password", {
                 email,
@@ -132,7 +132,7 @@ export const useAuth = () => {
             setLoading(false);
         }
     };
-    
+
     // パスワードリセット確認
     const resetPasswordConfirm = async (
         password: string,
@@ -142,14 +142,14 @@ export const useAuth = () => {
         setLoading(true);
         setError(null);
         setSuccess(null);
-    
+
         try {
             const response = await axiosInstance.put("/auth/password", {
                 password,
                 password_confirmation,
                 reset_password_token
             });
-    
+
             if (response.status === 200) {
                 setSuccess("パスワードが正常にリセットされました。新しいパスワードでログインしてください。");
             } else {
@@ -164,7 +164,7 @@ export const useAuth = () => {
             setLoading(false);
         }
     };
-    
+
     // グーグルログイン
     const loginWithGoogle = async (uid: string, provider: string, email: string, name: string, image: string) => {
         setLoading(true);
@@ -197,7 +197,7 @@ export const useAuth = () => {
     };
 
 
-    const loginWithLine= async (uid: string, provider: string, email: string, name: string, image: string,line_sub: string) => {
+    const loginWithLine = async (uid: string, provider: string, email: string, name: string, image: string, line_sub: string) => {
         setLoading(true);
         try {
             const response = await axiosInstance.post("/auth/line_login", {
@@ -207,7 +207,7 @@ export const useAuth = () => {
                 name,
                 image,
                 line_sub
-              });
+            });
 
             const { "access-token": accessToken, client, uid: userUid } = response.headers;
 
@@ -227,7 +227,37 @@ export const useAuth = () => {
             setLoading(false);
         }
     };
-    
 
-    return { success, error, loading, signUp, signIn, logout, checkAuthStatus, passwordReset, resetPasswordConfirm,loginWithGoogle,loginWithLine };
+    const lineLink = async (lineSub) => {
+        setLoading(true);
+        try {
+            const response = await axiosInstance.post("/auth/line_link", {
+                line_sub: lineSub,
+              }, {
+                headers: {
+                  "access-token": Cookies.get("access-token"),
+                  client: Cookies.get("client"),
+                  uid: Cookies.get("uid"),
+                },
+              });
+            if (response.status === 200) {
+                setSuccess("LINEアカウントの連携に成功しました！");
+                setAuth((prevState) => ({
+                    ...prevState,
+                    user: {
+                        ...prevState.user,
+                        line_sub: lineSub,
+                    },
+                }));
+            } else {
+                setError("LINEアカウントの連携に失敗しました。");
+            }
+        } catch (err) {
+            setError(err.response?.data?.errors?.[0] || "LINEアカウントの連携中にエラーが発生しました。");
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    return { success, error, loading, signUp, signIn, logout, checkAuthStatus, passwordReset, resetPasswordConfirm, loginWithGoogle, loginWithLine,lineLink };
 };
