@@ -11,7 +11,7 @@ export default function LoginButton() {
       // Google認証を実行 (リダイレクト無効化)
       const result = await authSignIn("google", {
         redirect: true,
-        callbackUrl: "session/google",
+        callbackUrl: "/session/google",
         prompt: "select_account",
       });
 
