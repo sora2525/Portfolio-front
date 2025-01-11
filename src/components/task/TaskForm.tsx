@@ -141,13 +141,13 @@ export default function TaskForm({
           <option value={2}>中</option>
           <option value={3}>高</option>
         </select>
-        {/* <input
+        <input
           type="datetime-local"
           name="reminder_time"
           value={formData.reminder_time}
           onChange={handleInputChange}
           className="w-full max-w-[1000px] p-1 sm:p-2 mt-4 border border-gray-300 rounded"
-        /> */}
+        />
       </div>
       <div className="mt-4 max-w-[1000px]">
         <h3>タグを選択:</h3>
