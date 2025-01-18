@@ -58,7 +58,7 @@ export function useLipSyncHandler() {
       const onMotionFinished = () => {
         if (audioRef.current && !audioRef.current.paused) {
           // まだ音声が再生中であればもう一度モーション1を再生
-          model.startMotion("Idle", 0, LAppDefine.PriorityForce, onMotionFinished);
+          model.startMotion("LipSync", 0, LAppDefine.PriorityForce, onMotionFinished);
         } else {
           // 音声が停止していればリップシンクを終了
           isLipSyncingRef.current = false;
@@ -66,7 +66,7 @@ export function useLipSyncHandler() {
       };
 
       // 強制的に `Hiyori_m01.motion3.json` を再生し、終了時にコールバックを呼び出す
-      model.startMotion("Idle", 0, LAppDefine.PriorityForce, onMotionFinished);
+      model.startMotion("LipSync", 0, LAppDefine.PriorityForce, onMotionFinished);
     }
   };
 
@@ -91,7 +91,7 @@ export function useLipSyncHandler() {
 
         const rms = wavFileHandlerRef.current.getRms();
         const scaledRms = Math.min(rms * 10, 1); // RMS値を調整
-
+        
         // ここで LAppModel のリップシンク用変数を更新
         model.setLipSyncValue(scaledRms);
         console.log("Setting LipSync value:", scaledRms);
