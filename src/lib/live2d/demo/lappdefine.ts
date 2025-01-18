@@ -46,8 +46,7 @@ export const PowerImageName = '';
 // モデルを配置したディレクトリ名の配列
 // ディレクトリ名とmodel3.jsonの名前を一致させておくこと
 export const ModelDir: string[] = [
-  'Hiyori',
-  'Mao',
+  'merotan'
 ];
 export const ModelDirSize: number = ModelDir.length;
 

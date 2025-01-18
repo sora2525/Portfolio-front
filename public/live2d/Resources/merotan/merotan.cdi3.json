@@ -1,0 +1,1850 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "ParamAngleX",
+			"GroupId": "",
+			"Name": "角度 X"
+		},
+		{
+			"Id": "ParamAngleY",
+			"GroupId": "",
+			"Name": "角度 Y"
+		},
+		{
+			"Id": "ParamBodyAngleX",
+			"GroupId": "",
+			"Name": "体の回転　X"
+		},
+		{
+			"Id": "ParamBodyAngleY",
+			"GroupId": "",
+			"Name": "体の回転　Y"
+		},
+		{
+			"Id": "ParamAngleZ",
+			"GroupId": "",
+			"Name": "角度 Z"
+		},
+		{
+			"Id": "ParamBodyAngleZ",
+			"GroupId": "",
+			"Name": "体の回転　Z"
+		},
+		{
+			"Id": "ParamEyeLOpen",
+			"GroupId": "ParamGroup",
+			"Name": "左目　開閉"
+		},
+		{
+			"Id": "ParamEyeROpen",
+			"GroupId": "ParamGroup",
+			"Name": "右目　開閉"
+		},
+		{
+			"Id": "ParamEyeBallX",
+			"GroupId": "ParamGroup",
+			"Name": "目玉 X"
+		},
+		{
+			"Id": "ParamEyeBallY",
+			"GroupId": "ParamGroup",
+			"Name": "目玉 Y"
+		},
+		{
+			"Id": "Param2",
+			"GroupId": "ParamGroup",
+			"Name": "怒り目"
+		},
+		{
+			"Id": "Param5",
+			"GroupId": "ParamGroup",
+			"Name": "驚き"
+		},
+		{
+			"Id": "Param6",
+			"GroupId": "ParamGroup",
+			"Name": "ジト目"
+		},
+		{
+			"Id": "Param",
+			"GroupId": "ParamGroup",
+			"Name": "笑顔"
+		},
+		{
+			"Id": "Param7",
+			"GroupId": "ParamGroup2",
+			"Name": "悲しみ眉"
+		},
+		{
+			"Id": "ParamBrowLY",
+			"GroupId": "ParamGroup2",
+			"Name": "左眉　上下"
+		},
+		{
+			"Id": "ParamBrowRY",
+			"GroupId": "ParamGroup2",
+			"Name": "右眉　上下"
+		},
+		{
+			"Id": "ParamBrowLX",
+			"GroupId": "ParamGroup2",
+			"Name": "左眉　左右"
+		},
+		{
+			"Id": "ParamBrowRX",
+			"GroupId": "ParamGroup2",
+			"Name": "右眉　左右"
+		},
+		{
+			"Id": "ParamBrowLAngle",
+			"GroupId": "ParamGroup2",
+			"Name": "左眉　角度"
+		},
+		{
+			"Id": "ParamBrowRAngle",
+			"GroupId": "ParamGroup2",
+			"Name": "右眉　角度"
+		},
+		{
+			"Id": "ParamBrowLForm",
+			"GroupId": "ParamGroup2",
+			"Name": "左眉　変形"
+		},
+		{
+			"Id": "ParamBrowRForm",
+			"GroupId": "ParamGroup2",
+			"Name": "右眉　変形"
+		},
+		{
+			"Id": "Param21",
+			"GroupId": "ParamGroup3",
+			"Name": "ジト目"
+		},
+		{
+			"Id": "Param12",
+			"GroupId": "ParamGroup3",
+			"Name": "ピース"
+		},
+		{
+			"Id": "Param13",
+			"GroupId": "ParamGroup3",
+			"Name": "手をあげる"
+		},
+		{
+			"Id": "Param14",
+			"GroupId": "ParamGroup3",
+			"Name": "ハート"
+		},
+		{
+			"Id": "Param15",
+			"GroupId": "ParamGroup3",
+			"Name": "ポンポン右腕"
+		},
+		{
+			"Id": "Param16",
+			"GroupId": "ParamGroup3",
+			"Name": "ポンポン左腕"
+		},
+		{
+			"Id": "Param17",
+			"GroupId": "ParamGroup3",
+			"Name": "腰に手をあてる"
+		},
+		{
+			"Id": "Param3",
+			"GroupId": "ParamGroup3",
+			"Name": "照れ"
+		},
+		{
+			"Id": "Param4",
+			"GroupId": "ParamGroup3",
+			"Name": "怒り"
+		},
+		{
+			"Id": "Param20",
+			"GroupId": "ParamGroup3",
+			"Name": "腕うごき"
+		},
+		{
+			"Id": "ParamMouthForm",
+			"GroupId": "ParamGroup4",
+			"Name": "口　変形"
+		},
+		{
+			"Id": "ParamMouthOpenY",
+			"GroupId": "ParamGroup4",
+			"Name": "口　開閉"
+		},
+		{
+			"Id": "Param8",
+			"GroupId": "ParamGroup4",
+			"Name": "口変"
+		},
+		{
+			"Id": "Param9",
+			"GroupId": "ParamGroup4",
+			"Name": "口開"
+		},
+		{
+			"Id": "Param10",
+			"GroupId": "ParamGroup4",
+			"Name": "口右"
+		},
+		{
+			"Id": "Param11",
+			"GroupId": "ParamGroup4",
+			"Name": "口左"
+		},
+		{
+			"Id": "ParamBreath",
+			"GroupId": "ParamGroup5",
+			"Name": "呼吸"
+		},
+		{
+			"Id": "Param18",
+			"GroupId": "ParamGroup5",
+			"Name": "呼吸　手打ち"
+		},
+		{
+			"Id": "Param19",
+			"GroupId": "ParamGroup5",
+			"Name": "呼吸　手打ち腕"
+		},
+		{
+			"Id": "ParamHairFront262",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンX１"
+		},
+		{
+			"Id": "ParamHairFront263",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンX１"
+		},
+		{
+			"Id": "ParamHairFront264",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンX2"
+		},
+		{
+			"Id": "ParamHairFront265",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンX2"
+		},
+		{
+			"Id": "ParamHairFront266",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンX3"
+		},
+		{
+			"Id": "ParamHairFront267",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンX3"
+		},
+		{
+			"Id": "ParamHairFront274",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンX4"
+		},
+		{
+			"Id": "ParamHairFront275",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンX4"
+		},
+		{
+			"Id": "ParamHairFront268",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンY1"
+		},
+		{
+			"Id": "ParamHairFront269",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンY1"
+		},
+		{
+			"Id": "ParamHairFront270",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンY2"
+		},
+		{
+			"Id": "ParamHairFront271",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンY2"
+		},
+		{
+			"Id": "ParamHairFront272",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンY3"
+		},
+		{
+			"Id": "ParamHairFront273",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンY3"
+		},
+		{
+			"Id": "ParamHairFront276",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンY4"
+		},
+		{
+			"Id": "ParamHairFront277",
+			"GroupId": "ParamGroup10",
+			"Name": "ポンポンY4"
+		},
+		{
+			"Id": "ParamHairFront",
+			"GroupId": "ParamGroup10",
+			"Name": "体Y"
+		},
+		{
+			"Id": "ParamHairFront257",
+			"GroupId": "ParamGroup10",
+			"Name": "腕X"
+		},
+		{
+			"Id": "ParamHairFront258",
+			"GroupId": "ParamGroup10",
+			"Name": "腕X"
+		},
+		{
+			"Id": "ParamHairFront259",
+			"GroupId": "ParamGroup10",
+			"Name": "腕Y"
+		},
+		{
+			"Id": "ParamHairFront260",
+			"GroupId": "ParamGroup10",
+			"Name": "腕Y"
+		},
+		{
+			"Id": "ParamHairFront253",
+			"GroupId": "ParamGroup9",
+			"Name": "腕フリルY1"
+		},
+		{
+			"Id": "ParamHairFront254",
+			"GroupId": "ParamGroup9",
+			"Name": "腕フリルY1"
+		},
+		{
+			"Id": "ParamHairFront255",
+			"GroupId": "ParamGroup9",
+			"Name": "腕フリルY2"
+		},
+		{
+			"Id": "ParamHairFront256",
+			"GroupId": "ParamGroup9",
+			"Name": "腕フリルY2"
+		},
+		{
+			"Id": "ParamHairFront249",
+			"GroupId": "ParamGroup9",
+			"Name": "足リボンY１"
+		},
+		{
+			"Id": "ParamHairFront250",
+			"GroupId": "ParamGroup9",
+			"Name": "足リボンY１"
+		},
+		{
+			"Id": "ParamHairFront244",
+			"GroupId": "ParamGroup9",
+			"Name": "足フリルY1"
+		},
+		{
+			"Id": "ParamHairFront246",
+			"GroupId": "ParamGroup9",
+			"Name": "足フリルY1"
+		},
+		{
+			"Id": "ParamHairFront245",
+			"GroupId": "ParamGroup9",
+			"Name": "足フリルY2"
+		},
+		{
+			"Id": "ParamHairFront248",
+			"GroupId": "ParamGroup9",
+			"Name": "足フリルY2"
+		},
+		{
+			"Id": "ParamHairFront247",
+			"GroupId": "ParamGroup9",
+			"Name": "足フリルY3"
+		},
+		{
+			"Id": "ParamHairFront238",
+			"GroupId": "ParamGroup9",
+			"Name": "布Y"
+		},
+		{
+			"Id": "ParamHairFront239",
+			"GroupId": "ParamGroup9",
+			"Name": "布Y"
+		},
+		{
+			"Id": "ParamHairFront240",
+			"GroupId": "ParamGroup9",
+			"Name": "布Y"
+		},
+		{
+			"Id": "ParamHairFront241",
+			"GroupId": "ParamGroup9",
+			"Name": "布Y"
+		},
+		{
+			"Id": "ParamHairFront242",
+			"GroupId": "ParamGroup9",
+			"Name": "布フリルY"
+		},
+		{
+			"Id": "ParamHairFront243",
+			"GroupId": "ParamGroup9",
+			"Name": "布フリルY"
+		},
+		{
+			"Id": "ParamHairFront236",
+			"GroupId": "ParamGroup9",
+			"Name": "背中リボンY"
+		},
+		{
+			"Id": "ParamHairFront237",
+			"GroupId": "ParamGroup9",
+			"Name": "背中リボンY"
+		},
+		{
+			"Id": "ParamHairFront231",
+			"GroupId": "ParamGroup9",
+			"Name": "頭リボンY１"
+		},
+		{
+			"Id": "ParamHairFront232",
+			"GroupId": "ParamGroup9",
+			"Name": "頭リボンY１"
+		},
+		{
+			"Id": "ParamHairFront233",
+			"GroupId": "ParamGroup9",
+			"Name": "頭リボンY2"
+		},
+		{
+			"Id": "ParamHairFront234",
+			"GroupId": "ParamGroup9",
+			"Name": "頭リボンY2"
+		},
+		{
+			"Id": "ParamHairFront235",
+			"GroupId": "ParamGroup9",
+			"Name": "頭リボンY2"
+		},
+		{
+			"Id": "ParamHairFront226",
+			"GroupId": "ParamGroup9",
+			"Name": "チェーンY１"
+		},
+		{
+			"Id": "ParamHairFront227",
+			"GroupId": "ParamGroup9",
+			"Name": "チェーンY2"
+		},
+		{
+			"Id": "ParamHairFront228",
+			"GroupId": "ParamGroup9",
+			"Name": "チェーンY3"
+		},
+		{
+			"Id": "ParamHairFront229",
+			"GroupId": "ParamGroup9",
+			"Name": "チェーンY4"
+		},
+		{
+			"Id": "ParamHairFront230",
+			"GroupId": "ParamGroup9",
+			"Name": "チェーンY5"
+		},
+		{
+			"Id": "ParamHairFront216",
+			"GroupId": "ParamGroup9",
+			"Name": "スカートフリルY１"
+		},
+		{
+			"Id": "ParamHairFront217",
+			"GroupId": "ParamGroup9",
+			"Name": "スカートフリルY１"
+		},
+		{
+			"Id": "ParamHairFront218",
+			"GroupId": "ParamGroup9",
+			"Name": "スカートフリルY2"
+		},
+		{
+			"Id": "ParamHairFront219",
+			"GroupId": "ParamGroup9",
+			"Name": "スカートフリルY2"
+		},
+		{
+			"Id": "ParamHairFront220",
+			"GroupId": "ParamGroup9",
+			"Name": "スカートフリルY2"
+		},
+		{
+			"Id": "ParamHairFront221",
+			"GroupId": "ParamGroup9",
+			"Name": "スカートフリルY3"
+		},
+		{
+			"Id": "ParamHairFront222",
+			"GroupId": "ParamGroup9",
+			"Name": "スカートフリルY3"
+		},
+		{
+			"Id": "ParamHairFront223",
+			"GroupId": "ParamGroup9",
+			"Name": "スカートフリルY3"
+		},
+		{
+			"Id": "ParamHairFront224",
+			"GroupId": "ParamGroup9",
+			"Name": "スカートフリルY4"
+		},
+		{
+			"Id": "ParamHairFront225",
+			"GroupId": "ParamGroup9",
+			"Name": "スカートフリルY4"
+		},
+		{
+			"Id": "ParamHairFront212",
+			"GroupId": "ParamGroup9",
+			"Name": "胸フリルY１"
+		},
+		{
+			"Id": "ParamHairFront213",
+			"GroupId": "ParamGroup9",
+			"Name": "胸フリルY１"
+		},
+		{
+			"Id": "ParamHairFront214",
+			"GroupId": "ParamGroup9",
+			"Name": "胸フリルY2"
+		},
+		{
+			"Id": "ParamHairFront215",
+			"GroupId": "ParamGroup9",
+			"Name": "胸フリルY2"
+		},
+		{
+			"Id": "ParamHairFront201",
+			"GroupId": "ParamGroup9",
+			"Name": "胸リボンX１"
+		},
+		{
+			"Id": "ParamHairFront202",
+			"GroupId": "ParamGroup9",
+			"Name": "胸リボンY１"
+		},
+		{
+			"Id": "ParamHairFront203",
+			"GroupId": "ParamGroup9",
+			"Name": "胸リボンY2"
+		},
+		{
+			"Id": "ParamHairFront204",
+			"GroupId": "ParamGroup9",
+			"Name": "胸リボンY2"
+		},
+		{
+			"Id": "ParamHairFront205",
+			"GroupId": "ParamGroup9",
+			"Name": "胸リボンⅤ2"
+		},
+		{
+			"Id": "ParamHairFront206",
+			"GroupId": "ParamGroup9",
+			"Name": "腰リボンV１"
+		},
+		{
+			"Id": "ParamHairFront207",
+			"GroupId": "ParamGroup9",
+			"Name": "腰リボンV１"
+		},
+		{
+			"Id": "ParamHairFront208",
+			"GroupId": "ParamGroup9",
+			"Name": "腰リボンV２"
+		},
+		{
+			"Id": "ParamHairFront209",
+			"GroupId": "ParamGroup9",
+			"Name": "腰リボンV２"
+		},
+		{
+			"Id": "ParamHairFront210",
+			"GroupId": "ParamGroup9",
+			"Name": "腰リボンY２"
+		},
+		{
+			"Id": "ParamHairFront211",
+			"GroupId": "ParamGroup9",
+			"Name": "腰リボンY２"
+		},
+		{
+			"Id": "ParamHairFront196",
+			"GroupId": "ParamGroup9",
+			"Name": "首リボンY１"
+		},
+		{
+			"Id": "ParamHairFront197",
+			"GroupId": "ParamGroup9",
+			"Name": "首リボンY１"
+		},
+		{
+			"Id": "ParamHairFront198",
+			"GroupId": "ParamGroup9",
+			"Name": "首リボンY２"
+		},
+		{
+			"Id": "ParamHairFront199",
+			"GroupId": "ParamGroup9",
+			"Name": "首リボンY２"
+		},
+		{
+			"Id": "ParamHairFront200",
+			"GroupId": "ParamGroup9",
+			"Name": "首リボンY２"
+		},
+		{
+			"Id": "ParamHairFront194",
+			"GroupId": "ParamGroup9",
+			"Name": "首フリルY"
+		},
+		{
+			"Id": "ParamHairFront195",
+			"GroupId": "ParamGroup9",
+			"Name": "首フリルY"
+		},
+		{
+			"Id": "ParamHairFront192",
+			"GroupId": "ParamGroup9",
+			"Name": "胸Y"
+		},
+		{
+			"Id": "ParamHairFront193",
+			"GroupId": "ParamGroup9",
+			"Name": "胸Y"
+		},
+		{
+			"Id": "ParamHairFront251",
+			"GroupId": "ParamGroup8",
+			"Name": "頭部"
+		},
+		{
+			"Id": "ParamHairFront190",
+			"GroupId": "ParamGroup8",
+			"Name": "胸X"
+		},
+		{
+			"Id": "ParamHairFront191",
+			"GroupId": "ParamGroup8",
+			"Name": "胸X"
+		},
+		{
+			"Id": "ParamHairFront187",
+			"GroupId": "ParamGroup8",
+			"Name": "足フリルX"
+		},
+		{
+			"Id": "ParamHairFront188",
+			"GroupId": "ParamGroup8",
+			"Name": "足フリルX"
+		},
+		{
+			"Id": "ParamHairFront189",
+			"GroupId": "ParamGroup8",
+			"Name": "足フリルX2"
+		},
+		{
+			"Id": "ParamHairFront185",
+			"GroupId": "ParamGroup8",
+			"Name": "足リボンＸ"
+		},
+		{
+			"Id": "ParamHairFront186",
+			"GroupId": "ParamGroup8",
+			"Name": "足リボンＸ"
+		},
+		{
+			"Id": "ParamHairFront181",
+			"GroupId": "ParamGroup8",
+			"Name": "足右フリルX１"
+		},
+		{
+			"Id": "ParamHairFront182",
+			"GroupId": "ParamGroup8",
+			"Name": "足右フリルX１"
+		},
+		{
+			"Id": "ParamHairFront183",
+			"GroupId": "ParamGroup8",
+			"Name": "足右フリルX2"
+		},
+		{
+			"Id": "ParamHairFront184",
+			"GroupId": "ParamGroup8",
+			"Name": "足右フリルX2"
+		},
+		{
+			"Id": "ParamHairFront168",
+			"GroupId": "ParamGroup8",
+			"Name": "布X１"
+		},
+		{
+			"Id": "ParamHairFront169",
+			"GroupId": "ParamGroup8",
+			"Name": "布X１"
+		},
+		{
+			"Id": "ParamHairFront170",
+			"GroupId": "ParamGroup8",
+			"Name": "布X１"
+		},
+		{
+			"Id": "ParamHairFront179",
+			"GroupId": "ParamGroup8",
+			"Name": "布X１"
+		},
+		{
+			"Id": "ParamHairFront180",
+			"GroupId": "ParamGroup8",
+			"Name": "布X１"
+		},
+		{
+			"Id": "ParamHairFront171",
+			"GroupId": "ParamGroup8",
+			"Name": "布フリルX１"
+		},
+		{
+			"Id": "ParamHairFront177",
+			"GroupId": "ParamGroup8",
+			"Name": "布フリルX１"
+		},
+		{
+			"Id": "ParamHairFront172",
+			"GroupId": "ParamGroup8",
+			"Name": "背中リボンX"
+		},
+		{
+			"Id": "ParamHairFront178",
+			"GroupId": "ParamGroup8",
+			"Name": "背中リボンX"
+		},
+		{
+			"Id": "ParamHairFront164",
+			"GroupId": "ParamGroup8",
+			"Name": "腕フリルX1"
+		},
+		{
+			"Id": "ParamHairFront165",
+			"GroupId": "ParamGroup8",
+			"Name": "腕フリルX1"
+		},
+		{
+			"Id": "ParamHairFront166",
+			"GroupId": "ParamGroup8",
+			"Name": "腕フリルX2"
+		},
+		{
+			"Id": "ParamHairFront167",
+			"GroupId": "ParamGroup8",
+			"Name": "腕フリルX2"
+		},
+		{
+			"Id": "ParamHairFront155",
+			"GroupId": "ParamGroup8",
+			"Name": "スカートフリルX１"
+		},
+		{
+			"Id": "ParamHairFront156",
+			"GroupId": "ParamGroup8",
+			"Name": "スカートフリルX１"
+		},
+		{
+			"Id": "ParamHairFront157",
+			"GroupId": "ParamGroup8",
+			"Name": "スカートフリルX2"
+		},
+		{
+			"Id": "ParamHairFront158",
+			"GroupId": "ParamGroup8",
+			"Name": "スカートフリルX2"
+		},
+		{
+			"Id": "ParamHairFront159",
+			"GroupId": "ParamGroup8",
+			"Name": "スカートフリルX3"
+		},
+		{
+			"Id": "ParamHairFront160",
+			"GroupId": "ParamGroup8",
+			"Name": "スカートフリルX3"
+		},
+		{
+			"Id": "ParamHairFront161",
+			"GroupId": "ParamGroup8",
+			"Name": "スカートフリルX3"
+		},
+		{
+			"Id": "ParamHairFront162",
+			"GroupId": "ParamGroup8",
+			"Name": "スカートフリルX4"
+		},
+		{
+			"Id": "ParamHairFront163",
+			"GroupId": "ParamGroup8",
+			"Name": "スカートフリルX4"
+		},
+		{
+			"Id": "ParamHairFront150",
+			"GroupId": "ParamGroup8",
+			"Name": "チェーンX１"
+		},
+		{
+			"Id": "ParamHairFront151",
+			"GroupId": "ParamGroup8",
+			"Name": "チェーンX2"
+		},
+		{
+			"Id": "ParamHairFront152",
+			"GroupId": "ParamGroup8",
+			"Name": "チェーンX3"
+		},
+		{
+			"Id": "ParamHairFront153",
+			"GroupId": "ParamGroup8",
+			"Name": "チェーンX4"
+		},
+		{
+			"Id": "ParamHairFront154",
+			"GroupId": "ParamGroup8",
+			"Name": "チェーンX5"
+		},
+		{
+			"Id": "ParamHairFront144",
+			"GroupId": "ParamGroup8",
+			"Name": "胸元フリルX1"
+		},
+		{
+			"Id": "ParamHairFront145",
+			"GroupId": "ParamGroup8",
+			"Name": "胸元フリルX1"
+		},
+		{
+			"Id": "ParamHairFront146",
+			"GroupId": "ParamGroup8",
+			"Name": "胸元フリルX2"
+		},
+		{
+			"Id": "ParamHairFront147",
+			"GroupId": "ParamGroup8",
+			"Name": "胸元フリルX2"
+		},
+		{
+			"Id": "ParamHairFront148",
+			"GroupId": "ParamGroup8",
+			"Name": "胸元フリルX3"
+		},
+		{
+			"Id": "ParamHairFront149",
+			"GroupId": "ParamGroup8",
+			"Name": "胸元フリルX3"
+		},
+		{
+			"Id": "ParamHairFront142",
+			"GroupId": "ParamGroup8",
+			"Name": "首X"
+		},
+		{
+			"Id": "ParamHairFront143",
+			"GroupId": "ParamGroup8",
+			"Name": "首X"
+		},
+		{
+			"Id": "ParamHairFront120",
+			"GroupId": "ParamGroup8",
+			"Name": "頭リボンX１"
+		},
+		{
+			"Id": "ParamHairFront119",
+			"GroupId": "ParamGroup8",
+			"Name": "頭リボンX１"
+		},
+		{
+			"Id": "ParamHairFront121",
+			"GroupId": "ParamGroup8",
+			"Name": "頭リボンX2"
+		},
+		{
+			"Id": "ParamHairFront122",
+			"GroupId": "ParamGroup8",
+			"Name": "頭リボンX2"
+		},
+		{
+			"Id": "ParamHairFront124",
+			"GroupId": "ParamGroup8",
+			"Name": "頭リボンX2"
+		},
+		{
+			"Id": "ParamHairFront123",
+			"GroupId": "ParamGroup8",
+			"Name": "頭リボンX3"
+		},
+		{
+			"Id": "ParamHairFront125",
+			"GroupId": "ParamGroup8",
+			"Name": "頭リボンX3"
+		},
+		{
+			"Id": "ParamHairFront126",
+			"GroupId": "ParamGroup8",
+			"Name": "頭リボンX3"
+		},
+		{
+			"Id": "ParamHairFront127",
+			"GroupId": "ParamGroup8",
+			"Name": "胸リボンX１"
+		},
+		{
+			"Id": "ParamHairFront128",
+			"GroupId": "ParamGroup8",
+			"Name": "胸リボンX１"
+		},
+		{
+			"Id": "ParamHairFront129",
+			"GroupId": "ParamGroup8",
+			"Name": "胸リボンX2"
+		},
+		{
+			"Id": "ParamHairFront132",
+			"GroupId": "ParamGroup8",
+			"Name": "胸リボンX2"
+		},
+		{
+			"Id": "ParamHairFront133",
+			"GroupId": "ParamGroup8",
+			"Name": "胸リボンX2"
+		},
+		{
+			"Id": "ParamHairFront131",
+			"GroupId": "ParamGroup8",
+			"Name": "胸リボンX3"
+		},
+		{
+			"Id": "ParamHairFront134",
+			"GroupId": "ParamGroup8",
+			"Name": "胸リボンX3"
+		},
+		{
+			"Id": "ParamHairFront130",
+			"GroupId": "ParamGroup8",
+			"Name": "胸リボンX4"
+		},
+		{
+			"Id": "ParamHairFront135",
+			"GroupId": "ParamGroup8",
+			"Name": "胸リボンX4"
+		},
+		{
+			"Id": "ParamHairFront136",
+			"GroupId": "ParamGroup8",
+			"Name": "胸リボンX4"
+		},
+		{
+			"Id": "ParamHairFront137",
+			"GroupId": "ParamGroup8",
+			"Name": "腰リボンX１"
+		},
+		{
+			"Id": "ParamHairFront138",
+			"GroupId": "ParamGroup8",
+			"Name": "腰リボンX１"
+		},
+		{
+			"Id": "ParamHairFront139",
+			"GroupId": "ParamGroup8",
+			"Name": "腰リボンX2"
+		},
+		{
+			"Id": "ParamHairFront140",
+			"GroupId": "ParamGroup8",
+			"Name": "腰リボンX2"
+		},
+		{
+			"Id": "ParamHairFront141",
+			"GroupId": "ParamGroup8",
+			"Name": "腰リボンX2"
+		},
+		{
+			"Id": "ParamHairFront176",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れ中間Y"
+		},
+		{
+			"Id": "ParamHairFront252",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れ中間Y"
+		},
+		{
+			"Id": "ParamHairFront261",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れ中間Y"
+		},
+		{
+			"Id": "ParamHairFront68",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY1"
+		},
+		{
+			"Id": "ParamHairFront69",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY1"
+		},
+		{
+			"Id": "ParamHairFront70",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY1"
+		},
+		{
+			"Id": "ParamHairFront71",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY2"
+		},
+		{
+			"Id": "ParamHairFront72",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY2"
+		},
+		{
+			"Id": "ParamHairFront73",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY2"
+		},
+		{
+			"Id": "ParamHairFront74",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY3"
+		},
+		{
+			"Id": "ParamHairFront75",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY3"
+		},
+		{
+			"Id": "ParamHairFront76",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY3"
+		},
+		{
+			"Id": "ParamHairFront77",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY4"
+		},
+		{
+			"Id": "ParamHairFront78",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY4"
+		},
+		{
+			"Id": "ParamHairFront79",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY4"
+		},
+		{
+			"Id": "ParamHairFront80",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY5"
+		},
+		{
+			"Id": "ParamHairFront81",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY5"
+		},
+		{
+			"Id": "ParamHairFront82",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY5"
+		},
+		{
+			"Id": "ParamHairFront83",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY6"
+		},
+		{
+			"Id": "ParamHairFront84",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY6"
+		},
+		{
+			"Id": "ParamHairFront85",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY6"
+		},
+		{
+			"Id": "ParamHairFront86",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY6"
+		},
+		{
+			"Id": "ParamHairFront87",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY7"
+		},
+		{
+			"Id": "ParamHairFront88",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY7"
+		},
+		{
+			"Id": "ParamHairFront89",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY7"
+		},
+		{
+			"Id": "ParamHairFront90",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY7"
+		},
+		{
+			"Id": "ParamHairFront91",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY8"
+		},
+		{
+			"Id": "ParamHairFront92",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY8"
+		},
+		{
+			"Id": "ParamHairFront93",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY8"
+		},
+		{
+			"Id": "ParamHairFront94",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY9"
+		},
+		{
+			"Id": "ParamHairFront95",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY9"
+		},
+		{
+			"Id": "ParamHairFront96",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY9"
+		},
+		{
+			"Id": "ParamHairFront97",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY10"
+		},
+		{
+			"Id": "ParamHairFront98",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY10"
+		},
+		{
+			"Id": "ParamHairFront99",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY10"
+		},
+		{
+			"Id": "ParamHairFront100",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY10"
+		},
+		{
+			"Id": "ParamHairFront101",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY11"
+		},
+		{
+			"Id": "ParamHairFront102",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY11"
+		},
+		{
+			"Id": "ParamHairFront103",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY11"
+		},
+		{
+			"Id": "ParamHairFront104",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY12"
+		},
+		{
+			"Id": "ParamHairFront105",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY12"
+		},
+		{
+			"Id": "ParamHairFront106",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY12"
+		},
+		{
+			"Id": "ParamHairFront107",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY13"
+		},
+		{
+			"Id": "ParamHairFront108",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY13"
+		},
+		{
+			"Id": "ParamHairFront109",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY13"
+		},
+		{
+			"Id": "ParamHairFront110",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY14"
+		},
+		{
+			"Id": "ParamHairFront111",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY14"
+		},
+		{
+			"Id": "ParamHairFront112",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY14"
+		},
+		{
+			"Id": "ParamHairFront113",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY15"
+		},
+		{
+			"Id": "ParamHairFront114",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY15"
+		},
+		{
+			"Id": "ParamHairFront115",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY15"
+		},
+		{
+			"Id": "ParamHairFront116",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY16"
+		},
+		{
+			"Id": "ParamHairFront117",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY16"
+		},
+		{
+			"Id": "ParamHairFront118",
+			"GroupId": "ParamGroup7",
+			"Name": "髪揺れY16"
+		},
+		{
+			"Id": "ParamHairFront173",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れ中間X"
+		},
+		{
+			"Id": "ParamHairFront174",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れ中間X"
+		},
+		{
+			"Id": "ParamHairFront175",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れ中間X"
+		},
+		{
+			"Id": "ParamHairFront2",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX1"
+		},
+		{
+			"Id": "ParamHairFront3",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX1"
+		},
+		{
+			"Id": "ParamHairFront6",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX1"
+		},
+		{
+			"Id": "ParamHairFront5",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX2"
+		},
+		{
+			"Id": "ParamHairFront7",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX2"
+		},
+		{
+			"Id": "ParamHairFront8",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX2"
+		},
+		{
+			"Id": "ParamHairFront4",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX3"
+		},
+		{
+			"Id": "ParamHairFront9",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX3"
+		},
+		{
+			"Id": "ParamHairFront10",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX3"
+		},
+		{
+			"Id": "ParamHairFront11",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX4"
+		},
+		{
+			"Id": "ParamHairFront12",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX4"
+		},
+		{
+			"Id": "ParamHairFront13",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX4"
+		},
+		{
+			"Id": "ParamHairFront14",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX5"
+		},
+		{
+			"Id": "ParamHairFront15",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX5"
+		},
+		{
+			"Id": "ParamHairFront16",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX5"
+		},
+		{
+			"Id": "ParamHairFront17",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX6"
+		},
+		{
+			"Id": "ParamHairFront18",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX6"
+		},
+		{
+			"Id": "ParamHairFront19",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX6"
+		},
+		{
+			"Id": "ParamHairFront20",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX6"
+		},
+		{
+			"Id": "ParamHairFront21",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX7"
+		},
+		{
+			"Id": "ParamHairFront23",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX7"
+		},
+		{
+			"Id": "ParamHairFront22",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX7"
+		},
+		{
+			"Id": "ParamHairFront24",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX7"
+		},
+		{
+			"Id": "ParamHairFront29",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX7"
+		},
+		{
+			"Id": "ParamHairFront25",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX8"
+		},
+		{
+			"Id": "ParamHairFront26",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX8"
+		},
+		{
+			"Id": "ParamHairFront27",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX8"
+		},
+		{
+			"Id": "ParamHairFront28",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX8"
+		},
+		{
+			"Id": "ParamHairFront30",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX9"
+		},
+		{
+			"Id": "ParamHairFront31",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX9"
+		},
+		{
+			"Id": "ParamHairFront32",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX9"
+		},
+		{
+			"Id": "ParamHairFront33",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX9"
+		},
+		{
+			"Id": "ParamHairFront34",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX10"
+		},
+		{
+			"Id": "ParamHairFront35",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX10"
+		},
+		{
+			"Id": "ParamHairFront36",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX10"
+		},
+		{
+			"Id": "ParamHairFront37",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX11"
+		},
+		{
+			"Id": "ParamHairFront39",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX11"
+		},
+		{
+			"Id": "ParamHairFront38",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX11"
+		},
+		{
+			"Id": "ParamHairFront40",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX11"
+		},
+		{
+			"Id": "ParamHairFront41",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX11"
+		},
+		{
+			"Id": "ParamHairFront42",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX12"
+		},
+		{
+			"Id": "ParamHairFront43",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX12"
+		},
+		{
+			"Id": "ParamHairFront44",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX12"
+		},
+		{
+			"Id": "ParamHairFront45",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX12"
+		},
+		{
+			"Id": "ParamHairFront46",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX13"
+		},
+		{
+			"Id": "ParamHairFront47",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX13"
+		},
+		{
+			"Id": "ParamHairFront48",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX13"
+		},
+		{
+			"Id": "ParamHairFront49",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX13"
+		},
+		{
+			"Id": "ParamHairFront50",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX14"
+		},
+		{
+			"Id": "ParamHairFront51",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX14"
+		},
+		{
+			"Id": "ParamHairFront52",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX14"
+		},
+		{
+			"Id": "ParamHairFront53",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX15"
+		},
+		{
+			"Id": "ParamHairFront54",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX15"
+		},
+		{
+			"Id": "ParamHairFront55",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX15"
+		},
+		{
+			"Id": "ParamHairFront56",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX16"
+		},
+		{
+			"Id": "ParamHairFront57",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX16"
+		},
+		{
+			"Id": "ParamHairFront58",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX16"
+		},
+		{
+			"Id": "ParamHairFront59",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX17"
+		},
+		{
+			"Id": "ParamHairFront60",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX17"
+		},
+		{
+			"Id": "ParamHairFront61",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX17"
+		},
+		{
+			"Id": "ParamHairFront62",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX18"
+		},
+		{
+			"Id": "ParamHairFront63",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX18"
+		},
+		{
+			"Id": "ParamHairFront64",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX18"
+		},
+		{
+			"Id": "ParamHairFront65",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX19"
+		},
+		{
+			"Id": "ParamHairFront66",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX19"
+		},
+		{
+			"Id": "ParamHairFront67",
+			"GroupId": "ParamGroup6",
+			"Name": "髪揺れX19"
+		},
+		{
+			"Id": "ParamHairSide",
+			"GroupId": "",
+			"Name": "髪揺れ　横"
+		},
+		{
+			"Id": "ParamHairBack",
+			"GroupId": "",
+			"Name": "髪揺れ　後"
+		}
+	],
+	"ParameterGroups": [
+		{
+			"Id": "ParamGroup",
+			"GroupId": "",
+			"Name": "目"
+		},
+		{
+			"Id": "ParamGroup2",
+			"GroupId": "",
+			"Name": "眉"
+		},
+		{
+			"Id": "ParamGroup3",
+			"GroupId": "",
+			"Name": "差分"
+		},
+		{
+			"Id": "ParamGroup4",
+			"GroupId": "",
+			"Name": "口"
+		},
+		{
+			"Id": "ParamGroup5",
+			"GroupId": "",
+			"Name": "呼吸"
+		},
+		{
+			"Id": "ParamGroup10",
+			"GroupId": "",
+			"Name": "物理演算　体"
+		},
+		{
+			"Id": "ParamGroup9",
+			"GroupId": "",
+			"Name": "物理演算　服Y"
+		},
+		{
+			"Id": "ParamGroup8",
+			"GroupId": "",
+			"Name": "物理演算　服X"
+		},
+		{
+			"Id": "ParamGroup7",
+			"GroupId": "",
+			"Name": "物理演算　髪Y"
+		},
+		{
+			"Id": "ParamGroup6",
+			"GroupId": "",
+			"Name": "物理演算　髪X"
+		}
+	],
+	"Parts": [
+		{
+			"Id": "Part40",
+			"Name": "物理演算　体"
+		},
+		{
+			"Id": "Part42",
+			"Name": "XY体"
+		},
+		{
+			"Id": "Part41",
+			"Name": "XY頭部"
+		},
+		{
+			"Id": "Part43",
+			"Name": "差分"
+		},
+		{
+			"Id": "Part37",
+			"Name": "体Z"
+		},
+		{
+			"Id": "Part36",
+			"Name": "頭部Z"
+		},
+		{
+			"Id": "Part39",
+			"Name": "物理演算　服"
+		},
+		{
+			"Id": "Part38",
+			"Name": "物理演算　髪"
+		},
+		{
+			"Id": "Part35",
+			"Name": "呼吸"
+		},
+		{
+			"Id": "Part",
+			"Name": "フォルダー 28"
+		},
+		{
+			"Id": "Part2",
+			"Name": "右ポンポン"
+		},
+		{
+			"Id": "Part4",
+			"Name": "左ポンポン"
+		},
+		{
+			"Id": "Part6",
+			"Name": "腰に手を当てる"
+		},
+		{
+			"Id": "Part7",
+			"Name": "左ハート"
+		},
+		{
+			"Id": "Part8",
+			"Name": "右ハート"
+		},
+		{
+			"Id": "Part9",
+			"Name": "手を振る"
+		},
+		{
+			"Id": "Part10",
+			"Name": "ピース"
+		},
+		{
+			"Id": "Part11",
+			"Name": "髪"
+		},
+		{
+			"Id": "Part12",
+			"Name": "髪投影"
+		},
+		{
+			"Id": "Part13",
+			"Name": "髪投影"
+		},
+		{
+			"Id": "Part15",
+			"Name": "表情"
+		},
+		{
+			"Id": "Part44",
+			"Name": "後ろ髪"
+		},
+		{
+			"Id": "Part16",
+			"Name": "胸リボン"
+		},
+		{
+			"Id": "Part17",
+			"Name": "首リボン"
+		},
+		{
+			"Id": "Part18",
+			"Name": "腰上腕"
+		},
+		{
+			"Id": "Part19",
+			"Name": "左ハート上腕"
+		},
+		{
+			"Id": "Part20",
+			"Name": "右ハート上腕"
+		},
+		{
+			"Id": "Part22",
+			"Name": "右ポンポン上腕"
+		},
+		{
+			"Id": "Part23",
+			"Name": "左ポンポン上腕"
+		},
+		{
+			"Id": "Part21",
+			"Name": "ピース、手を振る上腕"
+		},
+		{
+			"Id": "Part24",
+			"Name": "右腕通常"
+		},
+		{
+			"Id": "Part25",
+			"Name": "左腕通常"
+		},
+		{
+			"Id": "Part26",
+			"Name": "スカート茶色フリル"
+		},
+		{
+			"Id": "Part27",
+			"Name": "襟裏"
+		},
+		{
+			"Id": "Part28",
+			"Name": "足フリル表"
+		},
+		{
+			"Id": "Part29",
+			"Name": "足フリル裏"
+		},
+		{
+			"Id": "Part30",
+			"Name": "髪リボン"
+		},
+		{
+			"Id": "Part31",
+			"Name": "左後ろ布"
+		},
+		{
+			"Id": "Part32",
+			"Name": "右後ろ布"
+		},
+		{
+			"Id": "Part33",
+			"Name": "後ろ髪"
+		},
+		{
+			"Id": "Part3",
+			"Name": "右ポンポン"
+		},
+		{
+			"Id": "Part5",
+			"Name": "左ポンポン"
+		},
+		{
+			"Id": "Part34",
+			"Name": "口内"
+		}
+	],
+	"CombinedParameters": [
+		[
+			"ParamAngleX",
+			"ParamAngleY"
+		],
+		[
+			"ParamBodyAngleX",
+			"ParamBodyAngleY"
+		],
+		[
+			"ParamEyeBallX",
+			"ParamEyeBallY"
+		]
+	]
+}

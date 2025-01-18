@@ -1,0 +1,63 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "merotan.moc3",
+		"Textures": [
+			"merotan.4096/texture_00.png",
+			"merotan.4096/texture_01.png"
+		],
+		"Physics": "merotan.physics3.json",
+		"DisplayInfo": "merotan.cdi3.json",
+		"Motions": {
+			"Idle": [
+				{
+					"File": "motion/1.motion3.json"
+				},
+				{
+					"File": "motion/2.motion3.json"
+				},
+				{
+					"File": "motion/3.motion3.json"
+				},
+				{
+					"File": "motion/4.motion3.json"
+				},
+				{
+					"File": "motion/5.motion3.json"
+				},
+				{
+					"File": "motion/6.motion3.json"
+				},
+				{
+					"File": "motion/7.motion3.json"
+				},
+				{
+					"File": "motion/8.motion3.json"
+				},
+				{
+					"File": "motion/9.motion3.json"
+				}
+			],
+			"LipSync":[
+				{
+					"File": "motion/16.motion3.json"
+				},
+				{
+					"File": "motion/17.motion3.json"
+				}
+			]
+		}
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": ["ParamMouthOpenY"]
+		},
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": []
+		}
+	]
+}

@@ -536,14 +536,19 @@ public update(): void {
   }
 
   // ドラッグによる顔の向きの調整
-  this._model.addParameterValueById(this._idParamAngleX, this._dragX * 30);
-  this._model.addParameterValueById(this._idParamAngleY, this._dragY * 30);
+  this._model.addParameterValueById(this._idParamAngleX, this._dragX * 45);
+  this._model.addParameterValueById(this._idParamAngleY, this._dragY * 45);
   this._model.addParameterValueById(this._idParamAngleZ, this._dragX * this._dragY * -30);
 
+  this._model.addParameterValueById(this._idParamEyeBallX, this._dragX * 2.0);
+  this._model.addParameterValueById(this._idParamEyeBallY, this._dragY * 2.0);
+
+  this._model.addParameterValueById(this._idParamBodyAngleX, this._dragX * 10);
   // リップシンク値をモーションの口の動きに加算して上書き
   if (this._lipSyncValue > 0) {
     for (let i = 0; i < this._lipSyncIds.getSize(); ++i) {
       const lipSyncParamId = this._lipSyncIds.at(i);
+      console.log(this._lipSyncValue);
 
       // モーションで設定された現在の口の値を取得
       const currentMouthValue = this._model.getParameterValueById(lipSyncParamId);
@@ -588,6 +593,11 @@ public update(): void {
     priority: number,
     onFinishedMotionHandler?: FinishedMotionCallback
   ): CubismMotionQueueEntryHandle {
+    // 前のモーションの影響を排除
+    this._motionManager.stopAllMotions(); // モーションを停止
+    this._model.loadParameters(); // 前回保存された状態をロード
+    this._model.initialize(); // すべてのパラメータを初期化（重要）
+  
     if (priority == LAppDefine.PriorityForce) {
       this._motionManager.setReservePriority(priority);
     } else if (!this._motionManager.reserveMotion(priority)) {
@@ -596,14 +606,14 @@ public update(): void {
       }
       return InvalidMotionQueueEntryHandleValue;
     }
-
+  
     const motionFileName = this._modelSetting.getMotionFileName(group, no);
-
-    // ex) idle_0
+  
+    // モーション名を生成
     const name = `${group}_${no}`;
     let motion: CubismMotion = this._motions.getValue(name) as CubismMotion;
     let autoDelete = false;
-
+  
     if (motion == null) {
       fetch(`${this._modelHomeDir}${motionFileName}`)
         .then(response => {
@@ -623,49 +633,57 @@ public update(): void {
             null,
             onFinishedMotionHandler
           );
-
+  
           if (motion == null) {
             return;
           }
-
+  
           let fadeTime: number = this._modelSetting.getMotionFadeInTimeValue(
             group,
             no
           );
-
+  
           if (fadeTime >= 0.0) {
             motion.setFadeInTime(fadeTime);
           }
-
+  
           fadeTime = this._modelSetting.getMotionFadeOutTimeValue(group, no);
           if (fadeTime >= 0.0) {
             motion.setFadeOutTime(fadeTime);
           }
-
+  
           motion.setEffectIds(this._eyeBlinkIds, this._lipSyncIds);
-          autoDelete = true; // 終了時にメモリから削除
+          autoDelete = true; // 終了時にメモリ解放
         });
     } else {
       motion.setFinishedMotionHandler(onFinishedMotionHandler);
     }
-
-    //voice
+  
+    // ボイス再生
     const voice = this._modelSetting.getMotionSoundFileName(group, no);
     if (voice.localeCompare('') != 0) {
       let path = voice;
       path = this._modelHomeDir + path;
       this._wavFileHandler.start(path);
     }
-
+  
     if (this._debugMode) {
-      LAppPal.printMessage(`[APP]start motion: [${group}_${no}`);
+      LAppPal.printMessage(`[APP]start motion: [${group}_${no}]`);
     }
-    return this._motionManager.startMotionPriority(
+  
+    // モーション開始
+    const motionHandle = this._motionManager.startMotionPriority(
       motion,
       autoDelete,
       priority
     );
+  
+    // モーション開始後、モデルのパラメータを再リセット（安全措置）
+    this._model.saveParameters();
+  
+    return motionHandle;
   }
+  
 
   /**
    * ランダムに選ばれたモーションの再生を開始する。
