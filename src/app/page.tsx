@@ -30,12 +30,12 @@ export default function Home() {
           </div>
         </Link>
 
-        <Link href="/profile" className="text-lg font-medium group lg:rounded-full lg:w-[200px] lg:h-[200px] lg:bg-[#8fbc8f] lg:text-white flex items-center justify-center">
+        <Link href="/diaries" className="text-lg font-medium group lg:rounded-full lg:w-[200px] lg:h-[200px] lg:bg-[#8fbc8f] lg:text-white flex items-center justify-center">
           <div className="flex flex-col items-center justify-center text-lg">
             <span className="material-icons" style={{ fontSize: '48px' }}>
-              person
+            auto_stories
             </span>
-            <p>プロフィール</p>
+            <p>日記</p>
             <div className="lg:hidden w-full h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
           </div>
         </Link>
