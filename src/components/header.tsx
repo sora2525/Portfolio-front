@@ -3,23 +3,22 @@ import { useRecoilState } from "recoil";
 import { authState } from "@/lib/atom/authAtom";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation"; 
 
 export default function PageHeader() {
     const { logout } = useAuth();
     const [auth, setAuth] = useRecoilState(authState);
+    const router = useRouter();
 
     const handleLogout = async () => {
         try {
-            // Rails API のログアウト処理
             await logout();
     
-            // Auth.js のセッション終了
             await signOut({ redirect: false });
     
-            // 状態をリセット
             setAuth({ isAuthenticated: false, user: null });
     
-            // 認証不要なページへリダイレクト
+            router.push("/")
         } catch (err) {
             console.error("ログアウト中にエラーが発生しました:", err);
         }
@@ -34,6 +33,9 @@ export default function PageHeader() {
             </div>
             {auth.isAuthenticated && auth.user ? (
                 <div className="flex justify-end items-center">
+                    <Link href="/profile" className="text-white font-bold lg:ml-6 whitespace-nowrap mr-3">
+                     プロフィール
+                    </Link>
                     <button onClick={handleLogout} className="text-white font-bold flex">
                         <span className="material-icons">
                             logout

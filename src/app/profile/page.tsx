@@ -7,7 +7,7 @@ import Link from "next/link";
 import LineLinkButton from "@/components/LineLink";
 
 export default function Profile() {
-    const [auth,] = useRecoilState(authState);
+    const [auth] = useRecoilState(authState);
     const login = useRequireAuth();
     const { passwordReset } = useAuth();
 
@@ -17,9 +17,8 @@ export default function Profile() {
         }
     };
 
-
     if (!auth.isAuthenticated) {
-        return null; // ログインチェック中は何も描画しない
+        return null;
     }
 
     return (
@@ -35,20 +34,42 @@ export default function Profile() {
 
                 {auth.user ? (
                     <div className="space-y-4">
+                        {/* アバター画像の表示 */}
+                        {auth.user.avatar_url && (
+                            <div className="flex justify-center mb-4 mt-4 w-32 h-32 rounded-full overflow-hidden mx-auto border-2 border-teal-500">
+                                <img src={auth.user.avatar_url} alt="" />
+                            </div>
+                        )}
+
                         <p className="text-lg font-medium text-gray-700">名前: {auth.user.name}</p>
-                        <p className="text-lg font-medium text-gray-700">メールアドレス: {auth.user.email}</p>
+                        {auth.user.email ? (
+                            <>
+                                <p className="text-lg font-medium text-gray-700">メールアドレス: {auth.user.email}</p>
+                                <button
+                                    onClick={handleClick}
+                                    className="w-full py-3 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 mt-6"
+                                >
+                                    パスワードリセット
+                                </button>
+                            </>
+
+                        ) : (
+                            <div></div>
+                        )}
                     </div>
                 ) : (
                     <p className="text-red-600 text-center">ユーザー情報が見つかりません。</p>
                 )}
 
                 <div className="text-center">
-                    <button
-                        onClick={handleClick}
-                        className="w-full py-3 bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 mt-6"
-                    >
-                        パスワードリセット
-                    </button>
+                    <div className="flex justify-center mt-6">
+                        <Link
+                            href="/profile/edit"
+                            className="inline-block px-6 py-3 text-white bg-teal-600 rounded-md shadow hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all"
+                        >
+                            プロフィールを更新
+                        </Link>
+                    </div>
                     <div className="pt-3">
                         <LineLinkButton />
                     </div>

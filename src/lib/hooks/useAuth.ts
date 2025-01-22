@@ -259,5 +259,53 @@ export const useAuth = () => {
         }
     }
 
-    return { success, error, loading, signUp, signIn, logout, checkAuthStatus, passwordReset, resetPasswordConfirm, loginWithGoogle, loginWithLine,lineLink };
+    const updateProfile = async (name: string, avatar?: File) => {
+        setLoading(true);
+        setError(null);
+        setSuccess(null);
+    
+        const accessToken = Cookies.get("access-token");
+        const client = Cookies.get("client");
+        const uid = Cookies.get("uid");
+    
+        if (!accessToken || !client || !uid) {
+            setError("ログイン情報が不足しています。");
+            setLoading(false);
+            return;
+        }
+    
+        try {
+            const formData = new FormData();
+            formData.append("user[name]", name);
+            if (avatar) {
+                formData.append("user[avatar]", avatar); 
+            }
+    
+       
+            const response = await axiosInstance.put("/auth/profile", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "access-token": accessToken,
+                    client: client,
+                    uid: uid,
+                },
+            });
+    
+            if (response.status === 200) {
+                setAuth((prevState) => ({
+                    ...prevState,
+                    user: response.data.user, 
+                }));
+                setSuccess("プロフィールが更新されました！");
+            } else {
+                setError("プロフィールの更新に失敗しました。");
+            }
+        } catch (err: any) {
+            setError(err.response?.data?.errors?.[0] || "プロフィール更新中にエラーが発生しました。");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return { success, error, loading, signUp, signIn, logout, checkAuthStatus, passwordReset, resetPasswordConfirm, loginWithGoogle, loginWithLine,lineLink,updateProfile };
 };

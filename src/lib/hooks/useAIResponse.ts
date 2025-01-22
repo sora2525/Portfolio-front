@@ -10,7 +10,7 @@ export const useAIResponse = () => {
     async (
       question: string,
       messages: MessageType[],
-      mode: 'chat' | 'praise', // モード: チャット or 褒める
+      mode: 'chat' | 'praise' | 'comment', 
       affinity: number // 好感度
     ): Promise<string | null> => {
       setLoading(true);
