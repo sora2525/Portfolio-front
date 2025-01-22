@@ -3,16 +3,20 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useDiaries } from "@/lib/hooks/useDiaries";
 import { DiaryItem } from "@/components/diary/DiaryItem";
+import { useRequireAuth } from '@/lib/hooks/useRequireAuth';
+
 
 export default function Diary() {
   const { diaries, error, getDiaries, getPublicDiaries, destroyDiary } = useDiaries();
   const [mode, setMode] = useState<"mine" | "public">("mine");
+  const auth = useRequireAuth();
 
   useEffect(() => {
     const fetchData = async () => {
       await getDiaries();
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); 
 
   const handleShowMine = async () => {
