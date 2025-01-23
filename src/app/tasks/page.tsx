@@ -3,19 +3,18 @@ import React, { useEffect, useState } from "react";
 import { useTasks } from "@/lib/hooks/useTasks";
 import TaskItem from "@/components/task/TaskItem";
 import { useTags } from "@/lib/hooks/useTags";
-import TaskForm from "@/components/task/TaskForm";
 import { useRequireAuth } from '@/lib/hooks/useRequireAuth';
+import TaskForm from "@/components/task/TaskForm";
 import Link from "next/link";
 
 export default function Task() {
     const { getTasks, createTask, tasks, error } = useTasks();
     const { getTags, tags } = useTags();
-    const [isCreating, setIsCreating] = useState<boolean>(false);
     const [sortBy, setSortBy] = useState<string>("created_at");
     const [order, setOrder] = useState<string>("desc");
     const [selectedTag, setSelectedTag] = useState<string>("");
     const [status, setStatus] = useState<string>("all");
-    const [selectedTask, setSelectedTask] = useState(null);
+    const [isCreating, setIsCreating] = useState<boolean>(false); // フォーム表示の状態を管理
     const auth = useRequireAuth();
 
     useEffect(() => {
@@ -24,29 +23,21 @@ export default function Task() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortBy, order, selectedTag, status]);
 
-    const handleCreateToggle = () => {
-        setIsCreating(!isCreating);
-        setSelectedTask(null);
-    };
-
-    const handleFormSubmit = (title, description, dueDate, priority, reminderTime, selectedTags) => {
-        if (title) {
-            createTask(title, description, dueDate, priority, reminderTime, selectedTags).then(() => {
-                getTasks(sortBy, order, selectedTag, status);
-            });
-        }
-        setIsCreating(false);
-    };
-
     if (!auth.isAuthenticated) {
         return null;
-      }
+    }
+
+    const handleFormSubmit = async (title: string, description: string, dueDate: string, priority: number, reminderTime: string, tags: number[]) => {
+        await createTask(title, description, dueDate, priority, reminderTime, tags);
+        setIsCreating(false); // フォームを非表示にする
+        getTasks(sortBy, order, selectedTag, status); // タスク一覧を更新
+    };
 
     return (
         <div className="pointer-events-auto flex flex-col items-center justify-end w-full h-screen">
             <div className="bg-[rgba(243,244,246,0.85)] w-[95%] h-[90%]  p-3 rounded-lg shadow-lg mb-2">
                 <div className="flex w-full justify-between items-center">
-                    <Link href="/"><span className="material-icons text-[#008080]" style={{ fontSize: '42px' }} >
+                    <Link href="/"><span className="material-icons text-[#008080]" style={{ fontSize: '42px' }}>
                         reply
                     </span></Link>
                     <h1 className="sm:text-2xl text-xl font-semibold sm:mb-4 mb-2 text-center mx-auto">タスク一覧</h1>
@@ -54,20 +45,20 @@ export default function Task() {
 
                 {/* 状態の選択タブ */}
                 <div className="flex w-full font-semibold lg:text-lg space-x-6">
-                    <div 
-                        onClick={() => setStatus("all")} 
+                    <div
+                        onClick={() => setStatus("all")}
                         className={`w-1/3 text-center ${status === "all" ? "border-b-4 border-red-500" : ""} cursor-pointer`}
                     >
                         <p>All</p>
                     </div>
-                    <div 
-                        onClick={() => setStatus("incomplete")} 
+                    <div
+                        onClick={() => setStatus("incomplete")}
                         className={`w-1/3 text-center ${status === "incomplete" ? "border-b-4 border-red-500" : ""} cursor-pointer`}
                     >
                         <p>Incomplete</p>
                     </div>
-                    <div 
-                        onClick={() => setStatus("completed")} 
+                    <div
+                        onClick={() => setStatus("completed")}
                         className={`w-1/3 text-center ${status === "completed" ? "border-b-4 border-red-500" : ""} cursor-pointer`}
                     >
                         <p>Completed</p>
@@ -119,10 +110,11 @@ export default function Task() {
                     </ul>
                 </div>
 
+                {/* 新規作成ボタン */}
                 <div className="flex justify-center xxs:mt-5 mt-2 sm:text-2xl">
                     <button
-                        onClick={handleCreateToggle}
-                        className="text-[#008080] justify-center items-center rounded text-2xl flex flex-col group"
+                        onClick={() => setIsCreating(true)} // フォームを表示
+                        className="text-[#008080] justify-center items-center rounded text-2xl flex flex-col group cursor-pointer"
                     >
                         <div className="flex items-center">
                             <span className="material-icons" style={{ fontSize: '38px' }}>
@@ -134,13 +126,17 @@ export default function Task() {
                     </button>
                 </div>
             </div>
-            <TaskForm
-                onSubmit={handleFormSubmit}
-                tags={tags}
-                isVisible={isCreating}
-                editMode={false}
-                selectedTask={selectedTask}
-            />
+
+            {/* 新規作成フォームのモーダル表示 */}
+            {isCreating && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                        <TaskForm
+                            onSubmit={handleFormSubmit}
+                            onCancel={() => setIsCreating(false)} // フォームを閉じる
+                            tags={tags}
+                        />
+                    </div>
+            )}
         </div>
     );
 }
