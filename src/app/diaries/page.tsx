@@ -19,7 +19,7 @@ export default function Diary() {
       await getDiaries();
     };
     fetchData();
-  }, [getDiaries]);
+  }, []);
 
   const handleShowMine = async () => {
     await getDiaries();
