@@ -19,6 +19,7 @@ export default function Diary() {
       await getDiaries();
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleShowMine = async () => {
@@ -54,9 +55,8 @@ export default function Diary() {
         {/* 自分の日記ボタン */}
         <button
           onClick={handleShowMine}
-          className={`px-4 py-2 flex-1 text-center relative ${
-            mode === "mine" ? "text-blue-600 font-bold" : "text-gray-600"
-          }`}
+          className={`px-4 py-2 flex-1 text-center relative ${mode === "mine" ? "text-blue-600 font-bold" : "text-gray-600"
+            }`}
         >
           自分の日記
           {mode === "mine" && (
@@ -67,9 +67,8 @@ export default function Diary() {
         {/* 公開日記ボタン */}
         <button
           onClick={handleShowPublic}
-          className={`px-4 py-2 flex-1 text-center relative ${
-            mode === "public" ? "text-green-600 font-bold" : "text-gray-600"
-          }`}
+          className={`px-4 py-2 flex-1 text-center relative ${mode === "public" ? "text-green-600 font-bold" : "text-gray-600"
+            }`}
         >
           公開日記
           {mode === "public" && (
@@ -109,7 +108,7 @@ export default function Diary() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <DiaryForm
             onCancel={() => setIsFormVisible(false)}
-            onSubmit={handleFormSubmit} 
+            onSubmit={handleFormSubmit}
           />
         </div>
       )}
