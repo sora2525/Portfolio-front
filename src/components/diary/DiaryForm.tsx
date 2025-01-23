@@ -1,18 +1,19 @@
 "use client";
 import React, { useState } from "react";
 import { useDiaries } from "@/lib/hooks/useDiaries";
-import { useRouter } from "next/navigation";
 import { useAIResponse } from "@/lib/hooks/useAIResponse";
 
-export default function DiaryForm() {
+type DiaryFormProps = {
+  onCancel: () => void; // フォームを閉じるためのキャンセル関数
+  onSubmit: () => void; // 投稿成功時に呼び出される関数
+};
+
+export default function DiaryForm({ onCancel, onSubmit }: DiaryFormProps) {
   const { createDiary, error } = useDiaries();
-  const router = useRouter(); 
-  const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [isPublic, setIsPublic] = useState<boolean>(false);
-  const [characterComment, setCharacterComment] = useState<string>("");
   const [images, setImages] = useState<File[]>([]);
-  const {generateResponse} = useAIResponse();
+  const { generateResponse } = useAIResponse();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -23,36 +24,42 @@ export default function DiaryForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const character_comment = await generateResponse(
+      const characterComment = await generateResponse(
         `${content}`,
         [],
         "comment",
         50
-    );
+      );
       await createDiary({
-        title,
+        title: "",
         content,
         is_public: isPublic,
-        character_comment: character_comment,
-        images
+        character_comment: characterComment,
+        images,
       });
-      setTitle("");
       setContent("");
       setIsPublic(false);
-      setCharacterComment("");
       setImages([]);
-      router.push("/diaries");
+      onSubmit(); 
     } catch (err) {
       console.error("投稿に失敗しました", err);
     }
   };
 
   return (
-    <form 
-      onSubmit={handleSubmit} 
-      className="max-w-md mx-auto p-6 mt-20 space-y-4 bg-white shadow rounded pointer-events-auto"
+    <form
+      onSubmit={handleSubmit}
+      className="w-[95%] max-w-[500px]  mx-auto p-6 space-y-4 bg-white shadow rounded pointer-events-auto relative"
     >
-      <h2 className="text-2xl font-bold mb-4">新しい日記を作成</h2>
+      <button
+        onClick={onCancel}
+        type="button"
+        className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+      >
+        <span className="material-icons">close</span>
+      </button>
+
+      <h2 className="text-xl font-bold mb-4">日記を作成</h2>
 
       <div>
         <label className="block mb-1 font-semibold">内容:</label>
@@ -74,7 +81,6 @@ export default function DiaryForm() {
         />
       </div>
 
-
       <div>
         <label className="block mb-1 font-semibold">画像:</label>
         <input
@@ -87,8 +93,8 @@ export default function DiaryForm() {
 
       {error && <div className="text-red-500">{error}</div>}
 
-      <button 
-        type="submit" 
+      <button
+        type="submit"
         className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition-colors"
       >
         日記を作成

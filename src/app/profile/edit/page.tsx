@@ -47,7 +47,7 @@ export default function ProfileEdit() {
 
     return (
         <div className="flex justify-center items-center h-screen ">
-            <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md pointer-events-auto">
+            <div className="bg-white shadow-lg rounded-lg p-6 w-[90%] max-w-md pointer-events-auto">
                 <h1 className="text-2xl font-bold text-teal-600 text-center mb-6">プロフィール編集</h1>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
@@ -60,7 +60,7 @@ export default function ProfileEdit() {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                            className="mt-1 block w-full px-1 py-3 rounded-md border-gray-300 shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
                             placeholder="名前を入力してください"
                         />
                     </div>
