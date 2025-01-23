@@ -45,6 +45,7 @@ export default function SignUpPage() {
                             value={name} 
                             onChange={(e) => setName(e.target.value)} 
                             placeholder="名前" 
+                            maxLength={30}
                             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
                             required
                         />
@@ -56,6 +57,7 @@ export default function SignUpPage() {
                             value={email} 
                             onChange={(e) => setEmail(e.target.value)} 
                             placeholder="メールアドレス" 
+                            maxLength={30}
                             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
                             required
                         />
@@ -67,6 +69,7 @@ export default function SignUpPage() {
                             value={password} 
                             onChange={(e) => setPassword(e.target.value)} 
                             placeholder="パスワード" 
+                            maxLength={30}
                             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
                             required
                         />
@@ -77,7 +80,8 @@ export default function SignUpPage() {
                             type="password" 
                             value={passwordConfirmation} 
                             onChange={(e) => setPasswordConfirmation(e.target.value)} 
-                            placeholder="パスワード（確認用）" 
+                            placeholder="パスワード（確認用）"
+                            maxLength={30} 
                             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
                             required
                         />

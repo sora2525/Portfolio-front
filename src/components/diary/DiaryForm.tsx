@@ -4,8 +4,8 @@ import { useDiaries } from "@/lib/hooks/useDiaries";
 import { useAIResponse } from "@/lib/hooks/useAIResponse";
 
 type DiaryFormProps = {
-  onCancel: () => void; // フォームを閉じるためのキャンセル関数
-  onSubmit: () => void; // 投稿成功時に呼び出される関数
+  onCancel: () => void; 
+  onSubmit: () => void; 
 };
 
 export default function DiaryForm({ onCancel, onSubmit }: DiaryFormProps) {
@@ -13,6 +13,7 @@ export default function DiaryForm({ onCancel, onSubmit }: DiaryFormProps) {
   const [content, setContent] = useState<string>("");
   const [isPublic, setIsPublic] = useState<boolean>(false);
   const [images, setImages] = useState<File[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false); 
   const { generateResponse } = useAIResponse();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,6 +24,9 @@ export default function DiaryForm({ onCancel, onSubmit }: DiaryFormProps) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isSubmitting) return; 
+    setIsSubmitting(true); 
+
     try {
       const characterComment = await generateResponse(
         `${content}`,
@@ -40,9 +44,11 @@ export default function DiaryForm({ onCancel, onSubmit }: DiaryFormProps) {
       setContent("");
       setIsPublic(false);
       setImages([]);
-      onSubmit(); 
+      onSubmit();
     } catch (err) {
       console.error("投稿に失敗しました", err);
+    } finally {
+      setIsSubmitting(false); 
     }
   };
 
@@ -95,9 +101,14 @@ export default function DiaryForm({ onCancel, onSubmit }: DiaryFormProps) {
 
       <button
         type="submit"
-        className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition-colors"
+        disabled={isSubmitting} 
+        className={`w-full py-2 px-4 font-semibold rounded transition-colors ${
+          isSubmitting
+            ? "bg-gray-300 cursor-not-allowed"
+            : "bg-blue-500 text-white hover:bg-blue-600"
+        }`}
       >
-        日記を作成
+        {isSubmitting ? "送信中..." : "日記を作成"}
       </button>
     </form>
   );

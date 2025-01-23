@@ -95,8 +95,8 @@ export default function TaskItem({
                 <Link href={`tasks/${id}`} className="flex flex-col flex-wrap">
                     <h2 className="text-lg font-bold w-full sm:px-2 lg:p-2 overflow-hidden text-ellipsis whitespace-nowrap">{title}</h2>
                     <div className="flex w-full">
-                        <p className="w-1/2 sm:px-2 md:p-2">{`優先度: ${priority}`}</p>
                         <p className="w-1/2 sm:px-2 md:p-2  text-red-500 text-sm">{due_date}</p>
+                        <p className="w-1/2 sm:px-2 md:p-2 text-blue-500">{`優先度: ${priority}`}</p>
                     </div>
 
                     <div className="flex flex-wrap gap-2 mt-2">

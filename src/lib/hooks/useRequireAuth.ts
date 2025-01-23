@@ -28,7 +28,7 @@ export const useRequireAuth = () => {
 
   useEffect(() => {
     if (checked && !auth.isAuthenticated) {
-      router.push('/sign_in');
+      router.push("/sign_in?redirected=true");
     }
   }, [checked, auth.isAuthenticated, router]);
 
