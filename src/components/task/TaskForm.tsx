@@ -29,7 +29,7 @@ export default function TaskForm({
     title: "",
     description: "",
     due_date: "",
-    priority: 1,
+    priority: 0,
     reminder_time: "",
     tags: [],
   },
@@ -44,14 +44,14 @@ export default function TaskForm({
 
   const handleTagToggle = (tagId: number) => {
     if (selectedTags.includes(tagId)) {
-      setSelectedTags(selectedTags.filter((id) => id !== tagId)); // タグを解除
-      setTagError(null); // エラーをクリア
+      setSelectedTags(selectedTags.filter((id) => id !== tagId)); 
+      setTagError(null); 
     } else {
       if (selectedTags.length >= 5) {
-        setTagError("タグは最大5個まで選択できます"); // エラーメッセージをセット
+        setTagError("タグは最大5個まで選択できます"); 
       } else {
-        setSelectedTags([...selectedTags, tagId]); // タグを追加
-        setTagError(null); // エラーをクリア
+        setSelectedTags([...selectedTags, tagId]); 
+        setTagError(null); 
       }
     }
   };
@@ -86,6 +86,7 @@ export default function TaskForm({
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            maxLength={30}
             className="w-full px-3 py-1 sm:px-4 sm:py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
             placeholder="タスクのタイトルを入力"
             required
@@ -99,6 +100,7 @@ export default function TaskForm({
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            maxLength={1000}
             className="w-full px-3 py-1 sm:px-4 sm:py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
             placeholder="タスクの説明を入力"
           />
@@ -125,10 +127,13 @@ export default function TaskForm({
             onChange={(e) => setPriority(Number(e.target.value))}
             className="w-full px-3 py-1 sm:px-4 sm:py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
           >
-            <option value={0}>なし</option>
-            <option value={1}>低</option>
-            <option value={2}>中</option>
-            <option value={3}>高</option>
+            <option value={0}>0</option>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+
           </select>
         </div>
 
