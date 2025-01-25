@@ -14,7 +14,7 @@ export default function Task() {
     const [order, setOrder] = useState<string>("desc");
     const [selectedTag, setSelectedTag] = useState<string>("");
     const [status, setStatus] = useState<string>("all");
-    const [isCreating, setIsCreating] = useState<boolean>(false); // フォーム表示の状態を管理
+    const [isCreating, setIsCreating] = useState<boolean>(false); 
     const auth = useRequireAuth();
 
     useEffect(() => {
@@ -29,8 +29,8 @@ export default function Task() {
 
     const handleFormSubmit = async (title: string, description: string, dueDate: string, priority: number, reminderTime: string, tags: number[]) => {
         await createTask(title, description, dueDate, priority, reminderTime, tags);
-        setIsCreating(false); // フォームを非表示にする
-        getTasks(sortBy, order, selectedTag, status); // タスク一覧を更新
+        setIsCreating(false); 
+        getTasks(sortBy, order, selectedTag, status); 
     };
 
     return (
@@ -116,7 +116,7 @@ export default function Task() {
                 {/* 新規作成ボタン */}
                 <div className="flex justify-center xxs:mt-5 mt-2 sm:text-2xl">
                     <button
-                        onClick={() => setIsCreating(true)} // フォームを表示
+                        onClick={() => setIsCreating(true)}
                         className="text-[#008080] justify-center items-center rounded text-2xl flex flex-col group cursor-pointer"
                     >
                         <div className="flex items-center">
@@ -135,7 +135,7 @@ export default function Task() {
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <TaskForm
                         onSubmit={handleFormSubmit}
-                        onCancel={() => setIsCreating(false)} // フォームを閉じる
+                        onCancel={() => setIsCreating(false)} 
                         tags={tags}
                     />
                 </div>
