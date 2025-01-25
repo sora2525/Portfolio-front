@@ -37,10 +37,13 @@ export default function Task() {
         <div className="pointer-events-auto flex flex-col items-center justify-end w-full h-screen">
             <div className="bg-[rgba(243,244,246,0.85)] w-[95%] h-[90%]  p-3 rounded-lg shadow-lg mb-2">
                 <div className="flex w-full justify-between items-center">
-                    <Link href="/"><span className="material-icons text-[#008080]" style={{ fontSize: '42px' }}>
+                    <Link href="/"><span className="material-icons text-[#008080]" style={{ fontSize: '36px' }}>
                         reply
                     </span></Link>
-                    <h1 className="sm:text-2xl text-xl font-semibold sm:mb-4 mb-2 text-center mx-auto">タスク一覧</h1>
+                    <h1 className=" sm:text-2xl text-xl font-semibold sm:mb-4 mb-2 text-center mx-auto">タスク一覧</h1>
+                    <Link href="/calendar"><span className="mr-[10px] material-icons text-[#008080]">
+                        calendar_month
+                    </span></Link>
                 </div>
 
                 {/* 状態の選択タブ */}
@@ -130,12 +133,12 @@ export default function Task() {
             {/* 新規作成フォームのモーダル表示 */}
             {isCreating && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                        <TaskForm
-                            onSubmit={handleFormSubmit}
-                            onCancel={() => setIsCreating(false)} // フォームを閉じる
-                            tags={tags}
-                        />
-                    </div>
+                    <TaskForm
+                        onSubmit={handleFormSubmit}
+                        onCancel={() => setIsCreating(false)} // フォームを閉じる
+                        tags={tags}
+                    />
+                </div>
             )}
         </div>
     );

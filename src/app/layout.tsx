@@ -7,6 +7,8 @@ import PageHeader from "@/components/header";
 import { useEffect } from "react";
 import { useAuth } from "@/lib/hooks/useAuth";
 import Live2dView from "@/components/live2d/live2dView";
+import '@/styles/globals.css';
+
 
 import { SessionProvider } from 'next-auth/react';
 
