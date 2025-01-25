@@ -7,7 +7,6 @@ import interactionPlugin from '@fullcalendar/interaction';
 import jaLocale from '@fullcalendar/core/locales/ja';
 import { useTasks } from '@/lib/hooks/useTasks';
 import TaskForm from '@/components/task/TaskForm';
-import Link from 'next/link';
 
 type Task = {
   id: number;
@@ -21,7 +20,7 @@ type Task = {
 };
 
 const CalendarPage = () => {
-  const { getTasks, createTask, updateTask, error } = useTasks();
+  const { getTasks, createTask, updateTask, getTask, error } = useTasks();
   const [events, setEvents] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState<boolean | 'newTask'>(false);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -34,13 +33,10 @@ const CalendarPage = () => {
         id: task.id,
         title: task.completion_date ? `✓ ${task.title}` : `　 ${task.title}`,
         start: task.due_date,
-        backgroundColor:
-          task.priority === 1
-            ? '#EF4444'
-            : task.priority === 2
-              ? '#F59E0B'
-              : '#3B82F6',
+        backgroundColor: '#3B82F6',
         textColor: '#FFFFFF',
+        priority: task.priority,
+        description: task.description,
       }))
     );
   };
@@ -82,10 +78,14 @@ const CalendarPage = () => {
       .replaceAll('/', '-');
 
     try {
-      const task = selectedTasks.find((task) => task.id === Number(info.event.id));
-      if (!task) return;
+      const task = await getTask(Number(info.event.id));
+      if (!task) {
+        console.error('タスクが見つかりません');
+        return;
+      }
 
       const currentTags = task.tags.map((tag) => tag.id);
+
       await updateTask(
         task.id,
         task.title,
@@ -99,7 +99,7 @@ const CalendarPage = () => {
       const updatedTasks = await getTasks('due_date', 'asc', '', '');
       updateEvents(updatedTasks);
     } catch (error) {
-      console.error('タスク更新エラー:', error);
+      console.error('タスクの更新に失敗しました:', error);
     }
   };
 
@@ -124,7 +124,7 @@ const CalendarPage = () => {
           className="rounded-full"
           style={{ backgroundColor: eventInfo.backgroundColor }}
         ></span>
-        <p className="text-[10px] sm:text-sm  font-semibold">{eventInfo.event.title}</p>
+        <p className="text-[10px] sm:text-sm font-semibold">{eventInfo.event.title}</p>
       </div>
     );
   };
@@ -133,7 +133,7 @@ const CalendarPage = () => {
     <div className="pointer-events-auto min-h-screen flex flex-col items-center justify-center p-3 sm:p-6">
 
       {error && <p className="text-red-500 text-center">{error}</p>}
-      <div className="bg-white w-full max-w-4xl p-4 text-[12px] sm:text-[16px]  sm:p-6 rounded-lg shadow-lg flex items-center justify-center">
+      <div className="bg-white w-full max-w-4xl p-4 text-[12px] sm:text-[16px] sm:p-6 rounded-lg shadow-lg flex items-center justify-center">
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
@@ -143,7 +143,9 @@ const CalendarPage = () => {
           dateClick={handleDateClick}
           eventDrop={handleEventDrop}
           eventClick={handleEventClick}
-          editable={true}
+          editable={true} // ドラッグ＆ドロップを許可
+          eventResizableFromStart={false} // イベントの開始位置からのリサイズを無効化
+          eventDurationEditable={false} // イベントのリサイズを完全無効化
           customButtons={{
             customTask: {
               text: '',
@@ -164,6 +166,7 @@ const CalendarPage = () => {
           dayMaxEventRows={2}
           eventContent={renderEventContent}
         />
+
       </div>
 
       {isModalVisible && selectedDate && (
@@ -176,10 +179,11 @@ const CalendarPage = () => {
                   <li
                     key={task.id}
                     className="p-3 border rounded-lg bg-gray-50 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => router.push(`/tasks/${task.id}`)}
                   >
                     <h3 className="font-bold text-lg">{task.title}</h3>
                     <p className="text-sm text-gray-600">{task.description}</p>
-                    <p className="text-xs text-gray-500">期日: {task.due_date}</p>
+                    <p className="text-xs text-gray-500">優先度: {task.priority}</p>
                   </li>
                 ))}
               </ul>
@@ -203,6 +207,7 @@ const CalendarPage = () => {
           </div>
         </div>
       )}
+
 
       {isModalVisible === 'newTask' && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">

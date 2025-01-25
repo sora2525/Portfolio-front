@@ -104,7 +104,6 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                   ))}
                 </div>
               </div>
-              {/* 折り返し対応済みの description */}
               <p className="text-xl mt-5 break-words">{task.description}</p>
             </div>
 
