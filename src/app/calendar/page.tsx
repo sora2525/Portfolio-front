@@ -28,18 +28,18 @@ const CalendarPage = () => {
   const router = useRouter();
 
   const updateEvents = (tasks: Task[]) => {
-  setEvents(
-    tasks.map((task) => ({
-      id: task.id,
-      title: task.completion_date ? `✓ ${task.title}` : `　 ${task.title}`,
-      start: task.due_date,
-      backgroundColor:'#3B82F6',
-      textColor: '#FFFFFF',
-      priority: task.priority, 
-      description: task.description, 
-    }))
-  );
-};
+    setEvents(
+      tasks.map((task) => ({
+        id: task.id,
+        title: task.completion_date ? `✓ ${task.title}` : `　 ${task.title}`,
+        start: task.due_date,
+        backgroundColor: '#3B82F6',
+        textColor: '#FFFFFF',
+        priority: task.priority,
+        description: task.description,
+      }))
+    );
+  };
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -78,7 +78,7 @@ const CalendarPage = () => {
       .replaceAll('/', '-');
 
     try {
-      const task = await getTask(Number(info.event.id)); 
+      const task = await getTask(Number(info.event.id));
       if (!task) {
         console.error('タスクが見つかりません');
         return;
@@ -143,7 +143,9 @@ const CalendarPage = () => {
           dateClick={handleDateClick}
           eventDrop={handleEventDrop}
           eventClick={handleEventClick}
-          editable={true}
+          editable={true} // ドラッグ＆ドロップを許可
+          eventResizableFromStart={false} // イベントの開始位置からのリサイズを無効化
+          eventDurationEditable={false} // イベントのリサイズを完全無効化
           customButtons={{
             customTask: {
               text: '',
@@ -164,6 +166,7 @@ const CalendarPage = () => {
           dayMaxEventRows={2}
           eventContent={renderEventContent}
         />
+
       </div>
 
       {isModalVisible && selectedDate && (
