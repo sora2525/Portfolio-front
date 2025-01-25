@@ -1,0 +1,7 @@
+.fc-customTask-button::before {
+    content: 'reply'; /* 表示するマテリアルアイコン */
+    font-family: 'Material Icons'; /* マテリアルアイコンのフォントを指定 */
+    vertical-align: middle; /* アイコンをテキストに揃える */
+  }
+  
+  

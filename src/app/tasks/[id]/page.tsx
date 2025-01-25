@@ -86,7 +86,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
         ) : (
           <div className="flex flex-col h-full">
             <div>
-              <button onClick={() => router.push("/tasks")}>
+              <button onClick={() => router.back()}>
                 <span className="material-icons text-[#008080]" style={{ fontSize: '42px' }}>
                   reply
                 </span>
