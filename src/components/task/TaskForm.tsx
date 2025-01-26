@@ -41,24 +41,33 @@ export default function TaskForm({
   const [reminderTime, setReminderTime] = useState(initialTask.reminder_time);
   const [selectedTags, setSelectedTags] = useState<number[]>(initialTask.tags);
   const [tagError, setTagError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false); 
 
   const handleTagToggle = (tagId: number) => {
     if (selectedTags.includes(tagId)) {
-      setSelectedTags(selectedTags.filter((id) => id !== tagId)); 
-      setTagError(null); 
+      setSelectedTags(selectedTags.filter((id) => id !== tagId));
+      setTagError(null);
     } else {
       if (selectedTags.length >= 5) {
-        setTagError("タグは最大5個まで選択できます"); 
+        setTagError("タグは最大5個まで選択できます");
       } else {
-        setSelectedTags([...selectedTags, tagId]); 
-        setTagError(null); 
+        setSelectedTags([...selectedTags, tagId]);
+        setTagError(null);
       }
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(title, description, dueDate, priority, reminderTime, selectedTags);
+
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    try {
+      await onSubmit(title, description, dueDate, priority, reminderTime, selectedTags);
+    } finally {
+      setIsSubmitting(false); 
+    }
   };
 
   return (
@@ -127,13 +136,9 @@ export default function TaskForm({
             onChange={(e) => setPriority(Number(e.target.value))}
             className="w-full px-3 py-1 sm:px-4 sm:py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
           >
-            <option value={0}>0</option>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-
+            {[...Array(6).keys()].map((val) => (
+              <option key={val} value={val}>{val}</option>
+            ))}
           </select>
         </div>
 
@@ -172,8 +177,15 @@ export default function TaskForm({
 
         {/* ボタン */}
         <div className="flex justify-between">
-          <button type="submit" className="bg-green-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-600 transition w-full mt-3">
-            保存
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={`px-6 py-2 rounded-lg font-semibold w-full mt-3 transition ${isSubmitting
+              ? "bg-gray-400 text-gray-600 cursor-not-allowed"
+              : "bg-green-500 text-white hover:bg-green-600"
+              }`}
+          >
+            {isSubmitting ? "保存中..." : "保存"}
           </button>
         </div>
       </form>
