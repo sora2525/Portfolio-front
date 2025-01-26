@@ -47,6 +47,12 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+
+        <meta property="og:title" content="タスクエールでがんばるもん！"/>
+        <meta property="og:description" content="タスク管理をもっと楽しく！可愛いキャラクターと一緒にタスクを整理しよう。"/>
+        <meta property="og:url" content="https://task-yell.vercel.app"/>
+        <meta property="og:site_name" content="タスクエールでがんばるもん！"/>
+        <meta property="og:locale" content="ja_JP"/>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
