@@ -33,7 +33,7 @@ export default function LoginButton() {
       <button
         onClick={handleGoogleLogin}
         className="
-          px-6 py-3 text-white font-semibold rounded-lg shadow-md 
+          w-full px-6 py-3 text-white font-semibold rounded-lg shadow-md 
           bg-blue-500 hover:bg-blue-600 focus:outline-none 
           transition duration-300 ease-in-out transform hover:scale-105
         "

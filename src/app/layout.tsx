@@ -43,8 +43,8 @@ export default function RootLayout({
     <html lang="ja">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icon512_rounded.png"></link>
-        <meta name="theme-color" content="#8936FF" />
+        <link rel="apple-touch-icon" href="/icon512_maskable.png"></link>
+        <meta name="theme-color" content="#F472B6" />
         <Script
           src="/live2d/live2dcubismcore.min.js"
           strategy="beforeInteractive"

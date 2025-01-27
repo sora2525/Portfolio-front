@@ -30,19 +30,16 @@ export function DiaryItem({ diary, onDelete }: DiaryItemProps) {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [auth] = useRecoilState(authState);
 
-
     return (
         <>
             <li className="p-4 bg-white rounded shadow mt-2 max-w-[900px]">
                 {/* ユーザー情報の表示 */}
                 <div className="flex items-center mb-2">
-                    {diary.user?.avatar_url && (
-                        <img
-                            src={diary.user.avatar_url}
-                            alt={diary.user.name}
-                            className="w-[50px] h-[50px] rounded-full mr-2"
-                        />
-                    )}
+                    <img
+                        src={diary.user?.avatar_url || "/images/download20250101150055.png"} // プロフィール画像がなければデフォルト画像
+                        alt={diary.user?.name || "Default Avatar"}
+                        className="w-[50px] h-[50px] rounded-full mr-2"
+                    />
                     <span className="font-semibold">
                         {diary.user?.name || "Unknown"}
                     </span>
@@ -50,7 +47,7 @@ export function DiaryItem({ diary, onDelete }: DiaryItemProps) {
                         {new Date(diary.created_at).toLocaleDateString()}
                     </div>
                     {/* 自身の投稿の場合のみ削除ボタンを表示 */}
-                    {auth.user.id === diary.user.id && (
+                    {auth.user.id === diary.user?.id && (
                         <button
                             onClick={() => onDelete(diary.id)}
                             className="ml-4 text-red-500 hover:text-red-700"
@@ -88,7 +85,7 @@ export function DiaryItem({ diary, onDelete }: DiaryItemProps) {
                             height={50}
                             className="rounded-full object-cover"
                         />
-                        <p className="ml-2">蓮実 メロ</p>  
+                        <p className="ml-2 font-semibold">蓮実 メロ</p>  
                     </div>
 
                     <div>{diary.character_comment}</div>

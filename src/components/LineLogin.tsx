@@ -35,7 +35,7 @@ export default function LineLoginButton() {
       {/* ログインボタン */}
       <button
         onClick={handleLineLogin}
-        className="px-6 py-3 text-white font-semibold rounded-lg shadow-md bg-green-500 hover:bg-green-600 focus:outline-none transition duration-300 ease-in-out transform hover:scale-105"
+        className="w-full px-6 py-3 text-white font-semibold rounded-lg shadow-md bg-green-500 hover:bg-green-600 focus:outline-none transition duration-300 ease-in-out transform hover:scale-105"
       >
         LINEでログイン
       </button>
