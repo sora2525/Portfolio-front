@@ -5120,6 +5120,7 @@ streamsearch@^1.1.0:
   integrity sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==
 
 "string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0:
+  name string-width-cjs
   version "4.2.3"
   resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -5694,6 +5695,11 @@ util-deprecate@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
+
+wav-encoder@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/wav-encoder/-/wav-encoder-1.3.0.tgz#ed1ca1e59c8d2bca50010d6a380ab8d473b12b65"
+  integrity sha512-FXJdEu2qDOI+wbVYZpu21CS1vPEg5NaxNskBr4SaULpOJMrLE6xkH8dECa7PiS+ZoeyvP7GllWUAxPN3AvFSEw==
 
 web-streams-polyfill@4.0.0-beta.3:
   version "4.0.0-beta.3"

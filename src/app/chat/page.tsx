@@ -12,7 +12,7 @@ import Link from 'next/link';
 export default function Chat() {
   const { chats, createChat, getChats, clearChats } = useChatLog();
   const { generateResponse } = useAIResponse();
-  const { generateAndSyncLipSync } = useTextToLipSync();
+  const { speakAndLipSync } = useTextToLipSync();
   const auth = useRequireAuth();
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
@@ -47,9 +47,9 @@ export default function Chat() {
     if (aiResponse) {
       await createChat(aiResponse, 'character');
       
-      // スマホサイズの場合はgenerateAndSyncLipSyncを呼ばない
+      // スマホサイズの場合はspeakAndLipSyncを呼ばない
       if (!isMobile) {
-        generateAndSyncLipSync(aiResponse); 
+        speakAndLipSync(aiResponse); 
       }
     }
 
@@ -58,7 +58,7 @@ export default function Chat() {
 
   const onClickCharacterMessage = async (characterMessage: string) => {
    
-      generateAndSyncLipSync(characterMessage); 
+      speakAndLipSync(characterMessage); 
   }
 
   if (!auth.isAuthenticated) {
