@@ -5,11 +5,12 @@ import { useAuth } from "@/lib/hooks/useAuth";
 import { useRecoilState } from "recoil";
 import { authState } from "@/lib/atom/authAtom";
 import { useRouter } from "next/navigation"; 
+import Link from "next/link";
 
 export default function ProfileEdit() {
     const [auth] = useRecoilState(authState);
     const { updateProfile, success, error, loading } = useAuth();
-    const router = useRouter(); // useRouterを使用してルーターオブジェクトを取得
+    const router = useRouter(); 
 
     const [name, setName] = useState(auth.user?.name || "");
     const [avatar, setAvatar] = useState<File | null>(null);
@@ -46,8 +47,14 @@ export default function ProfileEdit() {
     }
 
     return (
-        <div className="flex justify-center items-center h-screen ">
-            <div className="bg-white shadow-lg rounded-lg p-6 w-[90%] max-w-md pointer-events-auto">
+        <div className="flex justify-center items-center h-screen pointer-events-auto">
+            <Link href="/profile" className="absolute top-[80px] left-4 text-3xl text-[#008080]">
+                <span className="material-icons" style={{ fontSize: '48px' }}>
+                    reply
+                </span>
+            </Link>
+
+            <div className="bg-white shadow-lg rounded-lg p-6 w-[90%] max-w-md">
                 <h1 className="text-2xl font-bold text-teal-600 text-center mb-6">プロフィール編集</h1>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>

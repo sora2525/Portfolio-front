@@ -10,12 +10,12 @@ export default function SignInPage() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [validationError, setValidationError] = useState<string | null>(null);
-    const [redirectMessage, setRedirectMessage] = useState<string | null>(null); // リダイレクトメッセージ用
+    const [redirectMessage, setRedirectMessage] = useState<string | null>(null);
     const { signIn, loading, error, success } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
-        const params = new URLSearchParams(window.location.search); // クエリパラメータを取得
+        const params = new URLSearchParams(window.location.search);
         if (params.get("redirected") === "true") {
             setRedirectMessage("ログインが必要です");
         }
@@ -36,7 +36,7 @@ export default function SignInPage() {
 
     return (
         <>
-            <div className="flex flex-col justify-center items-center w-full h-screen p-6">
+            <div className="flex flex-col justify-center items-center w-full h-screen p-6 mt-[50px]">
                 <Link href="/" className="absolute top-[80px] left-4 text-3xl text-[#008080] pointer-events-auto ">
                     <span className="material-icons" style={{ fontSize: '48px' }}>
                         reply

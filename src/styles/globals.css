@@ -5,3 +5,8 @@
   }
   
   
+  html, body {
+  height: 100%;
+  overflow: hidden; /* 縦方向のスクロールを無効化 */
+  touch-action: none; /* スワイプ動作を無効化 */
+}
