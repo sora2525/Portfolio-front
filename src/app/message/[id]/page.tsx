@@ -21,7 +21,7 @@ type Task = {
 export default function TaskPage({ params }: { params: { id: string } }) {
     const { getTask } = useTasks(); 
     const [task, setTask] = useState<Task | null>(null); 
-    const { generateAndSyncLipSync } = useTextToLipSync();
+    const { speakAndLipSync } = useTextToLipSync();
 
     const taskId = Number(params.id); 
 
@@ -39,7 +39,7 @@ export default function TaskPage({ params }: { params: { id: string } }) {
 
     const handlePlayMessage = () => {
         if (task?.completion_message) {
-            generateAndSyncLipSync(task.completion_message);
+            speakAndLipSync(task.completion_message);
         }
     };
 
