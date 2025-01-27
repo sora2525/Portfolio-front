@@ -17,6 +17,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           response_type: "code",
           redirect_uri: `${process.env.AUTH_URL}/api/auth/callback/line`,
           state: crypto.randomUUID(),
+          bot_prompt: "normal",
         },
       },
       checks: ["pkce"],
