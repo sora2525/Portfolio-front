@@ -10,7 +10,7 @@ export default function ReloadButton() {
             if (window.innerWidth < 640) {
                 setFontSize("32px"); // モバイル
             } else {
-                setFontSize("32px"); // PC
+                setFontSize("48px"); // PC
             }
         };
 
@@ -20,7 +20,7 @@ export default function ReloadButton() {
     }, []);
 
     const handleReload = () => {
-        window.location.href = window.location.href; // PWA & Safari対応
+        window.location.href = window.location.href; 
     };
 
     return (

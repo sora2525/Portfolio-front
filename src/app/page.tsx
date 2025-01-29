@@ -25,7 +25,7 @@ export default function Home() {
 
         <div className="
     pointer-events-auto text-[#008080] w-full  flex justify-around text-center p-5 lg:p-8 
-    bg-[rgba(243,244,246,0.85)] lg:clip-path-parallelogram lg:pl-[50px]
+    bg-[rgba(243,244,246,0.85)] lg:clip-path-parallelogram lg:pl-[50px] lg:relative fixed bottom-0
   ">
           {/* タスク管理 */}
           <Link href="/tasks" className="text-lg font-medium group flex items-center justify-center">
