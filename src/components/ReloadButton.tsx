@@ -10,18 +10,21 @@ export default function ReloadButton() {
             if (window.innerWidth < 640) {
                 setFontSize("32px"); // モバイル
             } else {
-                setFontSize("48px"); // PC
+                setFontSize("32px"); // PC
             }
         };
 
         updateFontSize();
-
         window.addEventListener("resize", updateFontSize);
         return () => window.removeEventListener("resize", updateFontSize);
     }, []);
 
+    const handleReload = () => {
+        window.location.href = window.location.href; // PWA & Safari対応
+    };
+
     return (
-        <button onClick={() => window.location.reload()} className="flex flex-col items-center">
+        <button onClick={handleReload} className="flex flex-col items-center">
             <span className="material-icons" style={{ fontSize }}>
                 cached
             </span>
