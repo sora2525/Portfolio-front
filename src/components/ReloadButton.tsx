@@ -8,7 +8,7 @@ export default function ReloadButton() {
     useEffect(() => {
         const updateFontSize = () => {
             if (window.innerWidth < 640) {
-                setFontSize("28px"); // モバイル
+                setFontSize("32px"); // モバイル
             } else {
                 setFontSize("48px"); // PC
             }
