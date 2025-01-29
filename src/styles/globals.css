@@ -1,3 +1,13 @@
+
+
+@tailwind utilities;
+
+@layer utilities {
+  .clip-path-parallelogram {
+    clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
+
 .fc-customTask-button::before {
     content: 'reply'; /* 表示するマテリアルアイコン */
     font-family: 'Material Icons'; /* マテリアルアイコンのフォントを指定 */
