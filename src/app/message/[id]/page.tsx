@@ -25,7 +25,6 @@ export default function TaskPage({ params }: { params: { id: string } }) {
 
     const taskId = Number(params.id); 
 
-    
     useEffect(() => {
         const fetchTask = async () => {
             if (taskId && !task) { 
@@ -46,26 +45,15 @@ export default function TaskPage({ params }: { params: { id: string } }) {
     if (!task) return <div>Loading...</div>; 
 
     return (
-        <>
-        <div className="pointer-events-auto w-full h-screen flex justify-end items-center flex-col relative">
-            <Link href="/tasks" className="absolute top-[80px] left-4 text-3xl text-[#008080]">
+        <div className="w-full h-screen flex justify-end items-center flex-col relative">
+            <Link href="/tasks" className="pointer-events-auto absolute top-[80px] left-4 text-3xl text-[#008080]">
                 <span className="material-icons" style={{ fontSize: '48px' }}>
-                reply
+                    reply
                 </span>
             </Link>
-            
-            <Message completion_message={task.completion_message} />
 
-            <button
-                onClick={handlePlayMessage}
-                className="mt-4 p-2 bg-blue-500 text-white flex space-x-3 mb-5"
-            >
-                <span className="material-icons">
-                    volume_up
-                </span>
-                <p>音声を生成</p>
-            </button>
+            {/* メッセージコンポーネント */}
+            <Message completion_message={task.completion_message} onPlayMessage={handlePlayMessage} />
         </div>
-        </>
     );
 }

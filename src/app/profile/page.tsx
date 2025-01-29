@@ -67,7 +67,7 @@ export default function Profile() {
                                 </Link>
                             </div>
                             <div className="pt-3">
-                                <LineLinkButton />
+                                {!auth.user.line_sub && <LineLinkButton />}
                             </div>
                         </div>
                     </div>
