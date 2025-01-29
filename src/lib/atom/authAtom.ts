@@ -1,4 +1,3 @@
-// atom
 import { atom } from 'recoil';
 
 // ユーザー情報の型定義
@@ -6,7 +5,9 @@ type User = {
   id: number;
   name: string;
   email: string;
-  avatar_url?: string; // アバター画像のURLを追加
+  avatar_url?: string;
+  line_sub?: string; 
+  provider?: string; 
 };
 
 // AuthStateの型定義

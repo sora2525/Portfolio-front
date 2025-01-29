@@ -73,7 +73,14 @@ export const useTasks = () => {
         }
         try {
             const response = await axiosInstance.post("/tasks", {
-                task: { title, description, due_date: dueDate, priority, reminder_time: reminderTime, tags }
+                task: {
+                    title,
+                    description,
+                    due_date: dueDate,
+                    priority,
+                    reminder_time: reminderTime,
+                    tags: tags.map(Number) 
+                }
             });
             setTasks((prevTasks) => [...prevTasks, response.data]);
         } catch (e: unknown) {

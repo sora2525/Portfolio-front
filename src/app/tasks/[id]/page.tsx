@@ -91,7 +91,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
                   reply
                 </span>
               </button>
-              <h1 className="font-bold text-3xl text-center">{task.title}</h1>
+              <h1 className="font-bold text-md sm:text-3xl text-center">{task.title}</h1>
               <div className="flex">
                 <p className="text-red-500 text-xl mt-5 w-[200px]">期日: {task.due_date}</p>
                 <p className="text-blue-500 text-xl mt-5">優先度: {task.priority}</p>

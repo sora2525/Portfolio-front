@@ -30,6 +30,7 @@ export default function ChatForm({ onSendMessage }: ChatFormProps) {
           type="text"
           className="flex-grow px-4 py-2 mr-2 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="メッセージを入力"
+          maxLength={100}
           required
           disabled={loading} // リクエスト中は入力できないようにする
         />
