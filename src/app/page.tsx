@@ -70,7 +70,7 @@ export default function Home() {
           <div className="hidden lg:block border-l-2 border-gray-300 h-20" />
 
           {/* お知らせ */}
-          <Link href="/notifications" className="hidden lg:block text-lg font-medium group flex items-center justify-center">
+          <Link href="/" className="hidden lg:block text-lg font-medium group flex items-center justify-center">
             <div className="flex flex-col items-center justify-center text-lg">
               <span className="material-icons" style={{ fontSize: '48px' }}>
                 mail
@@ -84,7 +84,7 @@ export default function Home() {
           <div className="hidden lg:block border-l-2 border-gray-300 h-20" />
 
           {/* 使い方 */}
-          <Link href="/help" className="hidden lg:block text-lg font-medium group flex items-center justify-center">
+          <Link href="/" className="hidden lg:block text-lg font-medium group flex items-center justify-center">
             <div className="flex flex-col items-center justify-center text-lg">
               <span className="material-icons" style={{ fontSize: '48px' }}>
                 help
