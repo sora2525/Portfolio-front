@@ -4,12 +4,15 @@ import { authState } from "../atom/authAtom";
 import { axiosInstance } from "../axiosInstance";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useSetRecoilState } from "recoil";
+import { flashMessageState } from "@/lib/atom/flashMessageAtom";
 
 export const useAuth = () => {
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [, setAuth] = useRecoilState(authState);
+    const [flashMessage, setFlashMessage] = useRecoilState(flashMessageState);
     const router = useRouter();
 
     // 新規登録
@@ -228,36 +231,53 @@ export const useAuth = () => {
         }
     };
 
-    const lineLink = async (lineSub) => {
+    const lineLink = async (lineSub: string, router: any) => {
         setLoading(true);
         try {
-            const response = await axiosInstance.post("/auth/line_link", {
-                line_sub: lineSub,
-              }, {
-                headers: {
-                  "access-token": Cookies.get("access-token"),
-                  client: Cookies.get("client"),
-                  uid: Cookies.get("uid"),
-                },
-              });
-            if (response.status === 200) {
-                setSuccess("LINEアカウントの連携に成功しました！");
-                setAuth((prevState) => ({
-                    ...prevState,
-                    user: {
-                        ...prevState.user,
-                        line_sub: lineSub,
-                    },
-                }));
-            } else {
-                setError("LINEアカウントの連携に失敗しました。");
+          const response = await axiosInstance.post(
+            "/auth/line_link",
+            { line_sub: lineSub },
+            {
+              headers: {
+                "access-token": Cookies.get("access-token"),
+                client: Cookies.get("client"),
+                uid: Cookies.get("uid"),
+              },
             }
-        } catch (err) {
-            setError(err.response?.data?.errors?.[0] || "LINEアカウントの連携中にエラーが発生しました。");
+          );
+    
+          if (response.status === 200) {
+            setSuccess("LINEアカウントの連携に成功しました！");
+            setAuth((prevState) => ({
+              ...prevState,
+              user: {
+                ...prevState.user,
+                line_sub: lineSub,
+              },
+            }));
+    
+            // フラッシュメッセージをセット
+            setFlashMessage({ message: "LINEアカウントの連携に成功しました！", type: "success" });
+    
+            router.push("/"); // トップページへリダイレクト
+          } else {
+            throw new Error("LINEアカウントの連携に失敗しました。");
+          }
+        } catch (err: any) {
+          setError(err.response?.data?.errors?.[0] || "LINEアカウントの連携中にエラーが発生しました。");
+    
+          // エラーメッセージをセット
+          setFlashMessage({
+            message: `連携に失敗しました: ${err.response?.data?.errors?.[0] || "不明なエラー"}`,
+            type: "error",
+          });
+    
+          router.push("/");
         } finally {
-            setLoading(false);
+          setLoading(false);
         }
-    }
+      };
+    
 
     const updateProfile = async (name: string, avatar?: File) => {
         setLoading(true);
