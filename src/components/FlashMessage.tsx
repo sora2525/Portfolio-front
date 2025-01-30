@@ -20,11 +20,14 @@ export default function FlashMessage() {
 
   return (
     <div
-      className={`fixed top-16 right-4 px-4 py-2 rounded-lg shadow-lg text-white text-sm z-50 ${
-        flashMessage.type === "success" ? "bg-green-500" : "bg-red-500"
-      }`}
+      className={`fixed top-16 right-4 px-2 py-1 sm:px-6 sm:py-3 rounded-full shadow-lg text-white text-[12px] sm:text-sm z-50 flex items-center space-x-2
+        ${flashMessage.type === "success" ? "bg-pink-400 shadow-pink-300" : "bg-yellow-300 text-gray-800 shadow-yellow-300"} 
+        animate-bounce transition-opacity duration-500 ease-in-out opacity-100`}
     >
-      {flashMessage.message}
+      <span className="text-lg">
+        {flashMessage.type === "success" ? "🎉" : "⚠️"}
+      </span>
+      <span>{flashMessage.message}</span>
     </div>
   );
 }
