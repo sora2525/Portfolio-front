@@ -11,6 +11,7 @@ import '@/styles/globals.css';
 
 
 import { SessionProvider } from 'next-auth/react';
+import FlashMessage from "@/components/FlashMessage";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -66,6 +67,7 @@ export default function RootLayout({
               <div className="h-screen w-screen bg-[url('/images/stage16.png')] bg-cover bg-no-repeat bg-center relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full z-20">
                   <PageHeader />
+                  <FlashMessage/>
                 </div>
                 <div className="flex flex-row-reverse w-full">
                   <div className="absolute z-10 pointer-events-none w-full lg:w-[60%] text-brack">
