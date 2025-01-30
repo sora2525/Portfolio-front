@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { useAuth } from "@/lib/hooks/useAuth";
 
 const PasswordResetForm = () => {
-    const { success, error, loading, resetPasswordConfirm } = useAuth();
+    const { loading, resetPasswordConfirm } = useAuth();
     const searchParams = useSearchParams();
     const resetToken = searchParams.get("reset_password_token") || "";
 
@@ -36,9 +36,6 @@ const PasswordResetForm = () => {
         <div className="flex justify-center items-center min-h-screen w-full p-6">
             <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg pointer-events-auto">
                 <h1 className="text-2xl font-semibold text-center text-teal-600 mb-6">パスワードリセット</h1>
-
-                {(localError || error) && <p className="text-red-600 text-center mb-4">{localError || error}</p>}
-                {success && <p className="text-green-600 text-center mb-4">{success}</p>}
 
                 <form onSubmit={handlePasswordReset} className="space-y-4">
                     <div>

@@ -20,7 +20,7 @@ type Task = {
 };
 
 const CalendarPage = () => {
-  const { getTasks, createTask, updateTask, getTask, error } = useTasks();
+  const { getTasks, createTask, updateTask, getTask } = useTasks();
   const [events, setEvents] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState<boolean | 'newTask'>(false);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -132,7 +132,6 @@ const CalendarPage = () => {
   return (
     <div className="pointer-events-auto min-h-screen flex flex-col items-center justify-center p-3 sm:p-6">
 
-      {error && <p className="text-red-500 text-center">{error}</p>}
       <div className="bg-white w-full max-w-4xl p-4 text-[12px] sm:text-[16px] sm:p-6 rounded-lg shadow-lg flex items-center justify-center">
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}

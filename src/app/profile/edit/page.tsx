@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function ProfileEdit() {
     const [auth] = useRecoilState(authState);
-    const { updateProfile, success, error, loading } = useAuth();
+    const { updateProfile,loading } = useAuth();
     const router = useRouter(); 
 
     const [name, setName] = useState(auth.user?.name || "");
@@ -105,9 +105,6 @@ export default function ProfileEdit() {
                         {loading ? "更新中..." : "更新する"}
                     </button>
                 </form>
-
-                {success && <p className="mt-4 text-green-600 text-center">{success}</p>}
-                {error && <p className="mt-4 text-red-600 text-center">{error}</p>}
             </div>
         </div>
     );
