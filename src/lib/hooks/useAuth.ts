@@ -179,21 +179,38 @@ export const useAuth = () => {
                 name,
                 image,
             });
-
+    
             const { "access-token": accessToken, client, uid: userUid } = response.headers;
-
+    
             if (accessToken && client && userUid) {
                 Cookies.set("access-token", accessToken, { expires: 7 });
                 Cookies.set("client", client, { expires: 7 });
                 Cookies.set("uid", userUid, { expires: 7 });
+    
                 setAuth({ isAuthenticated: true, user: response.data.user });
+    
+                // ✅ 成功時のフラッシュメッセージをセット
+                setFlashMessage({ message: "Googleログインに成功しました！", type: "success" });
+    
                 setSuccess("Googleログインに成功しました！");
                 setError(null);
             } else {
-                setError("トークン情報が取得できませんでした");
+                throw new Error("トークン情報が取得できませんでした");
             }
-        } catch (err) {
-            setError("Googleログインに失敗しました");
+    
+            router.push("/");
+        } catch (err: any) {
+            const errorMessage = err.response?.data?.errors?.[0] || "Googleログインに失敗しました";
+    
+            setError(errorMessage);
+    
+            // ✅ 失敗時のフラッシュメッセージをセット
+            setFlashMessage({
+                message: `ログインに失敗しました: ${errorMessage}`,
+                type: "error",
+            });
+    
+            router.push("/");
         } finally {
             setLoading(false);
         }
@@ -231,7 +248,7 @@ export const useAuth = () => {
         }
     };
 
-    const lineLink = async (lineSub: string, router: any) => {
+    const lineLink = async (lineSub: string) => {
         setLoading(true);
         try {
           const response = await axiosInstance.post(
