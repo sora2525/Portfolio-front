@@ -8,7 +8,7 @@ import TaskForm from "@/components/task/TaskForm";
 import Link from "next/link";
 
 export default function Task() {
-    const { getTasks, createTask, tasks, error } = useTasks();
+    const { getTasks, createTask, tasks } = useTasks();
     const { getTags, tags } = useTags();
     const [sortBy, setSortBy] = useState<string>("created_at");
     const [order, setOrder] = useState<string>("desc");
@@ -89,7 +89,6 @@ export default function Task() {
                 </div>
 
                 <div className="overflow-y-auto max-h-[60vh] xxs:max-h-[65vh] mt-4">
-                    {error && <p style={{ color: "red" }}>{error}</p>}
                     <ul className="space-y-2 lg:space-y-4">
                         {tasks.length > 0 ? (
                             tasks.map((task) => (

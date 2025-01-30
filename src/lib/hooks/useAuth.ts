@@ -4,12 +4,9 @@ import { authState } from "../atom/authAtom";
 import { axiosInstance } from "../axiosInstance";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { useSetRecoilState } from "recoil";
 import { flashMessageState } from "@/lib/atom/flashMessageAtom";
 
 export const useAuth = () => {
-    const [error, setError] = useState<string | null>(null);
-    const [success, setSuccess] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [, setAuth] = useRecoilState(authState);
     const [flashMessage, setFlashMessage] = useRecoilState(flashMessageState);
@@ -32,15 +29,22 @@ export const useAuth = () => {
                 Cookies.set("client", client, { expires: 7 });
                 Cookies.set("uid", uid, { expires: 7 });
                 setAuth({ isAuthenticated: true, user: response.data.data });
-                setSuccess("ユーザー登録に成功しました！");
-                setError(null);
+                setFlashMessage({
+                    message: "ユーザー登録に成功しました！",
+                    type: "success"
+                });
                 router.push("/");
             } else {
-                setError("トークン情報が取得できませんでした");
+                setFlashMessage({
+                    message: "トークン情報が取得できませんでした",
+                    type: "error"
+                });
             }
-
         } catch (err) {
-            setError("登録に失敗しました");
+            setFlashMessage({
+                message: "登録に失敗しました",
+                type: "error"
+            });
         } finally {
             setLoading(false);
         }
@@ -57,14 +61,24 @@ export const useAuth = () => {
                 Cookies.set("client", client, { expires: 7 });
                 Cookies.set("uid", uid, { expires: 7 });
                 setAuth({ isAuthenticated: true, user: response.data.data });
-                setSuccess("ログインに成功しました！");
-                setError(null);
+                setFlashMessage({
+                    message: "ログインに成功しました！",
+                    type: "success"
+                });
+                
                 router.push("/");
+                return;
             } else {
-                setError("トークン情報が取得できませんでした");
+                setFlashMessage({
+                    message: "トークン情報が取得できませんでした",
+                    type: "error"
+                });
             }
         } catch {
-            setError("ログインに失敗しました");
+            setFlashMessage({
+                message: "ログインに失敗しました",
+                type: "error"
+            });
         } finally {
             setLoading(false);
         }
@@ -88,10 +102,16 @@ export const useAuth = () => {
             Cookies.remove("client");
             Cookies.remove("uid");
             setAuth({ isAuthenticated: false, user: null });
-            setSuccess("ログアウトしました");
-            setError(null);
+            setFlashMessage({
+                message: "ログアウトしました",
+                type: "success"
+            });
+            router.push("/")
         } catch {
-            setError("ログアウトに失敗しました");
+            setFlashMessage({
+                message: "ログアウトに失敗しました",
+                type: "error"
+            });
         } finally {
             setLoading(false);
         }
@@ -120,19 +140,24 @@ export const useAuth = () => {
     // パスワードリセット
     const passwordReset = async (email: string) => {
         setLoading(true);
-        setError(null);
-        setSuccess(null);
 
         try {
             await axiosInstance.post("/auth/password", {
                 email,
                 redirect_url: process.env.NEXT_PUBLIC_REDIRECT_URL
             });
-            setSuccess("パスワードリセットメールが送信されました。メールを確認してください。");
+            setFlashMessage({
+                message: "パスワードリセットメールが送信されました。メールを確認してください。",
+                type: "success"
+            });
         } catch (e) {
-            setError("パスワードリセットのリクエストに失敗しました。");
+            setFlashMessage({
+                message: "パスワードリセットのリクエストに失敗しました。",
+                type: "error"
+            });
         } finally {
             setLoading(false);
+            router.push("/")
         }
     };
 
@@ -143,8 +168,6 @@ export const useAuth = () => {
         reset_password_token: string
     ) => {
         setLoading(true);
-        setError(null);
-        setSuccess(null);
 
         try {
             const response = await axiosInstance.put("/auth/password", {
@@ -154,15 +177,22 @@ export const useAuth = () => {
             });
 
             if (response.status === 200) {
-                setSuccess("パスワードが正常にリセットされました。新しいパスワードでログインしてください。");
+                setFlashMessage({
+                    message: "パスワードが正常にリセットされました。新しいパスワードでログインしてください。",
+                    type: "success"
+                });
+                router.push("/");
             } else {
-                setError("パスワードリセットに失敗しました。");
+                setFlashMessage({
+                    message: "パスワードリセットに失敗しました。",
+                    type: "error"
+                });
             }
         } catch (error) {
-            setError(
-                error.response?.data?.errors?.[0] ||
-                "パスワードリセットに失敗しました。"
-            );
+            setFlashMessage({
+                message: error.response?.data?.errors?.[0] || "パスワードリセットに失敗しました。",
+                type: "error"
+            });
         } finally {
             setLoading(false);
         }
@@ -189,11 +219,7 @@ export const useAuth = () => {
     
                 setAuth({ isAuthenticated: true, user: response.data.user });
     
-                // ✅ 成功時のフラッシュメッセージをセット
                 setFlashMessage({ message: "Googleログインに成功しました！", type: "success" });
-    
-                setSuccess("Googleログインに成功しました！");
-                setError(null);
             } else {
                 throw new Error("トークン情報が取得できませんでした");
             }
@@ -201,10 +227,6 @@ export const useAuth = () => {
             router.push("/");
         } catch (err: any) {
             const errorMessage = err.response?.data?.errors?.[0] || "Googleログインに失敗しました";
-    
-            setError(errorMessage);
-    
-            // ✅ 失敗時のフラッシュメッセージをセット
             setFlashMessage({
                 message: `ログインに失敗しました: ${errorMessage}`,
                 type: "error",
@@ -228,25 +250,31 @@ export const useAuth = () => {
                 image,
                 line_sub
             });
-
+    
             const { "access-token": accessToken, client, uid: userUid } = response.headers;
-
+    
             if (accessToken && client && userUid) {
                 Cookies.set("access-token", accessToken, { expires: 7 });
                 Cookies.set("client", client, { expires: 7 });
                 Cookies.set("uid", userUid, { expires: 7 });
+    
                 setAuth({ isAuthenticated: true, user: response.data.user });
-                setSuccess("Lineログインに成功しました！");
-                setError(null);
+    
+                setFlashMessage({ message: "LINEログインに成功しました！", type: "success" });
             } else {
-                setError("トークン情報が取得できませんでした");
+                throw new Error("トークン情報が取得できませんでした");
             }
-        } catch (err) {
-            setError("Lineログインに失敗しました");
+        } catch (err: any) {
+            setFlashMessage({
+                message: `LINEログインに失敗しました: ${err.response?.data?.errors?.[0] || "不明なエラー"}`,
+                type: "error",
+            });
         } finally {
             setLoading(false);
+            router.push("/");
         }
     };
+    
 
     const lineLink = async (lineSub: string) => {
         setLoading(true);
@@ -264,7 +292,6 @@ export const useAuth = () => {
           );
     
           if (response.status === 200) {
-            setSuccess("LINEアカウントの連携に成功しました！");
             setAuth((prevState) => ({
               ...prevState,
               user: {
@@ -273,17 +300,13 @@ export const useAuth = () => {
               },
             }));
     
-            // フラッシュメッセージをセット
             setFlashMessage({ message: "LINEアカウントの連携に成功しました！", type: "success" });
     
-            router.push("/"); // トップページへリダイレクト
+            router.push("/");
           } else {
             throw new Error("LINEアカウントの連携に失敗しました。");
           }
         } catch (err: any) {
-          setError(err.response?.data?.errors?.[0] || "LINEアカウントの連携中にエラーが発生しました。");
-    
-          // エラーメッセージをセット
           setFlashMessage({
             message: `連携に失敗しました: ${err.response?.data?.errors?.[0] || "不明なエラー"}`,
             type: "error",
@@ -298,15 +321,16 @@ export const useAuth = () => {
 
     const updateProfile = async (name: string, avatar?: File) => {
         setLoading(true);
-        setError(null);
-        setSuccess(null);
     
         const accessToken = Cookies.get("access-token");
         const client = Cookies.get("client");
         const uid = Cookies.get("uid");
     
         if (!accessToken || !client || !uid) {
-            setError("ログイン情報が不足しています。");
+            setFlashMessage({
+                message: "ログイン情報が不足しています。",
+                type: "error"
+            });
             setLoading(false);
             return;
         }
@@ -317,7 +341,6 @@ export const useAuth = () => {
             if (avatar) {
                 formData.append("user[avatar]", avatar); 
             }
-    
        
             const response = await axiosInstance.put("/auth/profile", formData, {
                 headers: {
@@ -333,16 +356,22 @@ export const useAuth = () => {
                     ...prevState,
                     user: response.data.user, 
                 }));
-                setSuccess("プロフィールが更新されました！");
+                setFlashMessage({
+                    message: "プロフィールが更新されました！",
+                    type: "success"
+                });
             } else {
-                setError("プロフィールの更新に失敗しました。");
+
             }
         } catch (err: any) {
-            setError(err.response?.data?.errors?.[0] || "プロフィール更新中にエラーが発生しました。");
+            setFlashMessage({
+                message: err.response?.data?.errors?.[0] || "プロフィール更新中にエラーが発生しました。",
+                type: "error"
+            });
         } finally {
             setLoading(false);
         }
     };
 
-    return { success, error, loading, signUp, signIn, logout, checkAuthStatus, passwordReset, resetPasswordConfirm, loginWithGoogle, loginWithLine,lineLink,updateProfile };
+    return { loading, signUp, signIn, logout, checkAuthStatus, passwordReset, resetPasswordConfirm, loginWithGoogle, loginWithLine,lineLink,updateProfile };
 };

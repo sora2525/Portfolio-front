@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { axiosInstance } from "../axiosInstance";
 import axios from "axios";
+import { flashMessageState } from "@/lib/atom/flashMessageAtom";
+import { useRecoilState } from "recoil";
 
 type Task = {
     id: number;
@@ -17,7 +19,8 @@ type Task = {
 
 export const useTasks = () => {
     const [tasks, setTasks] = useState<Task[]>([])
-    const [error, setError] = useState<string | null>(null);
+    const [flashMessage, setFlashMessage] = useRecoilState(flashMessageState);
+
 
     const getTasks = async (
         sortBy: string,
@@ -25,7 +28,6 @@ export const useTasks = () => {
         tagId: string,
         status: string
       ): Promise<Task[]> => {
-        setError(null);
         try {
           const response = await axiosInstance.get("/tasks", {
             params: {
@@ -38,21 +40,17 @@ export const useTasks = () => {
           return response.data; // データを返す
         } catch (e: unknown) {
           if (axios.isAxiosError(e) && e.response?.data.errors) {
-            setError(e.response.data.errors.join(", "));
           } else {
-            setError("タスクの取得に失敗しました");
           }
           return []; // エラー時は空の配列を返す
         }
       };
 
     const getTask = async (id: number) => {
-        setError(null);
         try {
             const response = await axiosInstance.get(`/tasks/${id}`);
             return response.data;
         } catch (e: unknown) {
-            setError("タスクの取得に失敗しました");
             return null;
         }
     };
@@ -65,10 +63,9 @@ export const useTasks = () => {
         reminderTime: string,
         tags: number[]
     ) => {
-        setError(null);
-
+        
         if (tags.length > 5) {
-            setError("タグは最大5個までです");
+            setFlashMessage({ message: "タグは最大5個まで設定できます", type: "error" });
             return;
         }
         try {
@@ -83,11 +80,13 @@ export const useTasks = () => {
                 }
             });
             setTasks((prevTasks) => [...prevTasks, response.data]);
+            setFlashMessage({ message: "タスクが作成されました！", type: "success" }); 
         } catch (e: unknown) {
-            if (axios.isAxiosError(e) && e.response?.data.errors) {
-                setError(e.response.data.errors.join(", "));
+            if (axios.isAxiosError(e) && e.response?.data?.errors) {
+                const errorMessage = e.response.data.errors.join("、") || "タスクの作成に失敗しました";
+                setFlashMessage({ message: `タスク作成エラー: ${errorMessage}`, type: "error" });
             } else {
-                setError("タスクの作成に失敗しました");
+                setFlashMessage({ message: "タスクの作成に失敗しました。ネットワークを確認してください。", type: "error" });
             }
         }
     };
@@ -101,7 +100,6 @@ export const useTasks = () => {
         reminderTime: string,
         tags: number[]
     ) => {
-        setError(null);
         try {
             const response = await axiosInstance.put(`/tasks/${id}`, {
                 task: { title, description, due_date: dueDate, priority, reminder_time: reminderTime, tags }
@@ -111,31 +109,28 @@ export const useTasks = () => {
                     task.id === id ? response.data : task
                 )
             );
+            setFlashMessage({ message: "タスクが更新されました！", type: "success" });
         } catch (e: unknown) {
-            if (axios.isAxiosError(e) && e.response?.data.errors) {
-                setError(e.response.data.errors.join(", "));
+            if (axios.isAxiosError(e) && e.response?.data?.errors) {
+                const errorMessage = e.response.data.errors.join("、") || "タスクの更新に失敗しました";
+                setFlashMessage({ message: `タスク更新エラー: ${errorMessage}`, type: "error" });
             } else {
-                setError("タスクの更新に失敗しました");
+                setFlashMessage({ message: "タスクの更新に失敗しました。ネットワークを確認してください。", type: "error" });
             }
         }
     };
 
     const destroyTask = async (id: number) => {
-        setError(null);
         try {
             await axiosInstance.delete(`/tasks/${id}`);
             setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+            setFlashMessage({ message: "タスクが削除されました", type: "success" });
         } catch (e: unknown) {
-            if (axios.isAxiosError(e) && e.response?.data.errors) {
-                setError(e.response.data.errors.join(", "));
-            } else {
-                setError("タスクの削除に失敗しました");
-            }
+            setFlashMessage({ message: "タスクの削除に失敗しました", type: "error" });
         }
     };
 
     const completeTask = async (id: number, currentCompletionDate?: string) => {
-        setError(null);
         try {
             // 未完了にする場合は completion_date を null に設定
             const completion_date = currentCompletionDate
@@ -154,15 +149,12 @@ export const useTasks = () => {
             );
         } catch (e: unknown) {
             if (axios.isAxiosError(e) && e.response?.data.errors) {
-                setError(e.response.data.errors.join(", "));
             } else {
-                setError("タスクの完了/未完了操作に失敗しました");
             }
         }
     };
 
     const addCompletionMessage = async (id: number, message: string) => {
-        setError(null);
         try {
             const response = await axiosInstance.put(`/tasks/${id}`, {
                 task: { completion_message: message },
@@ -174,14 +166,12 @@ export const useTasks = () => {
             );
         } catch (e: unknown) {
             if (axios.isAxiosError(e) && e.response?.data.errors) {
-                setError(e.response.data.errors.join(", "));
             } else {
-                setError("完了メッセージの追加に失敗しました");
             }
         }
     };
 
 
 
-    return { tasks, getTasks, getTask, createTask, updateTask, destroyTask, addCompletionMessage, error, completeTask };
+    return { tasks, getTasks, getTask, createTask, updateTask, destroyTask, addCompletionMessage,  completeTask };
 };

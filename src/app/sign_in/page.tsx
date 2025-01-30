@@ -11,7 +11,7 @@ export default function SignInPage() {
     const [password, setPassword] = useState<string>("");
     const [validationError, setValidationError] = useState<string | null>(null);
     const [redirectMessage, setRedirectMessage] = useState<string | null>(null);
-    const { signIn, loading, error, success } = useAuth();
+    const { signIn, loading } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
@@ -91,11 +91,8 @@ export default function SignInPage() {
                     <LoginButton />
                     <LineLoginButton />
 
-                    {/* 新規登録リンク */}
 
                     {/* 成功、エラー、バリデーションエラーメッセージ */}
-                    {success && <p className="text-green-600 text-center mt-4">{success}</p>}
-                    {error && <p className="text-red-600 text-center mt-4">{error}</p>}
                     {validationError && <p className="text-red-600 text-center mt-4">{validationError}</p>}
                 </div>
             </div>
