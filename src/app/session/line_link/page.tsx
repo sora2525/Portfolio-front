@@ -17,7 +17,7 @@ export default function LineLinkSession() {
         return;
       }
 
-      await lineLink(session.user.sub, router);
+      await lineLink(session.user.sub);
       setLoading(false);
     };
 
