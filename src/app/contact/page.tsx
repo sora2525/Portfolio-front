@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { useContact } from "@/lib/hooks/useContact";
 
@@ -16,7 +16,7 @@ const ContactForm = () => {
     setStatus("送信中...");
 
     try {
-      await createContact(formData); // ❶ APIを呼び出す
+      await createContact(formData);
       setStatus("お問い合わせを送信しました！");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
@@ -25,15 +25,61 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="pointer-events-auto flex flex-col justify-center items-center mt-[100px]">
-      <h2>お問い合わせ</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="お名前" value={formData.name} onChange={handleChange} required />
-        <input type="email" name="email" placeholder="メールアドレス" value={formData.email} onChange={handleChange} required />
-        <textarea name="message" placeholder="お問い合わせ内容" value={formData.message} onChange={handleChange} required />
-        <button type="submit">送信</button>
-      </form>
-      <p>{status}</p>
+    <div className="pointer-events-auto flex flex-col items-center justify-center min-h-screen  p-6">
+      <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-6">
+        <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">お問い合わせ</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* 名前 */}
+          <input
+            type="text"
+            name="name"
+            placeholder="お名前"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
+
+          {/* メールアドレス */}
+          <input
+            type="email"
+            name="email"
+            placeholder="メールアドレス"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
+
+          {/* お問い合わせ内容 */}
+          <textarea
+            name="message"
+            placeholder="お問い合わせ内容"
+            value={formData.message}
+            onChange={handleChange}
+            required
+            rows={5}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
+
+          {/* 送信ボタン */}
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white font-semibold p-3 rounded-lg hover:bg-blue-600 transition duration-200"
+          >
+            送信
+          </button>
+        </form>
+
+        {/* ステータスメッセージ */}
+        <p
+          className={`text-center mt-4 font-medium ${
+            status.includes("失敗") ? "text-red-500" : "text-green-500"
+          }`}
+        >
+          {status}
+        </p>
+      </div>
     </div>
   );
 };
