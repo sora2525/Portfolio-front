@@ -13,7 +13,6 @@ export default function Chat() {
   const { chats, createChat, getChats, clearChats } = useChatLog();
   const { generateResponse } = useAIResponse();
   
-  // ★ リップシンクフックから isLipSyncing を受け取る
   const { speakAndLipSync, isLipSyncing } = useTextToLipSync();
   
   const auth = useRequireAuth();
@@ -31,10 +30,8 @@ export default function Chat() {
   }, []);
 
   const handleSendMessage = async (userMessage: string) => {
-    // チャットにユーザーメッセージを追加
     await createChat(userMessage, 'user');
 
-    // AIからの応答メッセージ取得
     const aiResponse = await generateResponse(
       userMessage,
       chats.map((chat) => ({
