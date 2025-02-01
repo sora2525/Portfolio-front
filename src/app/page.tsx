@@ -15,11 +15,11 @@ export default function Home() {
             </span>
             <p className="mt-1">お知らせ</p>
           </Link>
-          <Link href="" className="flex flex-col justify-center items-center">
+          <Link href="/about" className="flex flex-col justify-center items-center">
             <span className="material-icons" style={{ fontSize: '28px' }}>
-              help
+              info
             </span>
-            <p className="mt-1">使い方</p>
+            <p className="mt-1">アプリ情報</p>
           </Link>
         </div>
 

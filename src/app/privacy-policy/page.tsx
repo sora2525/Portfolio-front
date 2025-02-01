@@ -1,6 +1,16 @@
+import Link from "next/link";
+
 export default function PrivacyPolicy() {
     return (
         <div className="pointer-events-auto max-w-[80%] max-h-[80%] mx-auto px-6 py-12 bg-white shadow-lg rounded-lg h-[80vh] overflow-y-auto mt-[100px]">
+            <Link
+                href="/about"
+                className="absolute top-[80px] left-4 text-3xl text-[#008080] pointer-events-auto"
+            >
+                <span className="material-icons" style={{ fontSize: '48px' }}>
+                    reply
+                </span>
+            </Link>
             <h1 className="text-3xl font-bold text-center mb-6">プライバシーポリシー</h1>
             <p className="text-gray-700 leading-relaxed mb-6">
                 <span className="font-semibold">タスクエールでがんばるもん！</span>（以下，「本サービス」といいます。）は、本サービスにおけるユーザーの個人情報の取扱いについて、以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。

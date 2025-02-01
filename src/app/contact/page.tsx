@@ -1,87 +1,98 @@
 "use client";
 import { useState } from "react";
 import { useContact } from "@/lib/hooks/useContact";
+import Link from "next/link";
 
 const ContactForm = () => {
-  const { createContact } = useContact();
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("");
+    const { createContact } = useContact();
+    const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+    const [status, setStatus] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("送信中...");
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus("送信中...");
 
-    try {
-      await createContact(formData);
-      setStatus("お問い合わせを送信しました！");
-      setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
-      setStatus("送信に失敗しました。");
-    }
-  };
+        try {
+            await createContact(formData);
+            setStatus("お問い合わせを送信しました！");
+            setFormData({ name: "", email: "", message: "" });
+        } catch (error) {
+            setStatus("送信に失敗しました。");
+        }
+    };
 
-  return (
-    <div className="pointer-events-auto flex flex-col items-center justify-center min-h-screen  p-6">
-      <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-6">
-        <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">お問い合わせ</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* 名前 */}
-          <input
-            type="text"
-            name="name"
-            placeholder="お名前"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
-          />
+    return (
 
-          {/* メールアドレス */}
-          <input
-            type="email"
-            name="email"
-            placeholder="メールアドレス"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
-          />
+        <>
+            <Link
+                href="/about"
+                className="absolute top-[80px] left-4 text-3xl text-[#008080] pointer-events-auto"
+            >
+                <span className="material-icons" style={{ fontSize: '48px' }}>
+                    reply
+                </span>
+            </Link>
+            <div className="pointer-events-auto flex flex-col items-center justify-center min-h-screen  p-6">
+                <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-6">
+                    <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">お問い合わせ</h2>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        {/* 名前 */}
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="お名前"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                        />
 
-          {/* お問い合わせ内容 */}
-          <textarea
-            name="message"
-            placeholder="お問い合わせ内容"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            rows={5}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
-          />
+                        {/* メールアドレス */}
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="メールアドレス"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                        />
 
-          {/* 送信ボタン */}
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white font-semibold p-3 rounded-lg hover:bg-blue-600 transition duration-200"
-          >
-            送信
-          </button>
-        </form>
+                        {/* お問い合わせ内容 */}
+                        <textarea
+                            name="message"
+                            placeholder="お問い合わせ内容"
+                            value={formData.message}
+                            onChange={handleChange}
+                            required
+                            rows={5}
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                        />
 
-        {/* ステータスメッセージ */}
-        <p
-          className={`text-center mt-4 font-medium ${
-            status.includes("失敗") ? "text-red-500" : "text-green-500"
-          }`}
-        >
-          {status}
-        </p>
-      </div>
-    </div>
-  );
+                        {/* 送信ボタン */}
+                        <button
+                            type="submit"
+                            className="w-full bg-blue-500 text-white font-semibold p-3 rounded-lg hover:bg-blue-600 transition duration-200"
+                        >
+                            送信
+                        </button>
+                    </form>
+
+                    {/* ステータスメッセージ */}
+                    <p
+                        className={`text-center mt-4 font-medium ${status.includes("失敗") ? "text-red-500" : "text-green-500"
+                            }`}
+                    >
+                        {status}
+                    </p>
+                </div>
+            </div>
+        </>
+    );
 };
 
 export default ContactForm;
