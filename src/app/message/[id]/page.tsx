@@ -36,9 +36,9 @@ export default function TaskPage({ params }: { params: { id: string } }) {
         fetchTask();
     }, [taskId, task, getTask]); 
 
-    const handlePlayMessage = () => {
+    const handlePlayMessage = async () => {
         if (task?.completion_message) {
-            speakAndLipSync(task.completion_message);
+            await speakAndLipSync(task.completion_message);
         }
     };
 
