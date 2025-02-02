@@ -70,26 +70,12 @@ export default function Home() {
           <div className="hidden lg:block border-l-2 border-gray-300 h-20" />
 
           {/* お知らせ */}
-          <Link href="/" className="hidden lg:block text-lg font-medium group flex items-center justify-center">
+          <Link href="/about" className="hidden lg:block text-lg font-medium group flex items-center justify-center">
             <div className="flex flex-col items-center justify-center text-lg">
               <span className="material-icons" style={{ fontSize: '48px' }}>
-                mail
+                info
               </span>
-              <p>お知らせ</p>
-              <div className="hidden lg:block w-full h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
-            </div>
-          </Link>
-
-          {/* 縦線 */}
-          <div className="hidden lg:block border-l-2 border-gray-300 h-20" />
-
-          {/* 使い方 */}
-          <Link href="/" className="hidden lg:block text-lg font-medium group flex items-center justify-center">
-            <div className="flex flex-col items-center justify-center text-lg">
-              <span className="material-icons" style={{ fontSize: '48px' }}>
-                help
-              </span>
-              <p>使い方</p>
+              <p>アプリ情報</p>
               <div className="hidden lg:block w-full h-1 bg-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mt-2" />
             </div>
           </Link>

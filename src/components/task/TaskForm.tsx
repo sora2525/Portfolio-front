@@ -1,5 +1,6 @@
 'use client';
 import { useState } from "react";
+import Link from "next/link";
 
 type Tag = {
   id: number;
@@ -41,7 +42,7 @@ export default function TaskForm({
   const [reminderTime, setReminderTime] = useState(initialTask.reminder_time);
   const [selectedTags, setSelectedTags] = useState<number[]>(initialTask.tags);
   const [tagError, setTagError] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleTagToggle = (tagId: number) => {
     if (selectedTags.includes(tagId)) {
@@ -66,7 +67,7 @@ export default function TaskForm({
     try {
       await onSubmit(title, description, dueDate, priority, reminderTime, selectedTags);
     } finally {
-      setIsSubmitting(false); 
+      setIsSubmitting(false);
     }
   };
 
@@ -164,13 +165,16 @@ export default function TaskForm({
                 type="button"
                 onClick={() => handleTagToggle(tag.id)}
                 className={`px-4 py-1 rounded-full text-sm font-semibold ${selectedTags.includes(tag.id)
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200 text-gray-700"
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-gray-700"
                   } hover:bg-blue-400 hover:text-white transition`}
               >
                 {tag.name}
               </button>
             ))}
+            <Link href="/tags" className="px-4 py-1 rounded-full text-sm font-semibold bg-green-500 text-white hover:bg-green-600 transition">
+              タグ追加
+            </Link>
           </div>
           {tagError && <p className="text-red-500 text-sm mt-1">{tagError}</p>}
         </div>

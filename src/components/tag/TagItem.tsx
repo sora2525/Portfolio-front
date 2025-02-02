@@ -10,7 +10,7 @@ type TagItemProps = {
 export default function TagItem({ id, name, color }: TagItemProps) {
     return (
             <div
-                className="p-1 rounded-sm text-white text-sm font-semibold text-center cursor-pointer hover:opacity-90"
+                className="p-1 px-2 rounded-full text-white text-sm font-semibold text-center cursor-pointer transition transform shadow-md"
                 style={{ backgroundColor: color }}
             >
                 {name}
