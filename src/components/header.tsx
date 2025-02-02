@@ -4,6 +4,7 @@ import { authState } from "@/lib/atom/authAtom";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function PageHeader() {
     const { logout } = useAuth();
@@ -27,15 +28,21 @@ export default function PageHeader() {
     return (
         <div className="bg-pink-400 flex h-[50px] items-center pointer-events-auto justify-between px-4">
             <div className="flex-shrink-0 whitespace-nowrap">
-                <Link href="/" className="text-white font-bold lg:ml-6 whitespace-nowrap">
-                    タスクエール
+                <Link href="/" className="flex justify-center items-center font-caveat text-white font-bold lg:ml-6 whitespace-nowrap">
+                    <p>t a s k   y e l l </p>
+                    <Image
+                        src="/images/Y33KZGG1dDcUVJT1738491973_1738492001.png" 
+                        alt="サンプル画像"
+                        width={35}              
+                        height={30}             
+                    />
                 </Link>
             </div>
             {auth.isAuthenticated && auth.user ? (
                 <div className="flex justify-end items-center">
                     <Link href="/profile" className="text-white font-bold flex mr-6">
                         <span className="material-icons" style={{ fontSize: "36px" }}>
-                        person
+                            person
                         </span>
                     </Link>
                     <button onClick={handleLogout} className="text-white font-bold flex">

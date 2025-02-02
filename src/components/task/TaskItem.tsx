@@ -80,7 +80,7 @@ export default function TaskItem({
             ) : (
                 <div
                     onClick={handleCompleteToggle}
-                    className={`w-8 h-8 sm:min-w-12 sm:min-h-12  min-w-8 min-h-8 flex items-center justify-center cursor-pointer rounded-full ${isCompleted ? "bg-green-500" : "bg-blue-500"}`}
+                    className={`w-8 h-8 sm:min-w-12 sm:min-h-12  min-w-8 min-h-8 flex items-center justify-center cursor-pointer rounded-full ${isCompleted ? "bg-green-400" : "bg-blue-400"}`}
                 >
                     {isCompleted ? (
                         <span className="text-white text-lg sm:text-2xl font-bold">✓</span>
@@ -114,7 +114,7 @@ export default function TaskItem({
 
             {/* 完了メッセージ表示 */}
             {completion_date && (
-                <div className="mt-2 text-green-700">
+                <div className="mt-2 text-green-500">
                     <Link href={`message/${id}`}>
                         <span className="material-icons" style={{ fontSize: '38px' }}>
                             textsms

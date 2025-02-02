@@ -28,8 +28,9 @@ export default function About() {
           <p>X (Twitter): <a href="https://x.com/sora_mero2525" className="text-blue-500 hover:underline">@sora_mero2525</a></p>
           <p className="mt-2">Powered by Next.js & Rails</p>
           <p>Live2D Cubism SDK, にじボイス 使用</p>
-          <p>キャラクターデザイン,イラスト: <a href="https://twitter.com/illustrator" className="text-blue-500 hover:underline">くが様</a></p>
-          <p>モデリング: <a href="https://twitter.com/illustrator" className="text-blue-500 hover:underline">たまねこ様</a></p>
+          <p>キャラクターボイス: 森宮 千乃</p>
+          <p>キャラクターデザイン,イラスト: <a href="https://x.com/kuga_i_" className="text-blue-500 hover:underline">くが様</a></p>
+          <p>モデリング: <a href="https://x.com/TAMA091900" className="text-blue-500 hover:underline">たまねこ様</a></p>
 
           <p className="mt-4 text-gray-500 text-sm">© 2025 タスクエールでがんばるもん！ - All rights reserved.</p>
         </div>
