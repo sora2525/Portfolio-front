@@ -8,38 +8,41 @@ type ChatFormProps = {
 
 export default function ChatForm({ onSendMessage }: ChatFormProps) {
   const messageRef = useRef<HTMLInputElement>(null);
-  const [loading, setLoading] = useState<boolean>(false); 
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userMessage = messageRef.current?.value;
 
     if (userMessage) {
-      setLoading(true); 
+      setLoading(true);
       await onSendMessage(userMessage);
-      messageRef.current!.value = ''; 
-      setLoading(false); 
+      messageRef.current!.value = '';
+      setLoading(false);
     }
   };
 
   return (
-    <div className=''>
-      <form onSubmit={handleSubmit} className="flex items-center m-4 rounded-lg ">
+    <div className="p-4">
+      <form
+        onSubmit={handleSubmit}
+        className="flex items-center m-4 p-4border border-pink-200 rounded-xl shadow-sm"
+      >
         <input
           ref={messageRef}
           type="text"
-          className="flex-grow px-4 py-2 mr-2 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-grow px-4 py-2 mr-2 text-gray-700 bg-pink-50 border border-pink-200 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-300"
           placeholder="メッセージを入力"
           maxLength={100}
           required
-          disabled={loading} // リクエスト中は入力できないようにする
+          disabled={loading}
         />
         <button
           type="submit"
-          className="focus:outline-none focus:ring-blue-400 focus:ring-opacity-75 hover:text-blue-700"
-          disabled={loading} // リクエスト中はボタンを無効にする
+          className="flex items-center justify-center p-1 rounded-full bg-blue-200 hover:bg-blue-300 transition focus:outline-none focus:ring-2 focus:ring-blue-300"
+          disabled={loading}
         >
-          <span className="material-icons text-black" style={{ fontSize: '52px' }}>
+          <span className="material-icons text-blue-700" style={{ fontSize: '48px' }}>
             play_circle_filled
           </span>
         </button>

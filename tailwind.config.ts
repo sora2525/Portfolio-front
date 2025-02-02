@@ -14,6 +14,7 @@ const config: Config = {
       },
       fontFamily: {
         custom: ['"Custom Font"', "sans-serif"], 
+        caveat: ['"Caveat"', 'cursive'],
       },
       screens: {
         xxs: "400px", 

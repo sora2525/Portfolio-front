@@ -14,7 +14,7 @@ export default function Task() {
     const [order, setOrder] = useState<string>("desc");
     const [selectedTag, setSelectedTag] = useState<string>("");
     const [status, setStatus] = useState<string>("all");
-    const [isCreating, setIsCreating] = useState<boolean>(false); 
+    const [isCreating, setIsCreating] = useState<boolean>(false);
     const auth = useRequireAuth();
 
     useEffect(() => {
@@ -29,8 +29,8 @@ export default function Task() {
 
     const handleFormSubmit = async (title: string, description: string, dueDate: string, priority: number, reminderTime: string, tags: number[]) => {
         await createTask(title, description, dueDate, priority, reminderTime, tags);
-        setIsCreating(false); 
-        getTasks(sortBy, order, selectedTag, status); 
+        setIsCreating(false);
+        getTasks(sortBy, order, selectedTag, status);
     };
 
     return (
@@ -70,23 +70,36 @@ export default function Task() {
 
                 {/* ソートセレクトボックス */}
                 <div className="flex gap-2 mt-4">
-                    <select onChange={(e) => setSortBy(e.target.value)} value={sortBy} className="h-[5%]">
+                    <select
+                        onChange={(e) => setSortBy(e.target.value)}
+                        value={sortBy}
+                        className="px-2 py-1 border border-pink-200  rounded-md focus:outline-none focus:ring-2 focus:ring-pink-300"
+                    >
                         <option value="created_at">作成日順</option>
                         <option value="due_date">期限順</option>
                         <option value="priority">優先度順</option>
                     </select>
 
-                    <select onChange={(e) => setOrder(e.target.value)} value={order} className="h-[5%]">
+                    <select
+                        onChange={(e) => setOrder(e.target.value)}
+                        value={order}
+                        className="px-2 py-1 border border-pink-200  rounded-md focus:outline-none focus:ring-2 focus:ring-pink-300"
+                    >
                         <option value="asc">昇順</option>
                         <option value="desc">降順</option>
                     </select>
-                    <select onChange={(e) => setSelectedTag(e.target.value)} value={selectedTag} className="h-[5%]">
+                    <select
+                        onChange={(e) => setSelectedTag(e.target.value)}
+                        value={selectedTag}
+                        className="px-2 py-1 border border-pink-200  rounded-md focus:outline-none focus:ring-2 focus:ring-pink-300"
+                    >
                         <option value="">すべてのタグ</option>
                         {tags.map((tag) => (
                             <option key={tag.id} value={tag.id}>{tag.name}</option>
                         ))}
                     </select>
                 </div>
+
 
                 <div className="overflow-y-auto max-h-[60vh] xxs:max-h-[65vh] mt-4">
                     <ul className="space-y-2 lg:space-y-4">
@@ -134,7 +147,7 @@ export default function Task() {
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <TaskForm
                         onSubmit={handleFormSubmit}
-                        onCancel={() => setIsCreating(false)} 
+                        onCancel={() => setIsCreating(false)}
                         tags={tags}
                     />
                 </div>

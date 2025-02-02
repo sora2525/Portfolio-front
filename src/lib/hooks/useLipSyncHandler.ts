@@ -67,7 +67,7 @@ export function useLipSyncHandler() {
   };
 
   const updateLipSync = () => {
-    const updateInterval = 16; // 60FPS
+    const updateInterval = 32; // 32FPS
 
     const update = () => {
       if (!isLipSyncingRef.current) return;
