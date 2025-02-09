@@ -9,11 +9,11 @@ export default function Home() {
         {/* ReloadButtonを右上に配置 */}
         <div className="pointer-events-auto absolute top-[100px] right-4 z-50 flex flex-col justify-center items-center font-extrabold space-y-4 text-white/95 text-sm lg:hidden" >
           <ReloadButton />
-          <Link href="" className="flex flex-col justify-center items-center">
+          <Link href="/how-to-use" className="flex flex-col justify-center items-center">
             <span className="material-icons" style={{ fontSize: '28px' }}>
-              mail
+              help
             </span>
-            <p className="mt-1">お知らせ</p>
+            <p className="mt-1">使い方</p>
           </Link>
           <Link href="/about" className="flex flex-col justify-center items-center">
             <span className="material-icons" style={{ fontSize: '28px' }}>

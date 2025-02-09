@@ -39,6 +39,12 @@
 				},
 				{
 					"File": "motion/10.motion3.json"
+				},
+				{
+					"File": "motion/16.motion3.json"
+				},
+				{
+					"File": "motion/17.motion3.json"
 				}
 			],
 			"LipSync":[
