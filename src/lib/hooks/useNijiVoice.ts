@@ -1,17 +1,14 @@
 "use client";
 import { useState, useCallback } from "react";
+import axios from "axios";
 import WavEncoder from "wav-encoder";
 
 export function useNijiVoice() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const apiKey =
-    process.env.REACT_APP_NIJI_VOICE_API_KEY ||
-    process.env.NEXT_PUBLIC_NIJI_VOICE_API_KEY;
-  const voiceActorId =
-    process.env.REACT_APP_NIJI_VOICE_ACTOR_ID ||
-    process.env.NEXT_PUBLIC_NIJI_VOICE_ACTOR_ID;
+  const apiKey = process.env.NEXT_PUBLIC_NIJI_VOICE_API_KEY;
+  const voiceActorId = process.env.NEXT_PUBLIC_NIJI_VOICE_ACTOR_ID;
 
   const generateVoice = useCallback(
     async (text: string): Promise<string | null> => {
@@ -32,28 +29,22 @@ export function useNijiVoice() {
         };
 
         const url = `https://api.nijivoice.com/api/platform/v1/voice-actors/${voiceActorId}/generate-encoded-voice`;
-        const response = await fetch(url, {
-          method: "POST",
+
+        const response = await axios.post(url, requestBody, {
           headers: {
             accept: "application/json",
             "content-type": "application/json",
             "x-api-key": apiKey,
           },
-          body: JSON.stringify(requestBody),
         });
 
-        if (!response.ok) {
-          throw new Error(
-            `にじボイスAPIの呼び出しに失敗しました (status: ${response.status})`
-          );
-        }
-
-        const data = await response.json();
-        const base64Audio = data?.generatedVoice?.base64Audio as string | undefined;
-        if (!base64Audio) {
+        if (response.status !== 200 || !response.data?.generatedVoice?.base64Audio) {
           throw new Error("音声データを取得できませんでした。");
         }
 
+        const base64Audio = response.data.generatedVoice.base64Audio;
+
+        // **Base64データをArrayBufferに変換**
         const byteString = atob(base64Audio);
         const byteNumbers = new Uint8Array(byteString.length);
         for (let i = 0; i < byteString.length; i++) {
@@ -61,16 +52,16 @@ export function useNijiVoice() {
         }
         const originalArrayBuffer = byteNumbers.buffer;
 
+        // **Audioデータをデコード**
         const audioCtx = new AudioContext();
         const audioBuffer = await audioCtx.decodeAudioData(originalArrayBuffer);
 
+        // **WAVフォーマットにエンコード**
         const wavData = {
           sampleRate: audioBuffer.sampleRate,
           channelData: [
-            audioBuffer.getChannelData(0), 
-            ...(audioBuffer.numberOfChannels > 1
-              ? [audioBuffer.getChannelData(1)]
-              : []),
+            audioBuffer.getChannelData(0),
+            ...(audioBuffer.numberOfChannels > 1 ? [audioBuffer.getChannelData(1)] : []),
           ],
         };
         const encodedWavArrayBuffer = await WavEncoder.encode(wavData);
@@ -78,7 +69,7 @@ export function useNijiVoice() {
         const blob = new Blob([encodedWavArrayBuffer], { type: "audio/wav" });
         const blobUrl = URL.createObjectURL(blob);
 
-        console.log("Generated linear PCM WAV Blob URL:", blobUrl);
+        console.log("Generated WAV Blob URL:", blobUrl);
 
         return blobUrl;
       } catch (err: any) {

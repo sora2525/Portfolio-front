@@ -11,7 +11,7 @@ export default function TermsOfService() {
                     reply
                 </span>
             </Link>
-            <div className="pointer-events-auto max-w-3xl mx-auto px-6 py-12 bg-white shadow-lg rounded-lg h-[80vh] overflow-y-auto pr-2 border border-gray-300 mt-[100px]">
+            <div className="pointer-events-auto max-w-[80%] max-h-[80%] max-w-3xl mx-auto px-6 py-12 bg-white shadow-lg rounded-lg h-[80vh] overflow-y-auto pr-2 border border-gray-300 mt-[100px]">
                 <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">利用規約</h1>
                 <p className="text-gray-700 leading-relaxed mb-6">
                     この利用規約（以下，「本規約」といいます。）は、
