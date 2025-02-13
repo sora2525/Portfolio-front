@@ -1,12 +1,20 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { ChatMessage } from '@/lib/hooks/useChatLog';
+import { Noto_Sans_JP } from "next/font/google";
+
+const notoSansJP = Noto_Sans_JP({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
 
 type ChatLogProps = {
   chats: ChatMessage[];
   onClearChats: () => void;
   onCharacterMessageClick: (message: string) => void;
-  isLipSyncing: boolean; 
+  isLipSyncing: boolean;
 };
 
 export default function ChatLog({
@@ -51,9 +59,8 @@ export default function ChatLog({
           {visibleChats.map((chat) => (
             <div
               key={chat.id}
-              className={`chat-message flex items-center ${
-                chat.message_type === 'user' ? 'justify-end' : 'justify-start'
-              }`}
+              className={`chat-message flex items-center ${chat.message_type === 'user' ? 'justify-end' : 'justify-start'
+                }`}
               onClick={() => {
                 if (chat.message_type === 'character' && !isLipSyncing) {
                   onCharacterMessageClick(chat.message);
@@ -61,29 +68,26 @@ export default function ChatLog({
               }}
             >
               <div
-  className={`
-    flex items-center max-w-[70%] px-4 py-2 mt-2 rounded-lg sm:rounded-full text-sm shadow-md
-    ${
-      chat.message_type === 'user'
-        ? 'bg-purple-100 text-purple-900'
-        : 'bg-pink-100 text-pink-900'
-    }
-    ${
-      chat.message_type === 'character'
-        ? `cursor-pointer ${
-            isLipSyncing ? 'opacity-60 cursor-not-allowed' : 'hover:bg-pink-200'
-          }`
-        : ''
-    }
+                className={`
+    flex items-center max-w-[70%] px-4 py-2 mt-2 rounded-lg sm:rounded-full text-sm sm:text-md lg:text-lg shadow-md ${notoSansJP.className}
+    ${chat.message_type === 'user'
+                    ? 'bg-purple-100 text-purple-900'
+                    : 'bg-pink-100 text-pink-900'
+                  }
+    ${chat.message_type === 'character'
+                    ? `cursor-pointer ${isLipSyncing ? 'opacity-60 cursor-not-allowed' : 'hover:bg-pink-200'
+                    }`
+                    : ''
+                  }
   `}
->
-  <p>{chat.message}</p>
-  {chat.message_type === 'character' && (
-    <span className="material-icons ml-2 text-xl text-pink-700">
-      volume_up
-    </span>
-  )}
-</div>
+              >
+                <p>{chat.message}</p>
+                {chat.message_type === 'character' && (
+                  <span className="material-icons ml-2 text-xl text-pink-700">
+                    volume_up
+                  </span>
+                )}
+              </div>
 
             </div>
           ))}

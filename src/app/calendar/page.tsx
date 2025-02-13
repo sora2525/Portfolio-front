@@ -7,6 +7,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import jaLocale from '@fullcalendar/core/locales/ja';
 import { useTasks } from '@/lib/hooks/useTasks';
 import TaskForm from '@/components/task/TaskForm';
+import { useRequireAuth } from '@/lib/hooks/useRequireAuth';
+
 
 type Task = {
   id: number;
@@ -26,6 +28,7 @@ const CalendarPage = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTasks, setSelectedTasks] = useState<Task[]>([]);
   const router = useRouter();
+  const auth = useRequireAuth();
 
   const updateEvents = (tasks: Task[]) => {
     setEvents(
