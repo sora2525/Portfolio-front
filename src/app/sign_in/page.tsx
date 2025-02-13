@@ -35,14 +35,20 @@ export default function SignInPage() {
     };
 
     return (
-        <>
-            <div className="flex flex-col justify-center items-center w-full h-screen p-6 mt-[50px]">
-                <Link href="/" className="absolute top-[80px] left-4 text-3xl text-[#008080] pointer-events-auto ">
-                    <span className="material-icons" style={{ fontSize: '48px' }}>
-                        reply
-                    </span>
-                </Link>
-                <div className="bg-white w-full max-w-md p-8 rounded-lg shadow-lg space-y-6 pointer-events-auto mb-10">
+        <div className="w-full h-screen flex flex-col justify-center items-center relative">
+            <div className="w-full max-w-[1000px] h-full flex flex-col justify-center items-center relative">
+                <div className="absolute top-4 left-4">
+                    <Link
+                        href="/"
+                        className="w-14 h-14 flex items-center justify-center rounded-full 
+           bg-white/80 shadow-md text-[#008080] hover:bg-white hover:shadow-lg 
+           transition-all duration-300 pointer-events-auto mt-[80px]"
+                    >
+                        <span className="material-icons leading-none" style={{ fontSize: "38px" }}>reply</span>
+                    </Link>
+                </div>
+
+                <div className="bg-white w-[90%] max-w-md p-8 rounded-lg shadow-lg space-y-6 pointer-events-auto mt-10">
                     <h2 className="text-2xl font-semibold text-center text-teal-600">ログイン</h2>
 
                     {/* リダイレクトメッセージ */}
@@ -82,8 +88,8 @@ export default function SignInPage() {
                         </button>
                     </form>
 
-                    <Link 
-                        href="/sign_up" 
+                    <Link
+                        href="/sign_up"
                         className="block text-center pointer-events-auto bg-teal-600 text-white rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 py-3"
                     >
                         メールアドレスから登録
@@ -91,11 +97,10 @@ export default function SignInPage() {
                     <LoginButton />
                     <LineLoginButton />
 
-
                     {/* 成功、エラー、バリデーションエラーメッセージ */}
                     {validationError && <p className="text-red-600 text-center mt-4">{validationError}</p>}
                 </div>
             </div>
-        </>
+        </div>
     );
 }
