@@ -80,7 +80,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
 
   return (
     <div className="pointer-events-auto flex flex-col items-center w-full h-screen relative justify-end">
-      <div className="bg-[rgba(243,244,246,0.85)] w-[95%] max-w-[1000px] h-[90%] p-4 rounded-lg shadow-lg flex flex-col justify-between mb-5 overflow-y-auto">
+      <div className="bg-[rgba(243,244,246,0.85)] w-[95%] max-w-[1000px] h-[90%] p-4 rounded-lg shadow-lg flex flex-col justify-between mb-2 overflow-y-auto">
         {error ? (
           <p style={{ color: "red" }}>{error}</p>
         ) : (
