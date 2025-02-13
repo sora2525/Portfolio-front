@@ -1,25 +1,33 @@
 import Link from "next/link";
+
 export default function TermsOfService() {
     return (
+        <div className="w-full h-screen flex flex-col justify-center items-center relative">
+            <div className="w-full max-w-[1000px] h-full flex flex-col justify-center items-center relative">
+                <div className="absolute top-4 left-4">
+                    <Link
+                        href="/about"
+                        className="w-14 h-14 flex items-center justify-center rounded-full 
+                   bg-white/80 shadow-md text-[#008080] hover:bg-white hover:shadow-lg 
+                   transition-all duration-300 pointer-events-auto mt-[80px]"
+                    >
+                        <span className="material-icons leading-none" style={{ fontSize: "38px" }}>reply</span>
+                    </Link>
+                </div>
 
-        <>
-            <Link
-                href="/about"
-                className="absolute top-[80px] left-4 text-3xl text-[#008080] pointer-events-auto"
-            >
-                <span className="material-icons" style={{ fontSize: '48px' }}>
-                    reply
-                </span>
-            </Link>
-            <div className="pointer-events-auto max-w-[80%] max-h-[80%] max-w-3xl mx-auto px-6 py-12 bg-white shadow-lg rounded-lg h-[80vh] overflow-y-auto pr-2 border border-gray-300 mt-[100px]">
-                <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">利用規約</h1>
-                <p className="text-gray-700 leading-relaxed mb-6">
-                    この利用規約（以下，「本規約」といいます。）は、
-                    <span className="font-semibold">タスクエールでがんばるもん！</span>（以下，「本サービス」といいます。）の利用条件を定めるものです。
-                    本サービスをご利用になる全ての方（以下，「ユーザー」といいます。）には、本規約に従って本サービスをご利用いただきます。
-                </p>
+                {/* 規約の内容を含むコンテナ */}
+                <div className="pointer-events-auto w-[90%] max-w-[1000px] max-h-[80%] mx-auto px-6 py-12 
+                bg-white shadow-lg rounded-lg h-[80vh] overflow-y-auto pr-2 border border-gray-300 mt-[100px]">
 
-                <section className="mb-8">
+                    <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">利用規約</h1>
+
+                    <p className="text-gray-700 leading-relaxed mb-6">
+                        この利用規約（以下，「本規約」といいます。）は、
+                        <span className="font-semibold">タスクエールでがんばるもん！</span>（以下，「本サービス」といいます。）の利用条件を定めるものです。
+                        本サービスをご利用になる全ての方（以下，「ユーザー」といいます。）には、本規約に従って本サービスをご利用いただきます。
+                    </p>
+
+                    <section className="mb-8">
                     <h2 className="text-2xl font-semibold mb-3 border-b-2 pb-2 border-gray-300">第1条（適用）</h2>
                     <p className="text-gray-700 leading-relaxed">
                         本規約は、ユーザーと本サービスとの間の本サービスの利用に関わる一切の関係に適用されるものとします。
@@ -276,8 +284,8 @@ export default function TermsOfService() {
                 </section>
 
 
-
+                </div>
             </div>
-        </>
+        </div>
     );
 }

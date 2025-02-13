@@ -1,9 +1,16 @@
 'use client';
 import { useState } from "react";
+import { Noto_Sans_JP } from "next/font/google"; 
+
+const notoSansJP = Noto_Sans_JP({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
 
 type MessageProps = {
     completion_message: string | null;
-    onPlayMessage: () => Promise<void>; // `Promise<void>` に変更
+    onPlayMessage: () => Promise<void>; 
 };
 
 export default function Message({ completion_message, onPlayMessage }: MessageProps) {
@@ -34,9 +41,11 @@ export default function Message({ completion_message, onPlayMessage }: MessagePr
                     <p>{isPlaying ? "再生中..." : "音声を生成"}</p>
                 </button>
             </div>
-            <div className="bg-[rgba(243,244,246,0.85)] p-4 overflow-y-auto rounded-b-md rounded-tl-md max-h-[95%] h-[90%]">
-                <p className="break-words text-md sm:text-2xl">{completion_message}</p>
+            <div className={`bg-pink-100/80 p-4 overflow-y-auto rounded-b-md rounded-tl-md max-h-[95%] h-[90%] 
+                border-2 border-pink-400/80 shadow-md ${notoSansJP.className}`}>
+                <p className="break-words text-md sm:text-2xl text-gray-800">{completion_message}</p>
             </div>
+
         </div>
     );
 }

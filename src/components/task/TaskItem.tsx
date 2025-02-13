@@ -60,7 +60,7 @@ export default function TaskItem({
         // 完了時のみ褒めるメッセージを生成
         if (!isCompleted) {
             const res = await generateResponse(
-                `${title},${description}`,
+                `タイトル:${title},詳細:${description}`,
                 [],
                 "praise",
                 50

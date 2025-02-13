@@ -26,20 +26,23 @@ const ContactForm = () => {
     };
 
     return (
+        <div className="w-full h-screen flex flex-col justify-center items-center relative">
+            <div className="w-full max-w-[1000px] h-full flex flex-col justify-center items-center relative">
+                <div className="absolute top-4 left-4">
+                    <Link
+                        href="/about"
+                        className="w-14 h-14 flex items-center justify-center rounded-full 
+                   bg-white/80 shadow-md text-[#008080] hover:bg-white hover:shadow-lg 
+                   transition-all duration-300 pointer-events-auto mt-[80px]"
+                    >
+                        <span className="material-icons leading-none" style={{ fontSize: "38px" }}>reply</span>
+                    </Link>
+                </div>
 
-        <>
-            <Link
-                href="/about"
-                className="absolute top-[80px] left-4 text-3xl text-[#008080] pointer-events-auto"
-            >
-                <span className="material-icons" style={{ fontSize: '48px' }}>
-                    reply
-                </span>
-            </Link>
-            <div className="pointer-events-auto flex flex-col items-center justify-center min-h-screen  p-6">
-                <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-6">
+                {/* お問い合わせフォーム */}
+                <div className="pointer-events-auto flex flex-col items-center justify-center w-full max-w-md bg-white shadow-lg rounded-xl p-6">
                     <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">お問い合わせ</h2>
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form onSubmit={handleSubmit} className="space-y-4 w-full">
                         {/* 名前 */}
                         <input
                             type="text"
@@ -91,7 +94,8 @@ const ContactForm = () => {
                     </p>
                 </div>
             </div>
-        </>
+        </div>
+
     );
 };
 

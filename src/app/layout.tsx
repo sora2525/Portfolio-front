@@ -9,6 +9,7 @@ import { useAuth } from "@/lib/hooks/useAuth";
 import Live2dView from "@/components/live2d/live2dView";
 import '@/styles/globals.css';
 import { Caveat } from 'next/font/google';
+import { Noto_Sans_JP } from "next/font/google";
 
 
 import { SessionProvider } from 'next-auth/react';
@@ -18,6 +19,12 @@ import FlashMessage from "@/components/FlashMessage";
 const caveat = Caveat({
   subsets: ['latin'], // 必要に応じて他のサブセットも追加
   weight: '400',
+});
+
+const notoSansJP = Noto_Sans_JP({
+  subsets: ["latin"],
+  weight: ["400", "700"], // 使うウェイトを指定（太さ）
+  display: "swap",
 });
 
 const geistSans = localFont({
@@ -78,7 +85,7 @@ export default function RootLayout({
                   <FlashMessage/>
                 </div>
                 <div className="flex flex-row-reverse w-full">
-                  <div className="absolute z-10 pointer-events-none w-full lg:w-[60%] text-brack">
+                  <div className="absolute z-10 pointer-events-none w-full  text-brack">
                     {children}
                   </div>
                   <div className="absolute inset-0 z-0">

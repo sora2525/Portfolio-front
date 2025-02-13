@@ -39,7 +39,7 @@ export default function Diary() {
 
   return (
     <div className="pointer-events-auto flex flex-col items-center justify-end w-full h-screen">
-      <div className="bg-[rgba(243,244,246,0.85)] w-[95%] h-[90%]  p-3 rounded-lg shadow-lg mb-2">
+      <div className="bg-[rgba(243,244,246,0.85)] w-[95%] max-w-[1000px] h-[90%]  p-3 rounded-lg shadow-lg mb-2">
 
         <div className="mb-4 flex items-center  w-full">
           {/* 戻るリンク */}

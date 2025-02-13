@@ -4,6 +4,8 @@ import { useTasks } from "@/lib/hooks/useTasks";
 import { useEffect, useState } from "react";
 import { useTextToLipSync } from "@/lib/hooks/useTextToLipSync";
 import Link from "next/link";
+import { useRequireAuth } from '@/lib/hooks/useRequireAuth';
+
 
 type Task = {
     id: number;
@@ -19,22 +21,24 @@ type Task = {
 };
 
 export default function TaskPage({ params }: { params: { id: string } }) {
-    const { getTask } = useTasks(); 
-    const [task, setTask] = useState<Task | null>(null); 
+    const { getTask } = useTasks();
+    const [task, setTask] = useState<Task | null>(null);
     const { speakAndLipSync } = useTextToLipSync();
+    const auth = useRequireAuth();
 
-    const taskId = Number(params.id); 
+
+    const taskId = Number(params.id);
 
     useEffect(() => {
         const fetchTask = async () => {
-            if (taskId && !task) { 
-                const taskData = await getTask(taskId); 
-                setTask(taskData); 
+            if (taskId && !task) {
+                const taskData = await getTask(taskId);
+                setTask(taskData);
             }
         };
 
         fetchTask();
-    }, [taskId, task, getTask]); 
+    }, [taskId, task, getTask]);
 
     const handlePlayMessage = async () => {
         if (task?.completion_message) {
@@ -42,18 +46,26 @@ export default function TaskPage({ params }: { params: { id: string } }) {
         }
     };
 
-    if (!task) return <div>Loading...</div>; 
+    if (!task) return <div>Loading...</div>;
 
     return (
-        <div className="w-full h-screen flex justify-end items-center flex-col relative">
-            <Link href="/tasks" className="pointer-events-auto absolute top-[80px] left-4 text-3xl text-[#008080]">
-                <span className="material-icons" style={{ fontSize: '48px' }}>
-                    reply
-                </span>
-            </Link>
+        <div className="w-full h-screen flex flex-col justify-center items-center relative">
+            <div className="w-full max-w-[1000px] h-full flex flex-col justify-end items-center relative">
+                <div className="absolute top-4 left-4">
+                    <Link
+                        href="/"
+                        className="w-14 h-14 flex items-center justify-center rounded-full 
+                   bg-white/80 shadow-md text-[#008080] hover:bg-white hover:shadow-lg 
+                   transition-all duration-300 pointer-events-auto mt-[80px]"
+                    >
+                        <span className="material-icons leading-none" style={{ fontSize: "38px" }}>reply</span>
+                    </Link>
+                </div>
 
-            {/* メッセージコンポーネント */}
-            <Message completion_message={task.completion_message} onPlayMessage={handlePlayMessage} />
+                {/* メッセージコンポーネント */}
+                <Message completion_message={task.completion_message} onPlayMessage={handlePlayMessage} />
+            </div>
         </div>
+
     );
 }

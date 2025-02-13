@@ -35,7 +35,7 @@ export default function Task() {
 
     return (
         <div className="pointer-events-auto flex flex-col items-center justify-end w-full h-screen">
-            <div className="bg-[rgba(243,244,246,0.85)] w-[95%] h-[90%]  p-3 rounded-lg shadow-lg mb-2">
+            <div className="bg-[rgba(243,244,246,0.85)] w-[95%] max-w-[1000px] h-[90%]  p-3 rounded-lg shadow-lg mb-2">
                 <div className="flex w-full justify-between items-center">
                     <Link href="/"><span className="material-icons text-[#008080]" style={{ fontSize: '36px' }}>
                         reply

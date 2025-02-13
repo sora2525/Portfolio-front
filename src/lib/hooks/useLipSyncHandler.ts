@@ -67,7 +67,7 @@ export function useLipSyncHandler() {
   };
 
   const updateLipSync = () => {
-    const updateInterval = 32; // 32FPS
+    const updateInterval = 50; // 20FPS
 
     const update = () => {
       if (!isLipSyncingRef.current) return;
@@ -85,7 +85,7 @@ export function useLipSyncHandler() {
         }
 
         const rms = wavFileHandlerRef.current.getRms();
-        const scaledRms = Math.min(rms * 10, 1);
+        const scaledRms = Math.min(rms * 5, 1);
         model.setLipSyncValue(scaledRms);
       }
     };

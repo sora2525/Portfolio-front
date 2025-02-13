@@ -12,15 +12,15 @@ import Link from 'next/link';
 export default function Chat() {
   const { chats, createChat, getChats, clearChats } = useChatLog();
   const { generateResponse } = useAIResponse();
-  
+
   const { speakAndLipSync, isLipSyncing } = useTextToLipSync();
-  
+
   const auth = useRequireAuth();
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobile(window.innerWidth <= 1024); 
+      setIsMobile(window.innerWidth <= 1024);
     };
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
@@ -44,7 +44,7 @@ export default function Chat() {
 
     if (aiResponse) {
       await createChat(aiResponse, 'character');
-      
+
       // if (!isMobile && !isLipSyncing) {
       //   speakAndLipSync(aiResponse); 
       // }
@@ -55,24 +55,28 @@ export default function Chat() {
 
   const onClickCharacterMessage = async (characterMessage: string) => {
     if (!isLipSyncing) {
-      speakAndLipSync(characterMessage); 
+      speakAndLipSync(characterMessage);
     }
   }
 
   if (!auth.isAuthenticated) {
-    return null; 
+    return null;
   }
 
   return (
-    <div className="w-full h-screen flex flex-col justify-end items-center">
-      <Link
-        href="/"
-        className="absolute top-[80px] left-4 text-3xl text-[#008080] pointer-events-auto"
-      >
-        <span className="material-icons" style={{ fontSize: '48px' }}>
-          reply
-        </span>
-      </Link>
+    <div className="w-full h-screen flex flex-col justify-center items-center relative">
+      <div className="w-full max-w-[1000px] h-full flex flex-col justify-end items-center relative">
+        <div className="absolute top-4 left-4">
+          <Link
+            href="/"
+            className="w-14 h-14 flex items-center justify-center rounded-full 
+                   bg-white/80 shadow-md text-[#008080] hover:bg-white hover:shadow-lg 
+                   transition-all duration-300 pointer-events-auto mt-[80px]"
+          >
+            <span className="material-icons leading-none" style={{ fontSize: "38px" }}>reply</span>
+          </Link>
+        </div>
+      </div>
 
       <div className="pointer-events-auto sticky bottom-0 chat-container flex flex-col w-full max-w-lg lg:max-w-[700px] p-4 rounded-lg">
         <ChatLog
@@ -83,6 +87,8 @@ export default function Chat() {
         />
         <ChatForm onSendMessage={handleSendMessage} />
       </div>
+
     </div>
+
   );
 }
