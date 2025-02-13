@@ -53,7 +53,7 @@ export default function TaskPage({ params }: { params: { id: string } }) {
             <div className="w-full max-w-[1000px] h-full flex flex-col justify-end items-center relative">
                 <div className="absolute top-4 left-4">
                     <Link
-                        href="/"
+                        href="/tasks"
                         className="w-14 h-14 flex items-center justify-center rounded-full 
                    bg-white/80 shadow-md text-[#008080] hover:bg-white hover:shadow-lg 
                    transition-all duration-300 pointer-events-auto mt-[80px]"
