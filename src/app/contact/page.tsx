@@ -27,7 +27,7 @@ const ContactForm = () => {
 
     return (
         <div className="w-full h-screen flex flex-col justify-center items-center relative">
-            <div className="w-full max-w-[1000px] h-full flex flex-col justify-center items-center relative">
+            <div className="w-full  max-w-[1000px] h-full flex flex-col justify-center items-center relative">
                 <div className="absolute top-4 left-4">
                     <Link
                         href="/about"
@@ -40,7 +40,7 @@ const ContactForm = () => {
                 </div>
 
                 {/* お問い合わせフォーム */}
-                <div className="pointer-events-auto flex flex-col items-center justify-center w-full max-w-md bg-white shadow-lg rounded-xl p-6">
+                <div className="pointer-events-auto flex flex-col items-center justify-center w-[90%] max-w-[600px]  bg-white shadow-lg rounded-xl p-6">
                     <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">お問い合わせ</h2>
                     <form onSubmit={handleSubmit} className="space-y-4 w-full">
                         {/* 名前 */}

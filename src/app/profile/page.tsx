@@ -35,7 +35,7 @@ export default function Profile() {
                     </Link>
                 </div>
 
-                <div className="pointer-events-auto bg-white w-full max-w-md p-8 rounded-lg shadow-lg space-y-6">
+                <div className="pointer-events-auto  bg-white w-[90%] max-w-md p-8 rounded-lg shadow-lg space-y-6">
                     <h2 className="text-2xl font-semibold text-center text-teal-600">プロフィール</h2>
 
                     {auth.user ? (
