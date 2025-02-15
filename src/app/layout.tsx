@@ -15,15 +15,17 @@ import { Noto_Sans_JP } from "next/font/google";
 import { SessionProvider } from 'next-auth/react';
 import FlashMessage from "@/components/FlashMessage";
 
+// GoogleAnalytics コンポーネントのインポート（Next.js v14以降用）
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const caveat = Caveat({
-  subsets: ['latin'], // 必要に応じて他のサブセットも追加
+  subsets: ['latin'],
   weight: '400',
 });
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
-  weight: ["400", "700"], // 使うウェイトを指定（太さ）
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -58,34 +60,39 @@ export default function RootLayout({
     <html lang="ja">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icon512_maskable.png"></link>
+        <link rel="apple-touch-icon" href="/icon512_maskable.png" />
         <meta name="theme-color" content="#F472B6" />
         <link rel="icon" href="/favicon.ico" />
         <Script
           src="/live2d/live2dcubismcore.min.js"
           strategy="beforeInteractive"
         />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
+        />
 
         <meta property="og:title" content="タスクエールでがんばるもん！" />
-        <meta property="og:description" content="タスク管理をもっと楽しく！可愛いキャラクターと一緒にタスクを整理しよう。" />
+        <meta
+          property="og:description"
+          content="タスク管理をもっと楽しく！可愛いキャラクターと一緒にタスクを整理しよう。"
+        />
         <meta property="og:url" content="https://www.task-yell.jp" />
         <meta property="og:site_name" content="タスクエールでがんばるもん！" />
         <meta property="og:locale" content="ja_JP" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SessionProvider>
           <RecoilRoot>
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX"} />
             <AuthLoader>
               <div className="h-screen w-screen bg-[url('/images/stage16.png')] bg-cover bg-no-repeat bg-center relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full z-20">
                   <PageHeader />
-                  <FlashMessage/>
+                  <FlashMessage />
                 </div>
                 <div className="flex flex-row-reverse w-full">
-                  <div className="absolute z-10 pointer-events-none w-full  text-brack">
+                  <div className="absolute z-10 pointer-events-none w-full text-brack">
                     {children}
                   </div>
                   <div className="absolute inset-0 z-0">
