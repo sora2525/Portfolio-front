@@ -6,7 +6,6 @@ import { useLipSyncHandler } from "./useLipSyncHandler";
 export function useTextToLipSync() {
   const { generateVoice, isLoading: isGenerating, error } = useNijiVoice();
   const { startLipSync } = useLipSyncHandler();
-
   const [isLipSyncing, setIsLipSyncing] = useState(false);
 
   const speakAndLipSync = async (text: string) => {

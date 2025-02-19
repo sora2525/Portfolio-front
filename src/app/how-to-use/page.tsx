@@ -31,7 +31,7 @@ export default function HowToUse() {
                             {/* 画像 */}
                             <div className="flex justify-center mb-6 sm:mb-8">
                                 <Image
-                                    src="/images/mero.jpeg"
+                                    src="/images/キービジュアル.png"
                                     alt="蓮実 メロ"
                                     width={250}
                                     height={500}

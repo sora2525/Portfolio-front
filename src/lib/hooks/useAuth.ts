@@ -221,7 +221,10 @@ export const useAuth = () => {
     
                 setFlashMessage({ message: "Googleログインに成功しました！", type: "success" });
             } else {
-                throw new Error("トークン情報が取得できませんでした");
+                setFlashMessage({
+                    message: "トークン情報が取得できませんでした",
+                    type: "error"
+                });
             }
     
             router.push("/");
@@ -262,7 +265,10 @@ export const useAuth = () => {
     
                 setFlashMessage({ message: "LINEログインに成功しました！", type: "success" });
             } else {
-                throw new Error("トークン情報が取得できませんでした");
+                setFlashMessage({
+                    message: "トークン情報が取得できませんでした",
+                    type: "error"
+                });
             }
         } catch (err: any) {
             setFlashMessage({
@@ -304,7 +310,10 @@ export const useAuth = () => {
     
             router.push("/");
           } else {
-            throw new Error("LINEアカウントの連携に失敗しました。");
+            setFlashMessage({
+                    message: "LINEアカウントの連携に失敗しました。",
+                    type: "error"
+                });
           }
         } catch (err: any) {
           setFlashMessage({

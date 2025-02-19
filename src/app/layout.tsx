@@ -60,7 +60,7 @@ export default function RootLayout({
     <html lang="ja">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icon512_maskable.png" />
+        <link rel="apple-touch-icon" href="/android-chrome-512x512.png" />
         <meta name="theme-color" content="#F472B6" />
         <link rel="icon" href="/favicon.ico" />
         <Script
@@ -75,8 +75,12 @@ export default function RootLayout({
         <meta property="og:title" content="タスクエールでがんばるもん！" />
         <meta
           property="og:description"
-          content="タスク管理をもっと楽しく！可愛いキャラクターと一緒にタスクを整理しよう。"
+          content="タスク管理をもっと楽しく！蓮実メロと一緒にタスクを整理しよう。"
         />
+        <meta property="og:image" content="https://www.task-yell.jp/images/キービジュアルOGP.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/png" />
         <meta property="og:url" content="https://www.task-yell.jp" />
         <meta property="og:site_name" content="タスクエールでがんばるもん！" />
         <meta property="og:locale" content="ja_JP" />

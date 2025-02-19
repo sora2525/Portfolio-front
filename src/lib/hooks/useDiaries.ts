@@ -7,7 +7,7 @@ interface Diary {
     content: string;
     is_public: boolean;
     character_comment: string;
-    images: string[]; // 画像のURLの配列
+    images: string[]; 
     created_at: string;
     updated_at: string;
 }

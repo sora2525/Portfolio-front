@@ -4,7 +4,6 @@ import { MessageType } from '@/components/chat/types';
 
 export const useAIResponse = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
 
   const generateResponse = useCallback(
     async (
@@ -14,7 +13,6 @@ export const useAIResponse = () => {
       affinity: number // 好感度
     ): Promise<string | null> => {
       setLoading(true);
-      setError(null);
 
       try {
         const response = await axios.post('/api/chatgpt', {
@@ -27,7 +25,6 @@ export const useAIResponse = () => {
         return response.data?.response || null;
       } catch (err) {
         console.error('OpenAIのAPI呼び出しでエラーが発生しました:', err);
-        setError('エラーが発生しました');
         return null;
       } finally {
         setLoading(false);
@@ -36,5 +33,5 @@ export const useAIResponse = () => {
     []
   );
 
-  return { generateResponse, loading, error };
+  return { generateResponse, loading};
 };

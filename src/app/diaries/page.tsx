@@ -13,7 +13,6 @@ export default function Diary() {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const auth = useRequireAuth();
 
-  // データ取得
   useEffect(() => {
     const fetchData = async () => {
       await getDiaries();
@@ -33,8 +32,8 @@ export default function Diary() {
   };
 
   const handleFormSubmit = async () => {
-    await getDiaries(); // 投稿後にデータを再取得してリストを更新
-    setIsFormVisible(false); // フォームを非表示にする
+    await getDiaries(); 
+    setIsFormVisible(false); 
   };
 
   return (
