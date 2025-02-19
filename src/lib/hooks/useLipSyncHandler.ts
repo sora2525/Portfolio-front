@@ -11,28 +11,33 @@ export function useLipSyncHandler() {
 
   useEffect(() => {
     wavFileHandlerRef.current = new LAppWavFileHandler();
-
+  
     return () => {
       if (wavFileHandlerRef.current) {
         wavFileHandlerRef.current.releasePcmData();
+        wavFileHandlerRef.current = null;
       }
-      wavFileHandlerRef.current = null;
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
     };
   }, []);
+  
 
 
   const startLipSync = async (wavFilePath: string): Promise<void> => {
-    console.log("startLipSync called");
+    console.log("リップシンクスタート");
 
     if (!wavFileHandlerRef.current) {
-      console.error("wavFileHandlerRef is not initialized.");
+      console.error("リップシンク用のオブジェクトが初期化されていません");
       return;
     }
 
    
     const success = await wavFileHandlerRef.current.loadWavFile(wavFilePath);
     if (success) {
-      console.log("WAV file loaded successfully (linear PCM).");
+      console.log("WAVファイルのロードに成功");
 
       const audio = new Audio(wavFilePath);
       audioRef.current = audio;
@@ -45,7 +50,7 @@ export function useLipSyncHandler() {
       forcePlayMotion();
       updateLipSync();
     } else {
-      console.error("Failed to load WAV file for lip-syncing.");
+      console.error("WAVファイルのロードに失敗しました");
     }
   };
 
@@ -78,7 +83,7 @@ export function useLipSyncHandler() {
       if (wavFileHandlerRef.current && model) {
         const updated = wavFileHandlerRef.current.update(updateInterval / 1000);
         if (!updated) {
-          console.log("WAV file playback finished");
+          console.log("再生終了");
           clearInterval(intervalId);
           isLipSyncingRef.current = false;
           return;
