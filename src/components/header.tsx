@@ -1,3 +1,4 @@
+"use client"
 import { useAuth } from "@/lib/hooks/useAuth";
 import { useRecoilState } from "recoil";
 import { authState } from "@/lib/atom/authAtom";
