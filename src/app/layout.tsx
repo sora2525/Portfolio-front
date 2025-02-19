@@ -84,6 +84,11 @@ export default function RootLayout({
         <meta property="og:url" content="https://www.task-yell.jp" />
         <meta property="og:site_name" content="タスクエールでがんばるもん！" />
         <meta property="og:locale" content="ja_JP" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="タスクエールでがんばるもん！" />
+        <meta name="twitter:description" content="タスク管理をもっと楽しく！蓮実メロと一緒にタスクを整理しよう。" />
+        <meta name="twitter:image" content="https://www.task-yell.jp/images/キービジュアルOGP.png" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SessionProvider>
