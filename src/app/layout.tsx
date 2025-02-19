@@ -77,11 +77,11 @@ export default function RootLayout({
           property="og:description"
           content="タスク管理をもっと楽しく！蓮実メロと一緒にタスクを整理しよう。"
         />
-        <meta property="og:image" content="https://www.task-yell.jp/images/キービジュアルOGP.png" />
+        <meta property="og:image" content="https://www.task-yell.jp/images/キービジュアルOGP2.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/png" />
-        <meta property="og:url" content="https://www.task-yell.jp" />
+        <meta property="og:url" content="https://www.task-yell.jp/" />
         <meta property="og:locale" content="ja_JP" />
 
         <meta name="twitter:card" content="summary_large_image" />
