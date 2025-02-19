@@ -37,12 +37,12 @@ export const useTasks = () => {
             },
           });
           setTasks(response.data);
-          return response.data; // データを返す
+          return response.data;
         } catch (e: unknown) {
           if (axios.isAxiosError(e) && e.response?.data.errors) {
           } else {
           }
-          return []; // エラー時は空の配列を返す
+          return []; 
         }
       };
 
@@ -141,7 +141,6 @@ export const useTasks = () => {
                 task: { completion_date }
             });
 
-            // タスク一覧を更新
             setTasks((prevTasks) =>
                 prevTasks.map((task) =>
                     task.id === id ? response.data : task

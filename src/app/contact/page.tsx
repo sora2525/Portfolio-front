@@ -15,7 +15,6 @@ const ContactForm = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus("送信中...");
-
         try {
             await createContact(formData);
             setStatus("お問い合わせを送信しました！");

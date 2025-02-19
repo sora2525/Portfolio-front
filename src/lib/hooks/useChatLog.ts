@@ -1,5 +1,7 @@
 import { axiosInstance } from "../axiosInstance";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { flashMessageState } from "@/lib/atom/flashMessageAtom";
 
 export type ChatMessage = {
   id: number;
@@ -11,24 +13,26 @@ export type ChatMessage = {
 export const useChatLog = () => {
   const [chats, setChats] = useState<ChatMessage[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [flashMessage, setFlashMessage] = useRecoilState(flashMessageState);
 
-  /**
-   * チャット履歴を取得する関数
-   */
+  // 共通のエラーメッセージ
+  const extractErrorMessage = (err: unknown, defaultMessage: string): string => {
+    if (err instanceof Error) {
+      return err.message || defaultMessage;
+    }
+    return defaultMessage;
+  };
+
   const getChats = async () => {
     setLoading(true);
-    setError(null);
     try {
-      const response = await axiosInstance.get<ChatMessage[]>("/chats"); // 型を明示
+      const response = await axiosInstance.get<ChatMessage[]>("/chats");
       setChats(response.data);
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        console.error("Failed to fetch chats:", err);
-        setError(err.message || "チャット履歴の取得に失敗しました");
-      } else {
-        setError("未知のエラーが発生しました");
-      }
+      setFlashMessage({
+        message: extractErrorMessage(err, "チャット履歴の取得に失敗しました"),
+        type: "error",
+      });
     } finally {
       setLoading(false);
     }
@@ -40,7 +44,6 @@ export const useChatLog = () => {
    * @param messageType - メッセージの種類 ("user" | "character")
    */
   const createChat = async (message: string, messageType: "user" | "character") => {
-    setError(null);
     try {
       const response = await axiosInstance.post<ChatMessage>("/chats", {
         chat: {
@@ -48,42 +51,34 @@ export const useChatLog = () => {
           message_type: messageType,
         },
       });
-      // 新しいチャットを追加
       setChats((prevChats) => [...prevChats, response.data]);
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        console.error("Failed to send message:", err);
-        setError(err.message || "メッセージの送信に失敗しました");
-      } else {
-        setError("未知のエラーが発生しました");
-      }
+      setFlashMessage({
+        message: extractErrorMessage(err, "メッセージの送信に失敗しました"),
+        type: "error",
+      });
     }
   };
 
   const clearChats = async () => {
     setLoading(true);
-    setError(null);
     try {
-      await axiosInstance.delete("/chats"); // チャットを削除するAPIを呼び出し
-      setChats([]); // 状態のチャット履歴を空にする
+      await axiosInstance.delete("/chats");
+      setChats([]);
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        console.error("Failed to clear chats:", err);
-        setError(err.message || "チャット履歴の削除に失敗しました");
-      } else {
-        setError("未知のエラーが発生しました");
-      }
+      setFlashMessage({
+        message: extractErrorMessage(err, "チャット履歴の削除に失敗しました"),
+        type: "error",
+      });
     } finally {
       setLoading(false);
     }
   };
 
-  /**
-   * 初回レンダリング時にチャット履歴を取得
-   */
+  // 初回レンダリング時
   useEffect(() => {
     getChats();
   }, []);
 
-  return { getChats, createChat, clearChats, chats, loading, error };
+  return { getChats, createChat, clearChats, chats, loading };
 };

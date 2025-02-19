@@ -87,8 +87,6 @@ export default function Chat() {
         />
         <ChatForm onSendMessage={handleSendMessage} />
       </div>
-
     </div>
-
   );
 }
