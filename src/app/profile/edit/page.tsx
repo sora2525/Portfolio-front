@@ -60,7 +60,7 @@ export default function ProfileEdit() {
                     </Link>
                 </div>
 
-                <div className="bg-white shadow-lg rounded-lg p-6 w-[90%] max-w-md">
+                <div className="bg-white shadow-lg rounded-lg p-6 w-[90%] max-w-md pointer-events-auto">
                     <h1 className="text-2xl font-bold text-teal-600 text-center mb-6">プロフィール編集</h1>
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>

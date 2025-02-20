@@ -43,7 +43,7 @@ function AuthLoader({ children }: { children: React.ReactNode }) {
   const { checkAuthStatus } = useAuth();
 
   useEffect(() => {
-    checkAuthStatus(); // 認証状態を確認
+    checkAuthStatus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

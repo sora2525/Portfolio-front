@@ -26,7 +26,7 @@ export default function About() {
             {/* クレジット表記 */}
             <div className="mt-6 text-gray-700 text-center">
               <h2 className="text-xl font-semibold mb-2">クレジット</h2>
-              <p>開発者: 瀬戸口蒼空</p>
+              <p>開発者: メロたん</p>
               <p>
                 X (Twitter):{" "}
                 <a href="https://x.com/sora_mero2525" className="text-blue-500 hover:underline">
