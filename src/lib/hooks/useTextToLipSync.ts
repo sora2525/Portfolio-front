@@ -4,7 +4,7 @@ import { useNijiVoice } from "@/lib/hooks/useNijiVoice";
 import { useLipSyncHandler } from "./useLipSyncHandler";
 
 export function useTextToLipSync() {
-  const { generateVoice, isLoading: isGenerating, error } = useNijiVoice();
+  const { generateVoice, isLoading: isGenerating } = useNijiVoice();
   const { startLipSync } = useLipSyncHandler();
   const [isLipSyncing, setIsLipSyncing] = useState(false);
 
@@ -29,7 +29,6 @@ export function useTextToLipSync() {
   return {
     speakAndLipSync,
     isGenerating, 
-    error,        
     isLipSyncing, 
   };
 }

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { axiosInstance } from "../axiosInstance";
+import { useRecoilState } from "recoil";
+import { flashMessageState } from "@/lib/atom/flashMessageAtom";
 
 interface Diary {
     id: number;
@@ -22,55 +24,61 @@ interface DiaryInput {
 
 export function useDiaries() {
     const [diaries, setDiaries] = useState<Diary[]>([]);
-    const [error, setError] = useState<string | null>(null);
+    const [flashMessage, setFlashMessage] = useRecoilState(flashMessageState);
+
+    const extractErrorMessage = (e: unknown): string => {
+        if (e instanceof Error) {
+            return e.message || "エラーが発生しました";
+        }
+        return "エラーが発生しました";
+    };
 
     // 全ての日記を取得
     const getDiaries = async (): Promise<Diary[]> => {
-        setError(null);
         try {
             const response = await axiosInstance.get<Diary[]>("/diaries");
-            console.log(response);
-            
             setDiaries(response.data);
             return response.data;
-        } catch (e: unknown) {
-            console.error("Error fetching diaries:", e);
-            setError("日記の取得に失敗しました");
+        } catch (e) {
+            setFlashMessage({
+                message: extractErrorMessage(e),
+                type: "error"
+            });
             return [];
         }
     };
 
+    // 公開されている日記を取得
     const getPublicDiaries = async (): Promise<Diary[]> => {
-        setError(null);
         try {
             const response = await axiosInstance.get<Diary[]>("/diaries/public_index");
-            console.log(response);
-            
             setDiaries(response.data);
             return response.data;
-        } catch (e: unknown) {
-            console.error("Error fetching diaries:", e);
-            setError("日記の取得に失敗しました");
+        } catch (e) {
+            setFlashMessage({
+                message: extractErrorMessage(e),
+                type: "error"
+            });
             return [];
         }
     };
 
     // 特定の日記を取得
     const getDiary = async (id: number): Promise<Diary | null> => {
-        setError(null);
         try {
             const response = await axiosInstance.get<Diary>(`/diaries/${id}`);
             return response.data;
-        } catch (e: unknown) {
-            console.error(`Error fetching diary with id ${id}:`, e);
-            setError("日記の取得に失敗しました");
+        } catch (e) {
+            setFlashMessage({
+                message: `日記の取得に失敗しました (ID: ${id})`,
+                type: "error"
+            });
             return null;
         }
     };
 
     // 新しい日記を作成
     const createDiary = async (diaryData: DiaryInput): Promise<Diary | null> => {
-        setError(null);
         try {
             const formData = new FormData();
             formData.append('diary[title]', diaryData.title);
@@ -85,43 +93,80 @@ export function useDiaries() {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             setDiaries(prev => [...prev, response.data]);
+
+            setFlashMessage({
+                message: "日記を作成しました",
+                type: "success"
+            });
+
             return response.data;
-        } catch (e: unknown) {
-            console.error("Error creating diary:", e);
-            setError("日記の作成に失敗しました");
+        } catch (e) {
+            setFlashMessage({
+                message: extractErrorMessage(e),
+                type: "error"
+            });
             return null;
         }
     };
 
     // 日記を更新
     const updateDiary = async (id: number, updatedData: Partial<DiaryInput>): Promise<Diary | null> => {
-        setError(null);
         try {
-            const response = await axiosInstance.put<Diary>(`/diaries/${id}`, { diary: updatedData });
+            let formData;
+            if (updatedData.images) {
+                formData = new FormData();
+                if (updatedData.title) formData.append("diary[title]", updatedData.title);
+                if (updatedData.content) formData.append("diary[content]", updatedData.content);
+                if (updatedData.is_public !== undefined) formData.append("diary[is_public]", String(updatedData.is_public));
+                if (updatedData.character_comment) formData.append("diary[character_comment]", updatedData.character_comment);
+                updatedData.images.forEach(image => {
+                    formData.append('diary[images][]', image);
+                });
+            }
+
+            const response = await axiosInstance.put<Diary>(
+                `/diaries/${id}`, 
+                formData || { diary: updatedData },
+                formData ? { headers: { 'Content-Type': 'multipart/form-data' } } : {}
+            );
+
             setDiaries(prev => prev.map(diary => diary.id === id ? response.data : diary));
+
+            setFlashMessage({
+                message: "日記を更新しました",
+                type: "success"
+            });
+
             return response.data;
-        } catch (e: unknown) {
-            console.error(`Error updating diary with id ${id}:`, e);
-            setError("日記の更新に失敗しました");
+        } catch (e) {
+            setFlashMessage({
+                message: `日記の更新に失敗しました (ID: ${id})`,
+                type: "error"
+            });
             return null;
         }
     };
 
     // 日記を削除
     const destroyDiary = async (id: number): Promise<void> => {
-        setError(null);
         try {
             await axiosInstance.delete(`/diaries/${id}`);
             setDiaries(prev => prev.filter(diary => diary.id !== id));
-        } catch (e: unknown) {
-            console.error(`Error deleting diary with id ${id}:`, e);
-            setError("日記の削除に失敗しました");
+
+            setFlashMessage({
+                message: "日記を削除しました",
+                type: "success"
+            });
+        } catch (e) {
+            setFlashMessage({
+                message: `日記の削除に失敗しました (ID: ${id})`,
+                type: "error"
+            });
         }
     };
 
     return {
         diaries,
-        error,
         getDiaries,
         getPublicDiaries,
         getDiary,

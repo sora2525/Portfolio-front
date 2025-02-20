@@ -21,7 +21,6 @@ export function useTags() {
 
             if (response.status === 201) {
                 console.log("タグが作成されました:", response.data);
-                // タグ作成後にタグ一覧を再取得して、反映
                 getTags();
                 return response.data;
             } else {

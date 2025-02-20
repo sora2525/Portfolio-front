@@ -44,8 +44,7 @@ function AuthLoader({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     checkAuthStatus();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [checkAuthStatus]);
 
   return <>{children}</>;
 }
@@ -87,7 +86,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SessionProvider>
           <RecoilRoot>
-            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX"} />
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
             <AuthLoader>
               <div className="h-screen w-screen bg-[url('/images/stage16.png')] bg-cover bg-no-repeat bg-center relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full z-20">
