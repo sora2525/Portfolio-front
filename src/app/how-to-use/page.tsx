@@ -20,7 +20,7 @@ export default function HowToUse() {
 
                         <section className="bg-white p-6 rounded-lg shadow">
                             <h2 className="text-3xl font-bold text-center mb-6">使い方</h2>
-                            <p>このアプリは、タスク管理をより楽しくするために開発されました。蓮実メロがタスクをサポートし、励ましながら進捗を管理できます。</p>
+                            <p>このアプリは、タスク管理をより楽しくするために開発されました！蓮実メロがタスクをサポートし、励ましながら進捗を管理できます！</p>
                         </section>
 
                         <section className="bg-white p-4 sm:p-6 rounded-lg shadow-lg">
@@ -103,7 +103,7 @@ export default function HowToUse() {
 
 
                         <section className="bg-white p-6 rounded-lg shadow">
-                            <h2 className="text-3xl font-bold text-center mb-6">LINE通知について</h2>
+                            <h2 className="text-xl sm:text-3xl font-bold text-center mb-6">LINE通知について</h2>
                             <div className="flex justify-center w-full">
                                 <Image
                                     src="/images/311rhang.png"
@@ -116,31 +116,69 @@ export default function HowToUse() {
                         </section>
 
                         <section className="bg-white p-6 rounded-lg shadow">
-                            <h2 className="text-3xl font-bold text-center mb-6 text-indigo-700">PWAのインストール方法</h2>
+                            <h2 className="text-xl sm:text-3xl font-bold text-center mb-6">PWAのインストール方法</h2>
                             <p className="text-gray-700 text-base">
-                                当アプリはプログレッシブ・ウェブ・アプリ（PWA）としてもご利用いただけます。対応ブラウザ（Google Chrome、Microsoft Edge、Safariなど）を使用している場合、以下の手順でアプリをインストールすることができます。
+                                当アプリはプログレッシブ・ウェブ・アプリ（PWA）としてもご利用いただけます。対応ブラウザ（Google Chrome、Safariなど）を使用している場合、以下の手順でアプリをインストールすることができます。
                             </p>
-                            <ul className="list-disc list-inside mt-4 text-gray-700 text-base">
-                                <li>
-                                    ブラウザのアドレスバー近くにある<strong className="font-bold">「インストール」</strong>または<strong className="font-bold">「ホーム画面に追加」</strong>のアイコンをタップします。
-                                </li>
-                                <li>
-                                    表示されるダイアログで<strong className="font-bold">「追加」</strong>または<strong className="font-bold">「インストール」</strong>を選択します。
-                                </li>
-                                <li>
-                                    インストール完了後、ホーム画面にアプリのアイコンが追加され、ネイティブアプリのように全画面表示でご利用いただけます。
-                                </li>
-                            </ul>
-                            <p className="mt-4 text-gray-700 text-base">
-                                ※ ブラウザやデバイスによっては、手順やボタンの名称が異なる場合がありますので、各ブラウザのヘルプをご参照ください。
+
+                            <h3 className="text-xl sm:text-3xl font-bold text-center my-6 ">iosでのインストール方法</h3>
+                            <div className="flex justify-center w-full mb-3">
+                                <Image
+                                    src="/images/safariPWA.jpeg"
+                                    alt="サンプル画像"
+                                    width={300}
+                                    height={600}
+                                />
+                            </div>
+                            <div className="flex justify-center w-full">
+                                <Image
+                                    src="/images/IOSPWA.jpeg"
+                                    alt="サンプル画像"
+                                    width={300}
+                                    height={600}
+                                />
+                            </div>
+                            <ol className="list-decimal list-inside text-gray-700 text-base mt-3">
+                                <li><strong>Safariでアプリのページ</strong>を開く</li>
+                                <li><strong>共有ボタン（四角＋矢印）</strong>をタップ</li>
+                                <li><strong>「ホーム画面に追加」</strong>を選択</li>
+                                <li><strong>名前を確認して「追加」</strong>をタップ</li>
+                                <li><strong>ホーム画面にアプリアイコンが追加</strong>され、アプリのように使えます！</li>
+                            </ol>
+                            <p className="text-gray-700 mt-4"><strong>💡「ホーム画面に追加」が表示されない場合</strong>
+                                Safariを使っているか確認してください（Chromeでは不可）。
                             </p>
+
+                            <h3 className="text-xl sm:text-3xl font-bold text-center my-6 ">androidでのインストール方法</h3>
+                            <div className="flex justify-center w-full mb-3">
+                                <Image
+                                    src="/images/androidPWA.jpeg"
+                                    alt="サンプル画像"
+                                    width={300}
+                                    height={600}
+                                />
+                            </div>
+                            <div className="flex justify-center w-full mb-3">
+                                <Image
+                                    src="/images/androidPWA2.jpeg"
+                                    alt="サンプル画像"
+                                    width={300}
+                                    height={600}
+                                />
+                            </div>
+                            <ol className="list-decimal list-inside text-gray-700 text-base">
+                                <li><strong>Chromeでアプリのページ</strong>を開く</li>
+                                <li><strong>画面下部またはメニュー（︙）に表示される「アプリをインストール」</strong>をタップ</li>
+                                <li><strong>「インストール」</strong>をタップ</li>
+                                <li><strong>ホーム画面にアプリアイコンが追加</strong>され、アプリのように使えます！</li>
+                            </ol>
                         </section>
 
 
 
                         {/* ホーム画面セクション */}
                         <section className="bg-white p-6 rounded-lg shadow">
-                            <h1 className="text-3xl font-bold text-center mb-6">ホーム画面</h1>
+                            <h1 className="text-xl sm:text-3xl font-bold text-center mb-6">ホーム画面</h1>
                             <div className="flex justify-center mb-8">
                                 <Image
                                     src="/images/スクリーンショット 2025-02-10 001447.png"
@@ -204,7 +242,7 @@ export default function HowToUse() {
 
                         {/* タスク管理セクション */}
                         <section className="bg-white p-6 rounded-lg shadow">
-                            <h1 className="text-3xl font-bold text-center mb-6 ">タスク管理</h1>
+                            <h1 className="text-xl sm:text-3xl font-bold text-center mb-6 ">タスク管理</h1>
                             <div className="flex justify-center mb-8">
                                 <Image
                                     src="/images/スクリーンショット 2025-02-10 001457.png"
@@ -217,7 +255,7 @@ export default function HowToUse() {
                             <div className="space-y-4 text-gray-700 text-base">
                                 <p>
                                     タスク管理機能は、ただタスクを管理するだけじゃなく、あなたの<span className="font-bold">頑張り</span>を毎回しっかりと見守り、
-                                    完了したときに可愛いキャラクターが「<span className="font-bold">すごい！よくやったね！</span>」と熱烈に褒めてくれます！。
+                                    完了したときにメロが「<span className="font-bold">すごい！よくやったね！</span>」と熱烈に褒めてくれます！。
                                 </p>
                                 <p>
                                     <span className="font-bold">フィルタ・ソート：</span>上部のタブで「All / Incomplete / Completed」などでタスクを絞り込み、
@@ -261,7 +299,7 @@ export default function HowToUse() {
 
                         {/* チャットセクション */}
                         <section className="bg-white p-6 rounded-lg shadow">
-                            <h2 className="text-3xl font-bold text-center mb-6 ">チャット</h2>
+                            <h2 className="text-xl sm:text-3xl font-bold text-center mb-6 ">チャット</h2>
                             <div className="flex justify-center items-center mb-8">
                                 <Image
                                     src="/images/スクリーンショット 2025-02-10 001509.png"
@@ -273,20 +311,20 @@ export default function HowToUse() {
                             </div>
                             <div className="space-y-4 text-gray-700 text-base">
                                 <p>
-                                    チャット機能では、キャラクターと<span className="font-bold">リアルタイム</span>に会話することができます。タスクの休憩がてらお話を楽しみましょう！
+                                    チャット機能では、メロと<span className="font-bold">リアルタイム</span>に会話することができます。タスクの休憩がてらお話を楽しみましょう！
                                 </p>
                                 <p>
-                                    入力フォームからメッセージを送信すると、キャラクターがすぐに返答してくれます。
+                                    入力フォームからメッセージを送信すると、メロがすぐに返答してくれます。
                                 </p>
                                 <p>
-                                    また、キャラクターの返答はクリックで<span className="font-bold">音声再生</span>も可能。声に耳を傾けながら、ほっと一息つける時間をお楽しみいただけます！
+                                    また、メロの返答はクリックで<span className="font-bold">音声再生</span>も可能。声に耳を傾けながら、ほっと一息つける時間をお楽しみいただけます！
                                 </p>
                             </div>
                         </section>
 
                         {/* 日記セクション */}
                         <section className="bg-white p-6 rounded-lg shadow">
-                            <h2 className="text-3xl font-bold text-center mb-6 ">日記</h2>
+                            <h2 className="text-xl sm:text-3xl font-bold text-center mb-6 ">日記</h2>
                             <div className="flex flex-col justify-center items-center mb-8">
                                 <Image
                                     src="/images/スクリーンショット 2025-02-10 002103.png"
@@ -298,13 +336,13 @@ export default function HowToUse() {
                             </div>
                             <div className="space-y-4 text-gray-700 text-base">
                                 <p>
-                                    日記機能は、絶対にリプライが来るSNSのような機能です。あなたの日々の思いを気軽に記録できます！
+                                    日記機能は、メロからリプライが来るSNSのような機能です。あなたの日々の思いを気軽に記録できます！
                                 </p>
                                 <p>
                                     日記は<span className="font-bold">非公開設定</span>と<span className="font-bold">公開設定</span>の両方があり、あなたの気持ちに合わせて使い分けることが可能です。
                                 </p>
                                 <p>
-                                    投稿すると、必ずキャラクターから<span className="font-bold">温かいリプライ</span>が届き、あなたの毎日をそっと支えてくれます。
+                                    投稿すると、必ず蓮実メロから<span className="font-bold">温かいリプライ</span>が届き、あなたの毎日をそっと支えてくれます。
                                 </p>
                             </div>
                         </section>

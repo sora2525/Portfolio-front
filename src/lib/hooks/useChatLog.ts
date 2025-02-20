@@ -1,5 +1,5 @@
 import { axiosInstance } from "../axiosInstance";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRecoilState } from "recoil";
 import { flashMessageState } from "@/lib/atom/flashMessageAtom";
 
@@ -15,15 +15,16 @@ export const useChatLog = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [flashMessage, setFlashMessage] = useRecoilState(flashMessageState);
 
-  // 共通のエラーメッセージ
-  const extractErrorMessage = (err: unknown, defaultMessage: string): string => {
+ 
+  const extractErrorMessage = useCallback((err: unknown, defaultMessage: string): string => {
     if (err instanceof Error) {
       return err.message || defaultMessage;
     }
     return defaultMessage;
-  };
+  }, []);
 
-  const getChats = async () => {
+  
+  const getChats = useCallback(async () => {
     setLoading(true);
     try {
       const response = await axiosInstance.get<ChatMessage[]>("/chats");
@@ -36,14 +37,10 @@ export const useChatLog = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [extractErrorMessage, setFlashMessage]); 
 
-  /**
-   * 新しいチャットを作成する関数
-   * @param message - メッセージ内容
-   * @param messageType - メッセージの種類 ("user" | "character")
-   */
-  const createChat = async (message: string, messageType: "user" | "character") => {
+
+  const createChat = useCallback(async (message: string, messageType: "user" | "character") => {
     try {
       const response = await axiosInstance.post<ChatMessage>("/chats", {
         chat: {
@@ -58,9 +55,10 @@ export const useChatLog = () => {
         type: "error",
       });
     }
-  };
+  }, [extractErrorMessage, setFlashMessage]);
 
-  const clearChats = async () => {
+
+  const clearChats = useCallback(async () => {
     setLoading(true);
     try {
       await axiosInstance.delete("/chats");
@@ -73,12 +71,12 @@ export const useChatLog = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [extractErrorMessage, setFlashMessage]);
 
-  // 初回レンダリング時
+ 
   useEffect(() => {
     getChats();
-  }, []);
+  }, [getChats]);
 
   return { getChats, createChat, clearChats, chats, loading };
 };
