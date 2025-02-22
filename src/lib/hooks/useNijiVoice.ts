@@ -101,7 +101,7 @@ export function useNijiVoice() {
     } finally {
       setIsLoading(false);
     }
-  }, [apiKey, voiceActorId]);
+  }, [apiKey, voiceActorId,setFlashMessage]);
 
   useEffect(() => {
     const cleanup = () => {
