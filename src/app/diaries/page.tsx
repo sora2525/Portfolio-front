@@ -7,7 +7,7 @@ import Link from "next/link";
 import DiaryForm from "@/components/diary/DiaryForm";
 
 export default function Diary() {
-  const { diaries, error, getDiaries, getPublicDiaries, destroyDiary } =
+  const { diaries, getDiaries, getPublicDiaries, destroyDiary } =
     useDiaries();
   const [mode, setMode] = useState<"mine" | "public">("mine");
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -75,8 +75,6 @@ export default function Diary() {
             )}
           </button>
         </div>
-
-        {error && <p className="text-red-500 mb-4">{error}</p>}
 
         <div className="max-h-[75vh] sm:max-h-[80vh]  overflow-y-auto">
           <ul className="space-y-4">

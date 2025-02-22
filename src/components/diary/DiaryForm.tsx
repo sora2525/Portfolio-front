@@ -9,7 +9,7 @@ type DiaryFormProps = {
 };
 
 export default function DiaryForm({ onCancel, onSubmit }: DiaryFormProps) {
-  const { createDiary, error } = useDiaries();
+  const { createDiary } = useDiaries();
   const [content, setContent] = useState<string>("");
   const [isPublic, setIsPublic] = useState<boolean>(false);
   const [images, setImages] = useState<File[]>([]);
@@ -96,8 +96,6 @@ export default function DiaryForm({ onCancel, onSubmit }: DiaryFormProps) {
           className="w-full"
         />
       </div>
-
-      {error && <div className="text-red-500">{error}</div>}
 
       <button
         type="submit"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useRecoilState } from "recoil";
 import { authState } from "../atom/authAtom";
 import { axiosInstance } from "../axiosInstance";
@@ -118,7 +118,7 @@ export const useAuth = () => {
     };
 
     // ログイン状態の確認
-    const checkAuthStatus = async () => {
+    const checkAuthStatus = useCallback(async () => {
         const accessToken = Cookies.get("access-token");
         const client = Cookies.get("client");
         const uid = Cookies.get("uid");
@@ -135,7 +135,7 @@ export const useAuth = () => {
                 setAuth({ isAuthenticated: false, user: null });
             }
         }
-    };
+    }, [setAuth]);
 
     // パスワードリセット
     const passwordReset = async (email: string) => {

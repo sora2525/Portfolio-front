@@ -2,12 +2,14 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import axios from "axios";
 import WavEncoder from "wav-encoder";
 import { decode as base64ToArrayBuffer } from "base64-arraybuffer";
+import { flashMessageState } from "@/lib/atom/flashMessageAtom";
+import { useRecoilState } from "recoil";
 
 export function useNijiVoice() {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
+  const [flashMessage, setFlashMessage] = useRecoilState(flashMessageState);
 
   const apiKey = process.env.NEXT_PUBLIC_NIJI_VOICE_API_KEY;
   const voiceActorId = process.env.NEXT_PUBLIC_NIJI_VOICE_ACTOR_ID;
@@ -20,7 +22,6 @@ export function useNijiVoice() {
 
   const generateVoice = useCallback(async (text: string): Promise<string | null> => {
     setIsLoading(true);
-    setError(null);
 
     setBlobUrl((prevBlobUrl) => {
       if (prevBlobUrl) {
@@ -30,7 +31,10 @@ export function useNijiVoice() {
     });
 
     if (!apiKey || !voiceActorId) {
-      setError("APIキーまたはVoice Actor IDが設定されていません。");
+      setFlashMessage({
+        message: "APIキーまたは声優IDが設定されていません。",
+        type: "error",
+      });
       setIsLoading(false);
       return null;
     }
@@ -52,7 +56,7 @@ export function useNijiVoice() {
       });
 
       if (response.status !== 200 || !response.data?.generatedVoice?.base64Audio) {
-        throw new Error("音声データを取得できませんでした。");
+        throw new Error("音声データの取得に失敗しました。");
       }
 
       const base64Audio = response.data.generatedVoice.base64Audio;
@@ -77,23 +81,27 @@ export function useNijiVoice() {
       const newBlobUrl = URL.createObjectURL(blob);
 
       setBlobUrl(newBlobUrl);
-
       console.log("Generated WAV Blob URL:", newBlobUrl);
+
       return newBlobUrl;
     } catch (err: unknown) {
-      console.error(err);
-      setError(
-        axios.isAxiosError(err)
-          ? err.response?.data?.message || "APIエラーが発生しました"
-          : err instanceof Error
-          ? err.message
-          : "不明なエラーが発生しました"
-      );
+      console.error("音声生成エラー:", err);
+      
+      let errorMessage = "音声の生成に失敗しました。";
+      if (err instanceof Error) {
+        errorMessage += ` 詳細: ${err.message}`;
+      }
+
+      setFlashMessage({
+        message: errorMessage,
+        type: "error",
+      });
+
       return null;
     } finally {
       setIsLoading(false);
     }
-  }, [apiKey, voiceActorId]);
+  }, [apiKey, voiceActorId,setFlashMessage]);
 
   useEffect(() => {
     const cleanup = () => {
@@ -106,7 +114,7 @@ export function useNijiVoice() {
     window.addEventListener("beforeunload", cleanup);
 
     return () => {
-      cleanup(); 
+      cleanup();
       window.removeEventListener("beforeunload", cleanup);
     };
   }, [blobUrl]);
@@ -114,6 +122,5 @@ export function useNijiVoice() {
   return {
     generateVoice,
     isLoading,
-    error,
   };
 }
