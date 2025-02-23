@@ -18,6 +18,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           redirect_uri: `${process.env.AUTH_URL}/api/auth/callback/line`,
           state: crypto.randomUUID(),
           bot_prompt: "normal",
+          prompt: "consent",
+          ui_locales: "ja",
         },
       },
     }),
