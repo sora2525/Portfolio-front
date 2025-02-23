@@ -17,7 +17,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           response_type: "code",
           redirect_uri: `${process.env.AUTH_URL}/api/auth/callback/line`,
           bot_prompt: "normal",
-          prompt: "consent",
+          prompt: "login",
           ui_locales: "ja",
         },
       },
