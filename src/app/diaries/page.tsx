@@ -33,6 +33,7 @@ export default function Diary() {
 
   const handleFormSubmit = async () => {
     await getDiaries(); 
+    setMode("mine");
     setIsFormVisible(false); 
   };
 
