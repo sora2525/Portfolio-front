@@ -78,7 +78,7 @@ export default function Chat() {
         </div>
       </div>
 
-      <div className="pointer-events-auto sticky bottom-0 chat-container flex flex-col w-full max-w-lg lg:max-w-[700px] p-4 rounded-lg">
+      <div className="pointer-events-auto  bottom-0 chat-container flex flex-col w-full max-w-lg lg:max-w-[700px] p-4 rounded-lg">
         <ChatLog
           chats={chats}
           onClearChats={clearChats}
