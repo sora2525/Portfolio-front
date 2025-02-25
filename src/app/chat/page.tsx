@@ -78,15 +78,17 @@ export default function Chat() {
         </div>
       </div>
 
-      <div className="pointer-events-auto  bottom-0 chat-container flex flex-col w-full max-w-lg lg:max-w-[700px] p-4 rounded-lg">
-        <ChatLog
-          chats={chats}
-          onClearChats={clearChats}
-          onCharacterMessageClick={onClickCharacterMessage}
-          isLipSyncing={isLipSyncing}
-        />
-        <ChatForm onSendMessage={handleSendMessage} />
-      </div>
+      <div className="pointer-events-auto chat-container flex flex-col w-full max-w-lg lg:max-w-[700px] p-4 rounded-lg 
+                 fixed bottom-0 left-1/2 transform -translate-x-1/2  shadow-lg">
+  <ChatLog
+    chats={chats}
+    onClearChats={clearChats}
+    onCharacterMessageClick={onClickCharacterMessage}
+    isLipSyncing={isLipSyncing}
+  />
+  <ChatForm onSendMessage={handleSendMessage} />
+</div>
+
     </div>
   );
 }
