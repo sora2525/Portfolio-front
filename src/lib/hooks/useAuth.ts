@@ -2,7 +2,6 @@ import { useState, useCallback } from "react";
 import { useRecoilState } from "recoil";
 import { authState } from "../atom/authAtom";
 import { axiosInstance } from "../axiosInstance";
-import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { flashMessageState } from "@/lib/atom/flashMessageAtom";
 
@@ -25,9 +24,9 @@ export const useAuth = () => {
 
             const { "access-token": accessToken, client, uid } = response.headers;
             if (accessToken && client && uid) {
-                Cookies.set("access-token", accessToken, { expires: 7 });
-                Cookies.set("client", client, { expires: 7 });
-                Cookies.set("uid", uid, { expires: 7 });
+                localStorage.setItem("access-token", accessToken);
+                localStorage.setItem("client", client);
+                localStorage.setItem("uid", uid);
                 setAuth({ isAuthenticated: true, user: response.data.data });
                 setFlashMessage({
                     message: "ユーザー登録に成功しました！",
@@ -57,15 +56,15 @@ export const useAuth = () => {
             const response = await axiosInstance.post("/auth/sign_in", { email, password });
             const { "access-token": accessToken, client, uid } = response.headers;
             if (accessToken && client && uid) {
-                Cookies.set("access-token", accessToken, { expires: 7 });
-                Cookies.set("client", client, { expires: 7 });
-                Cookies.set("uid", uid, { expires: 7 });
+                localStorage.setItem("access-token", accessToken);
+                localStorage.setItem("client", client);
+                localStorage.setItem("uid", uid);
                 setAuth({ isAuthenticated: true, user: response.data.data });
                 setFlashMessage({
                     message: "ログインに成功しました！",
                     type: "success"
                 });
-                
+
                 router.push("/");
                 return;
             } else {
@@ -88,9 +87,9 @@ export const useAuth = () => {
     const logout = async () => {
         setLoading(true);
         try {
-            const accessToken = Cookies.get("access-token");
-            const client = Cookies.get("client");
-            const uid = Cookies.get("uid");
+            const accessToken = localStorage.getItem("access-token");
+            const client = localStorage.getItem("client");
+            const uid = localStorage.getItem("uid");
 
             if (accessToken && client && uid) {
                 await axiosInstance.delete("/auth/sign_out", {
@@ -98,9 +97,9 @@ export const useAuth = () => {
                 });
             }
 
-            Cookies.remove("access-token");
-            Cookies.remove("client");
-            Cookies.remove("uid");
+            localStorage.removeItem("access-token");
+            localStorage.removeItem("client");
+            localStorage.removeItem("uid");
             setAuth({ isAuthenticated: false, user: null });
             setFlashMessage({
                 message: "ログアウトしました",
@@ -119,9 +118,9 @@ export const useAuth = () => {
 
     // ログイン状態の確認
     const checkAuthStatus = useCallback(async () => {
-        const accessToken = Cookies.get("access-token");
-        const client = Cookies.get("client");
-        const uid = Cookies.get("uid");
+        const accessToken = localStorage.getItem("access-token");
+        const client = localStorage.getItem("client");
+        const uid = localStorage.getItem("uid");
 
         if (accessToken && client && uid) {
             try {
@@ -209,16 +208,16 @@ export const useAuth = () => {
                 name,
                 image,
             });
-    
+
             const { "access-token": accessToken, client, uid: userUid } = response.headers;
-    
+
             if (accessToken && client && userUid) {
-                Cookies.set("access-token", accessToken, { expires: 7 });
-                Cookies.set("client", client, { expires: 7 });
-                Cookies.set("uid", userUid, { expires: 7 });
-    
+                localStorage.setItem("access-token", accessToken);
+                localStorage.setItem("client", client);
+                localStorage.setItem("uid", uid);
+
                 setAuth({ isAuthenticated: true, user: response.data.user });
-    
+
                 setFlashMessage({ message: "Googleログインに成功しました！", type: "success" });
             } else {
                 setFlashMessage({
@@ -226,7 +225,7 @@ export const useAuth = () => {
                     type: "error"
                 });
             }
-    
+
             router.push("/");
         } catch (err: any) {
             const errorMessage = err.response?.data?.errors?.[0] || "Googleログインに失敗しました";
@@ -234,7 +233,7 @@ export const useAuth = () => {
                 message: `ログインに失敗しました: ${errorMessage}`,
                 type: "error",
             });
-    
+
             router.push("/");
         } finally {
             setLoading(false);
@@ -253,16 +252,16 @@ export const useAuth = () => {
                 image,
                 line_sub
             });
-    
+
             const { "access-token": accessToken, client, uid: userUid } = response.headers;
-    
+
             if (accessToken && client && userUid) {
-                Cookies.set("access-token", accessToken, { expires: 7 });
-                Cookies.set("client", client, { expires: 7 });
-                Cookies.set("uid", userUid, { expires: 7 });
-    
+                localStorage.setItem("access-token", accessToken);
+                localStorage.setItem("client", client);
+                localStorage.setItem("uid", uid);
+
                 setAuth({ isAuthenticated: true, user: response.data.user });
-    
+
                 setFlashMessage({ message: "LINEログインに成功しました！", type: "success" });
             } else {
                 setFlashMessage({
@@ -280,61 +279,74 @@ export const useAuth = () => {
             router.push("/");
         }
     };
-    
+
 
     const lineLink = async (lineSub: string) => {
         setLoading(true);
         try {
-          const response = await axiosInstance.post(
-            "/auth/line_link",
-            { line_sub: lineSub },
-            {
-              headers: {
-                "access-token": Cookies.get("access-token"),
-                client: Cookies.get("client"),
-                uid: Cookies.get("uid"),
-              },
+            const accessToken = localStorage.getItem("access-token");
+            const client = localStorage.getItem("client");
+            const uid = localStorage.getItem("uid");
+
+            if (!accessToken || !client || !uid) {
+                setFlashMessage({
+                    message: "ログイン情報が不足しています。",
+                    type: "error"
+                });
+                setLoading(false);
+                return;
             }
-          );
-    
-          if (response.status === 200) {
-            setAuth((prevState) => ({
-              ...prevState,
-              user: {
-                ...prevState.user,
-                line_sub: lineSub,
-              },
-            }));
-    
-            setFlashMessage({ message: "LINEアカウントの連携に成功しました！", type: "success" });
-    
-            router.push("/");
-          } else {
-            setFlashMessage({
+
+            const response = await axiosInstance.post(
+                "/auth/line_link",
+                { line_sub: lineSub },
+                {
+                    headers: {
+                        "access-token": accessToken,
+                        client: client,
+                        uid: uid,
+                    },
+                }
+            );
+
+            if (response.status === 200) {
+                setAuth((prevState) => ({
+                    ...prevState,
+                    user: {
+                        ...prevState.user,
+                        line_sub: lineSub,
+                    },
+                }));
+
+                setFlashMessage({ message: "LINEアカウントの連携に成功しました！", type: "success" });
+
+                router.push("/");
+            } else {
+                setFlashMessage({
                     message: "LINEアカウントの連携に失敗しました。",
                     type: "error"
                 });
-          }
+            }
         } catch (err: any) {
-          setFlashMessage({
-            message: `連携に失敗しました: ${err.response?.data?.errors?.[0] || "不明なエラー"}`,
-            type: "error",
-          });
-    
-          router.push("/");
+            setFlashMessage({
+                message: `連携に失敗しました: ${err.response?.data?.errors?.[0] || "不明なエラー"}`,
+                type: "error",
+            });
+
+            router.push("/");
         } finally {
-          setLoading(false);
+            setLoading(false);
         }
-      };
-    
+    };
+
 
     const updateProfile = async (name: string, avatar?: File) => {
         setLoading(true);
-    
-        const accessToken = Cookies.get("access-token");
-        const client = Cookies.get("client");
-        const uid = Cookies.get("uid");
-    
+
+        const accessToken = localStorage.getItem("access-token");
+        const client = localStorage.getItem("client");
+        const uid = localStorage.getItem("uid");
+
         if (!accessToken || !client || !uid) {
             setFlashMessage({
                 message: "ログイン情報が不足しています。",
@@ -343,14 +355,14 @@ export const useAuth = () => {
             setLoading(false);
             return;
         }
-    
+
         try {
             const formData = new FormData();
             formData.append("user[name]", name);
             if (avatar) {
-                formData.append("user[avatar]", avatar); 
+                formData.append("user[avatar]", avatar);
             }
-       
+
             const response = await axiosInstance.put("/auth/profile", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -359,18 +371,21 @@ export const useAuth = () => {
                     uid: uid,
                 },
             });
-    
+
             if (response.status === 200) {
                 setAuth((prevState) => ({
                     ...prevState,
-                    user: response.data.user, 
+                    user: response.data.user,
                 }));
                 setFlashMessage({
                     message: "プロフィールが更新されました！",
                     type: "success"
                 });
             } else {
-
+                setFlashMessage({
+                    message: "プロフィールの更新に失敗しました。",
+                    type: "error"
+                });
             }
         } catch (err: any) {
             setFlashMessage({
@@ -382,5 +397,6 @@ export const useAuth = () => {
         }
     };
 
-    return { loading, signUp, signIn, logout, checkAuthStatus, passwordReset, resetPasswordConfirm, loginWithGoogle, loginWithLine,lineLink,updateProfile };
+
+    return { loading, signUp, signIn, logout, checkAuthStatus, passwordReset, resetPasswordConfirm, loginWithGoogle, loginWithLine, lineLink, updateProfile };
 };
