@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const baseURL = `${process.env.NEXT_PUBLIC_API_URL}/api/${process.env.NEXT_PUBLIC_API_VERSION}`;
 
@@ -8,10 +9,9 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
     (config) => {
-        const accessToken = localStorage.getItem("access-token");
-        const client = localStorage.getItem("client");
-        const uid = localStorage.getItem("uid");
-
+        const accessToken = Cookies.get("access-token");
+        const client = Cookies.get("client");
+        const uid = Cookies.get("uid");
 
         if (accessToken && client && uid) {
             config.headers["access-token"] = accessToken;
