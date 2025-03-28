@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
 
     // ChatGPTによる応答
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4-turbo',
+      model: 'gpt-3.5-turbo',
       messages: newMessages,
       max_tokens: 256,
       temperature: 1.3,
