@@ -31,7 +31,7 @@ function Live2dViewComponent() {
 
   return (
     <div id="live2d-container">
-      <canvas className="w-screen h-[800px] xxs:h-[900px] sm:h-[1200px] md:h-[1400px] lg:h-[1600px]" ref={ref} />
+      <canvas className="w-screen h-[800px] xxs:h-[900px] sm:h-[1200px] md:h-[1400px] lg:h-[1400px]" ref={ref} />
     </div>
   );
 }
